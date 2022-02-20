@@ -1,12 +1,13 @@
-import { faCancel, faPencil, faX } from '@fortawesome/free-solid-svg-icons';
+import React, { 
+  Fragment, useRef, useState,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { faPencil, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { Fragment, useRef } from 'react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import swal from 'sweetalert';
 import { pictureUpdate } from '../../app/redux/reducer';
 import http from '../../service/PrivateConfigRequest';
+import { clearAllItem } from '../../utils/helper';
 
 const Profile = () => {
 
@@ -51,7 +52,7 @@ const Profile = () => {
     } else {
       http.put('/profile/password', passwordChange)
       .then((res) => {
-        swal(res.data.message, {
+        swal(`${res.data.message}. Please Relog To Your Account`, {
           icon: 'success',
         }).then(() => {
           setPasswordChange({
@@ -59,6 +60,8 @@ const Profile = () => {
             password: '',
             password_confirmation: ''
           });
+          clearAllItem();
+          window.location.href = '/';
         });
       }).catch((err) => {
         if (err.response.status === 422) {

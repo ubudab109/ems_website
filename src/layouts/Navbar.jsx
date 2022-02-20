@@ -7,7 +7,6 @@ import { URL_SERVICE } from '../utils/constant';
 import { clearAllItem } from '../utils/helper';
 import http from '../service/PrivateConfigRequest';
 import CustomModal from '../component/CustomModal';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 const Navbar = () => {

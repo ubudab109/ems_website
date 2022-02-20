@@ -11,7 +11,6 @@ import {
   useRouteMatch,
   withRouter,
   useHistory,
-  Link,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
