@@ -1,0 +1,203 @@
+
+@import "~bootstrap/scss/bootstrap";
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+@media (max-width : 1464px) {
+	.login {
+		min-height: 84vh;
+		margin-top: 30%;
+	}
+
+	.img-welcome {
+		left: 151px;
+		top: 349px;
+		width: 607.9px;
+		height: 420.17px;
+		padding-left: 59px;
+    padding-top: 5%;
+
+	}
+
+	.title-wrap {
+		left: 100px;
+		top: 152px;
+		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+		padding-left: 100px;
+	}
+}
+
+.p-viewer, .p-viewer2{
+	float: right;
+	margin-top: -39px;
+	margin-right: 25px;
+	position: relative;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.btn-login {
+	width: 165px;
+	height: 50px;
+	left: 1175px;
+	top: 543px;
+	color: white;
+	border: none;
+	background: #00617F;
+	border-radius: 5px;
+}
+@media (min-width : 1466px), (max-width : 1468px) {
+	.login {
+		min-height: 86vh;
+		margin-top: 30%;
+		margin-left: 10%;
+	}
+}
+@media (min-width : 1469px) {
+	.login {
+		min-height: 75vh;
+		margin-top: 30%;
+		margin-left: 10%;
+	}
+	.title-wrap {
+		left: 100px;
+		top: 152px;
+		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+		padding-left: 20%;
+	}
+
+	.img-welcome {
+		padding-left: 23%;
+    padding-top: 5%;
+	}
+}
+
+.bg-image {
+  background-image: url('https://bootstrapious.com/i/snippets/sn-page-split/bg.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+.input-form {
+	border: none;
+	left: 917px;
+	top: 320px;
+	width: 100%;
+	height: 50px;
+	background: #FFFFFF;
+	border-radius: 5px;
+}
+
+.left-bg {
+	padding-top: 152px;
+}
+
+@media (min-width : 1200px) {
+	.bg-blue-rounded {
+		border-top-left-radius: 20px;
+		border-bottom-left-radius: 20px;
+		background: #19C8FF;
+	}
+}
+
+@media (max-width: 1199px){
+	.bg-blue-rounded {
+		background: #19C8FF;
+	}
+
+	.left-bg {
+		display: none;
+	}
+	.img-welcome {
+		display: none;
+	}
+	.title-wrap {
+		display: none;
+	}
+}
+
+
+
+.title-welcome {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 64px;
+	line-height: 75px;
+	color: #001820;
+}
+
+.subtitle-welcome {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 36px;
+	line-height: 42px;
+
+	color: #001820;
+}
+
+.login-title {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 36px;
+	line-height: 42px;
+	padding-bottom: 20px;
+	color: #FFFFFF !important;
+}
+
+.company-name {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 21px;
+	margin-top: 40%;
+	color: #00617F;
+}
+
+.forgot-text {
+	left: 1204px;
+	top: 482px;
+
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	/* identical to box height */
+
+
+	color: #FFFFFF;
+}
+
+.label-input {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 23px;
+	color: #006180;
+	padding-bottom: 7px;
+}
+
+.password-text {
+	left: 1204px;
+	top: 482px;
+	cursor: pointer;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 21px;
+	/* identical to box height */
+	text-decoration: none;
+
+	color: #00617F;
+}
