@@ -138,3 +138,16 @@ export const isActionAllowed = (permission, permissionName) => {
     return false;
   }
 }
+
+/**
+ * Sum value integer in array
+ * @param {Array} array 
+ * @returns {Integer}
+ */
+export const sumArray = (array) => {
+  var sum = 0;
+  for (var i = 0; i < array.length; i++) {
+    sum += array[i];
+  }
+  return sum;
+}

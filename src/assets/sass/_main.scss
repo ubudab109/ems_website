@@ -672,7 +672,7 @@ progress {
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
-  margin-left: 2%;
+  margin-left: 0;
 }
 
 @media (min-width: 576px) {
@@ -926,7 +926,7 @@ progress {
   --bs-gutter-y: 3rem;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 575px) {
   .col-sm {
     flex: 1 0 0%;
   }
@@ -1627,7 +1627,7 @@ progress {
 
   .col-xl-4 {
     flex: 0 0 auto;
-    width: 33.33333333%;
+    width: 32.9%;
   }
 
   .col-xl-5 {
@@ -7916,6 +7916,23 @@ button:focus {
   color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-bold {
+  font-weight: bold !important;
+}
+
+.font-14 {
+  font-size: 14px !important;
+}
+
+@media (min-width : 1440px) {
+  .border-right {
+    border: 1px solid #AAAAAA;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+  }
+}
+
 .text-muted {
   --bs-text-opacity: 1;
   color: #6c757d !important;
@@ -11686,6 +11703,18 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 
 
+.btn-rounded-border-blue {
+  border: 2px solid #00617F;
+  box-sizing: border-box;
+  border-radius: 100px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  color: #00617F;
+  background: transparent;
+}
 
 .btn-border-blue {
   border: 1px solid #00617F;
@@ -11746,6 +11775,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .font-12 {
   font-size: 12px !important;
 }
+
+.font-16 {
+  font-size: 16px !important;
+}
+
 .font-11 {
   font-size: 11px !important;
 
@@ -12121,4 +12155,35 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
 hr.divider-gray {
   border: 1px solid #AAAAAA;
+}
+
+
+.badge-purple-holiday {
+  color: #BB3FC6;
+  background: #EECFF0;
+  border-bottom-left-radius: 54px;
+  border-top-right-radius: 33px;
+  border-bottom-right-radius: 33px;
+}
+
+.badge-orange-holiday {
+  color: #FF5900;
+  background: #FFD5BF;
+  border-bottom-left-radius: 54px;
+  border-top-right-radius: 33px;
+  border-bottom-right-radius: 33px;
+}
+
+.badge-yellow-holiday {
+  color: #FFC700;
+  background: #FFF5D5;
+  border-bottom-left-radius: 54px;
+  border-top-right-radius: 33px;
+  border-bottom-right-radius: 33px;
+}
+
+.scrollable-div {
+  overflow-y: scroll;
+  height: initial;
+  overflow-x: hidden;
 }
