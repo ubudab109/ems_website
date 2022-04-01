@@ -2,34 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Calendar from 'react-calendar';
 
-const CalendarDashboard = ({ 
-  onChangeDate, date, onActiveStartDate, month, year,
+const CalendarDashboard = ({
+  onChangeDate, date, onActiveStartDate, holiday, customContent, yearChange
 }) => {
   return (
-    <div className="card card-shadow">
-      <div className="row justify-content-between px-3" style={{
-        paddingTop: '10px'
+    <div className="card card-dashboard card-shadow">
+      <div className="d-flex flex-wrap justify-content-around" style={{
+        width: '100%'
       }}>
-        <div className="col-xl-4 col-lg-8 col-md-9 col-sm-12">
-          <span className="text-blue-dark">Calendar</span>
+
+        <div className="col-12">
+          <h1 className="text-blue-dark text-left mt-4 mx-4" style={{
+            fontSize: '20px'
+          }}>
+            Calendar
+          </h1>
         </div>
-        <div className="col-xl-3 col-lg-4 col-md-3 col-sm-12">
-          <button className="btn-rounded-border-blue">{month} {year}</button>
-        </div>
+
       </div>
-      <div className="divider-wrapper-calendar">
-        <hr className="divider-gray" />
-      </div>
+
       <div className="card-body">
         <Calendar
           onChange={onChangeDate}
           value={date}
           onActiveStartDateChange={onActiveStartDate}
           showNeighboringMonth={false}
+          locale="id-ID"
+          tileClassName={customContent}
+          onClickYear={yearChange}
         />
 
-        <div className="col-12 text-center">
-          <p>Hari Ulang Tahun</p>
+        <div className="row justify-content-center mt-3">
+          <div className="col-12 text-center" style={{
+            'border': '1px solid #00617F',
+            boxSizing: 'border-box',
+            borderRadius: '5px'
+          }}>
+            {holiday}
+          </div>
         </div>
 
       </div>
@@ -38,11 +48,18 @@ const CalendarDashboard = ({
 };
 
 CalendarDashboard.propTypes = {
-  onChangeDate : PropTypes.func,
-  date : PropTypes.instanceOf(Date),
+  onChangeDate: PropTypes.func,
+  date: PropTypes.instanceOf(Date),
   onActiveStartDate: PropTypes.func,
   month: PropTypes.string,
-  year: PropTypes.string
+  year: PropTypes.string,
+  holiday: PropTypes.string,
+  isOpenDatePicker: PropTypes.bool,
+  onClickYear: PropTypes.func,
 };
+
+CalendarDashboard.defaultProps = {
+  isOpenDatePicker: false,
+}
 
 export default CalendarDashboard;

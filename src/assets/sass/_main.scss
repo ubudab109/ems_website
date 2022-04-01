@@ -456,6 +456,7 @@ legend + * {
   padding: 0;
 }
 
+
 ::-webkit-inner-spin-button {
   height: auto;
 }
@@ -1417,6 +1418,11 @@ progress {
     width: 33.33333333%;
   }
 
+  .col-lg-4-3 {
+    flex: 0 0 auto;
+    width: 48.93333%;
+  }
+
   .col-lg-5 {
     flex: 0 0 auto;
     width: 41.66666667%;
@@ -1633,6 +1639,11 @@ progress {
   .col-xl-5 {
     flex: 0 0 auto;
     width: 41.66666667%;
+  }
+
+  .col-xl-4-5 {
+    flex: 0 0 auto;
+    width: 39.666667%;
   }
 
   .col-xl-6 {
@@ -8009,6 +8020,10 @@ button:focus {
   --bs-text-opacity: 0.25;
 }
 
+.text-red {
+  color: #d10000 !important;
+}
+
 
 
 .text-opacity-50 {
@@ -11866,8 +11881,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
-  font-size: 14px;
-  line-height: 16px;
   color: #00617F;
 } 
 

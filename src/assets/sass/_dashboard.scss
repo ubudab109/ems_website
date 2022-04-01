@@ -1,0 +1,171 @@
+.row-1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* width */
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+  cursor: pointer;
+  
+}
+
+
+/* Track */
+.scrollbar::-webkit-scrollbar-track {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+ 
+/* Handle */
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #C4C4C4; 
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 10px;
+}
+
+/* Handle on hover */
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #747070; 
+}
+
+.card-dashboard {
+  flex: 1 1 20rem;
+  align-items: center;
+  margin: 10px 10px;
+  align-self: normal;
+}
+
+.progress-wrapper {
+  width: 300px;
+}
+
+
+select {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  background-image: none;
+  flex: 1;
+  padding: 0 .5em;
+  color:#00617F;
+  cursor:pointer;
+  font-size: 1em;
+  font-family: Roboto;
+}
+select::-ms-expand {
+  display: none;
+}
+
+
+.select {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 28px;
+  overflow: hidden;
+  border: 1px solid #00617F;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+option {
+  text-align: center;
+}
+ul.ul-db {
+  list-style: none;
+  padding: 0;
+}
+
+ul.ul-db li{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: inherit;
+  color: #200E32;
+}
+
+
+.divider-card {
+  width: 100%;
+  border: 3px solid #00617F;
+  border-radius: 15px;
+}
+
+.select::after {
+  content: url("../polygon.png");
+  position: absolute;
+  top: 0;
+  right: 0.1px;
+  padding: 0 4px;
+  cursor: pointer;
+  pointer-events: none;
+  width: 21px;
+  border: 1px solid #00617F;
+  box-sizing: border-box;
+  transition: 0.25s all ease;
+}
+
+.select:hover::after {
+  color: #23b499;
+}
+
+.badge-online {
+  background: #BCFFCD;
+  border-radius: 74px;
+  color: #008836;
+  font-size: 16px;
+}
+
+
+.badge-offline {
+  background: #F1F1F1;
+  border-radius: 74px;
+  color: #AAAAAA;
+  font-size: 16px;
+
+}
+
+.text-um {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: inherit;
+  color: #200E32;
+}
+
+.division-wrapper {
+  border: 2px solid #00617F;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+@media (max-width: 1345px) {
+  .progress-wrapper {
+    width: 600px;
+  }
+}
+
+@media (max-width: 1304px) and (min-width : 1090px){
+  .progress-wrapper {
+    width: 374px;
+  }
+}
+
+@media (max-width: 1304px) and (min-width : 1153px){
+  .progress-wrapper {
+    width: 427px;
+  }
+}
+
+@media (max-width: 1090px){
+  .progress-wrapper {
+    width: 100%;
+  }
+}
