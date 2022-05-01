@@ -5,32 +5,7 @@
   justify-content: space-between;
 }
 
-/* width */
-.scrollbar::-webkit-scrollbar {
-  width: 6px;
-  cursor: pointer;
-  
-}
 
-
-/* Track */
-.scrollbar::-webkit-scrollbar-track {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
- 
-/* Handle */
-.scrollbar::-webkit-scrollbar-thumb {
-  background: #C4C4C4; 
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  height: 10px;
-}
-
-/* Handle on hover */
-.scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #747070; 
-}
 
 .card-dashboard {
   flex: 1 1 20rem;
@@ -94,7 +69,13 @@ ul.ul-db li{
 
 .divider-card {
   width: 100%;
-  border: 3px solid #00617F;
+  border: 2px solid #00617F;
+  border-radius: 15px;
+}
+
+.divider-card-child {
+  width: 100%;
+  border: 1px solid #00617F;
   border-radius: 15px;
 }
 
@@ -146,26 +127,6 @@ ul.ul-db li{
   border-radius: 5px;
 }
 
-@media (max-width: 1345px) {
-  .progress-wrapper {
-    width: 600px;
-  }
-}
-
-@media (max-width: 1304px) and (min-width : 1090px){
-  .progress-wrapper {
-    width: 374px;
-  }
-}
-
-@media (max-width: 1304px) and (min-width : 1153px){
-  .progress-wrapper {
-    width: 427px;
-  }
-}
-
-@media (max-width: 1090px){
-  .progress-wrapper {
-    width: 100%;
-  }
+.progress-wrapper {
+  width: 100%;
 }

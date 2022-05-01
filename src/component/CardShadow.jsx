@@ -14,7 +14,9 @@ const CardShadow = ({ children, title }) => {
           {title}
         </h1>
       </div>
-      <div className="card-body">
+      <div className="card-body" style={{
+        width: '100%'
+      }}>
         {children}
       </div>
     </div>

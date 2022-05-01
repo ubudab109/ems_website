@@ -1,8 +1,8 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { Chart, registerables, ArcElement } from "chart.js";
 import { Doughnut } from 'react-chartjs-2';
-import http from '../../../service/PrivateConfigRequest';
-import { sumArray } from '../../../utils/helper';
+import { sumArray } from '../utils/helper';
+import http from '../service/PrivateConfigRequest';
 import LegendChart from './LegendChart';
 
 Chart.register(...registerables);

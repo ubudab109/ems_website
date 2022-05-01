@@ -1,14 +1,20 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 const ProgressBar = ({ 
-  bgcolor, progress, height, total, isLoaded
+  bgcolor, 
+  progress, 
+  height, 
+  total, 
+  isLoaded, 
+  marginBottom,
 }) => {
   const widthProgress = (progress / total) * 100;
   const Parentdiv = {
     height: height,
     width: '100%',
     backgroundColor: 'whitesmoke',
-    marginBottom: '41px',
+    marginBottom: marginBottom,
     borderRadius: '5px',
   }
 

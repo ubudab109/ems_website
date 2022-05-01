@@ -13,16 +13,16 @@ const LegendThreeChart = ({
   dataThree,
 }) => {
   return (
-    <div className="row justify-content-center" style={{
-      marginBottom : '11px',
-      paddingLeft: '15'
+    <div className="row justify-content-end" style={{
+      marginTop: '27px',
+      paddingLeft: 'auto',
+      width: '100%'
     }}>
-      <div className="col-5">
+      <div className="col-4">
         <div className="d-flex">
           <div
             className="col-10"
             style={{
-              paddingTop: '4px',
               width: '6%',
             }}
           >
@@ -35,13 +35,12 @@ const LegendThreeChart = ({
             />
           </div>
           <div
-            className="col-12"
             style={{
-              paddingLeft: '13px'
+              paddingLeft: '13px',
             }}
           >
-            <span className="text-muted-span">{dataOneLabel}</span>
-            <p className="text-blue-dark">{dataOne}</p>
+            <span className="text-muted-span span-block">{dataOneLabel}</span>
+            <span className="text-blue-dark span-block">{dataOne}</span>
           </div>
         </div>
       </div>
@@ -50,7 +49,6 @@ const LegendThreeChart = ({
           <div
             className="col-1"
             style={{
-              paddingTop: '4px',
               width: '6%',
             }}
           >
@@ -63,22 +61,20 @@ const LegendThreeChart = ({
             />
           </div>
           <div
-            className="col-12"
             style={{
               paddingLeft: '13px'
             }}
           >
-            <span className="text-muted-span">{dataTwoLabel}</span>
-            <p className="text-blue-dark">{dataTwo}</p>
+            <span className="text-muted-span span-block">{dataTwoLabel}</span>
+            <span className="text-blue-dark span-block">{dataTwo}</span>
           </div>
         </div>
       </div>
-      <div className="col-3">
+      <div className="col-4">
         <div className="d-flex">
           <div
             className="col-1"
             style={{
-              paddingTop: '4px',
               width: '6%',
             }}
           >
@@ -91,13 +87,12 @@ const LegendThreeChart = ({
             />
           </div>
           <div
-            className="col-12"
             style={{
               paddingLeft: '13px'
             }}
           >
-            <span className="text-muted-span">{dataThreeLabel}</span>
-            <p className="text-blue-dark">{dataThree}</p>
+            <span className="text-muted-span span-block">{dataThreeLabel}</span>
+            <span className="text-blue-dark span-block">{dataThree}</span>
           </div>
         </div>
       </div>

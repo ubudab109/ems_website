@@ -1,0 +1,46 @@
+.rdt_TableHead {
+  border-bottom: 4px solid #00617F;
+  margin-bottom: 25px;
+}
+
+.rdt_TableCol {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 14px;
+  line-height: 16px;
+  color: #00617F;
+}
+
+.rdt_TableCell {
+  font-family: Roboto;
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.rdt_TableRow {
+  border-bottom: 1px solid #000 !important;
+}
+
+.rdt_TableCell .td-text {
+  color: #000000;
+  font-family: Roboto;
+  font-style: normal;
+  line-height: 16px;
+}
+
+.rdt_TableCell .td-text-mute {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500 !important;
+  line-height: 16px;
+  color: #AAAAAA;
+}
+
+.rdt_TableCell .badge-radius {
+  border-bottom-left-radius: 55px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+}

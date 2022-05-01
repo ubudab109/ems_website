@@ -74,4 +74,30 @@ export const MONTH_LIST = [
     label     : 'Desember',
     label_en  : 'December',
   },
-]
+];
+
+export const WORK_PLACES_OPTION = [
+ {
+   value: '0',
+   label: 'On Office',
+ },
+ {
+   value: '1',
+   label: 'Remote'
+ }
+];
+
+export const TIME_STATUS_OPTION = [
+  {
+    value: '0',
+    label: 'On Time',
+  },
+  {
+    value: '1',
+    label: 'Late'
+  },
+  {
+    value: '2',
+    label: 'Absent'
+  },
+ ];

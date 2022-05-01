@@ -2,14 +2,15 @@ import React, { Fragment, useState } from 'react';
 import { useCallback } from 'react';
 import { useEffect } from 'react';
 import CardShadow from '../../component/CardShadow';
-import CalendarDashboard from './components/Calendar';
-import ChartEmployee from './components/ChartEmployee';
-import ChartWorkplaces from './components/ChartWorkplaces';
-import ChartAttendance from './components/ChartAttendance';
+import ChartEmployee from '../../component/ChartEmployee';
+import ChartWorkplaces from '../../component/ChartWorkplaces';
+import ChartAttendance from '../../component/ChartAttendance';
 import moment from 'moment';
 import axios from 'axios';
 import UserManagament from './components/UserManagement';
 import DivisionManagement from './components/DivisionManagement';
+import ScheduleManagement from './components/ScheduleManagement';
+import CalendarDashboard from '../../component/Calendar';
 
 const Dashboard = () => {
 
@@ -84,7 +85,9 @@ const Dashboard = () => {
           </div>
         </CardShadow>
 
-        <ChartAttendance />
+        <ChartAttendance 
+          gapChart="41px"
+        />
 
         <CalendarDashboard
           date={date}
@@ -113,9 +116,7 @@ const Dashboard = () => {
       <div className="row-1">
         <UserManagament />
         <DivisionManagement />
-        <CardShadow title="Total Employee">
-          <ChartEmployee />
-        </CardShadow>
+        <ScheduleManagement />
       </div>
 
     </Fragment>

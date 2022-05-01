@@ -21,7 +21,9 @@ const CalendarDashboard = ({
 
       </div>
 
-      <div className="card-body">
+      <div className="card-body" style={{
+        width: '100%'
+      }}>
         <Calendar
           onChange={onChangeDate}
           value={date}

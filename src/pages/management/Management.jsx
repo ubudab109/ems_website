@@ -65,7 +65,7 @@ const Management = () => {
           <Fragment>
             <Route exact path={`${url}/user`} children={
               <UserManagement
-                tabActive={isTabActive('user') ? true : false}
+                tabActive={isTabActive('user')}
               />
             } />
             <Route path={`${url}/role`} children={

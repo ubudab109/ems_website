@@ -16,10 +16,10 @@ const routes = [
     icon: `${process.env.PUBLIC_URL}/assets/icon_menu/dashboard.png`,
   },
   {
-    path: '/attendance',
+    path: '/attendance-management',
     component: Absen,
     name: 'Absen',
-    exact: true,
+    exact: false,
     icon: `${process.env.PUBLIC_URL}/assets/icon_menu/Scan.png`,
   },
   {

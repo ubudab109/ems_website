@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import { withRouter, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -19,9 +20,10 @@ import CustomModalDetail from '../../../component/CustomModalDetail';
 import { filterStyles } from '../../../style-component/ReactSelectFilterTable';
 import { INVITE_STATUS } from '../../../utils/constant';
 import { isActionAllowed, isString } from '../../../utils/helper';
+import DetailDataUser from '../modal/DetailDataUser';
 
 
-const UserManagement = (props) => {
+const UserManagement = ({ tabActive }) => {
   const permissionData = useSelector(state => state.auth.permissions.filter(e => e.name === 'Management')[0]); // get permission for management, to check if current user if can access a few menu in this views
   const history = useHistory();
   const [keyword, setKeyword] = useState(''); // state for search data by keyword
@@ -379,6 +381,8 @@ const UserManagement = (props) => {
         });
       });
   }
+
+
   /**
    * Remove or Cancel Invite
    * @param {event} e 
@@ -536,49 +540,16 @@ const UserManagement = (props) => {
     );
   };
 
-  /**
-   * Childer for componenent modal detail data user
-   * @param {String} srcAvatar
-   * @param {String} name
-   * @param {String} email
-   * @param {String} role
-   * @returns  {Component}
-   */
-  const DetailData = ({ srcAvatar, name, email, role }) => {
-    return (
-      <Fragment>
-        <div className="row justify-content-center">
-          <div className="col-xl-5 col-lg-5 col-md-8 col-sm-10">
-            <img src={srcAvatar} alt="avatar" className="img-center" />
-          </div>
-        </div>
-        <div className="row justify-content-center">
-          <div className="form-group mb-3">
-            <label className="text-blue-dark my-2" htmlFor="detail_name">Name</label>
-            <input type="text" name="" id="detail_name" readOnly disabled className="form-control input-text-custom" value={name} />
-          </div>
-
-          <div className="form-group mb-3">
-            <label className="text-blue-dark my-2" htmlFor="detail_email">Email</label>
-            <input type="text" name="" id="detail_email" readOnly disabled className="form-control input-text-custom" value={email} />
-          </div>
-
-          <div className="form-group">
-            <label className="text-blue-dark my-2" htmlFor="detail_role">Role</label>
-            <input type="text" name="" id="detail_role" readOnly disabled className="form-control input-text-custom" value={role} />
-          </div>
-        </div>
-      </Fragment>
-    );
-  };
+  
 
   return (
-    <div className={`tab-pane ${props.tabActive ? 'active' : ''}`} role="tabpanel" id="noanim-tab-example-tabpane-user">
+    <div className={`tab-pane ${tabActive ? 'active' : ''}`} role="tabpanel" id="noanim-tab-example-tabpane-user">
 
       {/* Modal Detail User */}
       <CustomModalDetail
+        size="sm"
         children={
-          <DetailData
+          <DetailDataUser
             srcAvatar={viewDetailData.avatar}
             name={viewDetailData.name}
             email={viewDetailData.email}
@@ -638,6 +609,7 @@ const UserManagement = (props) => {
                 <SearchFilterInput
                   onChangeInput={(e) => onChangeKeyword(e)}
                   input={keyword}
+                  canFilter
                   clickFilter={() => {
                     if (isFilterActive) {
                       setFilterActive(false);
@@ -691,7 +663,7 @@ const UserManagement = (props) => {
             </div>
 
             <div className="row mt-5 v-50">
-              <Table striped hover responsive>
+              <Table bordered hover responsive>
                 <thead>
                   <tr>
                     <th className="text-left" style={{ paddingLeft: '29px' }}>Name</th>
@@ -806,6 +778,10 @@ const UserManagement = (props) => {
       </div>
     </div>
   );
+};
+
+UserManagement.propTypes = {
+  tabActive : PropTypes.bool.isRequired,
 };
 
 export default withRouter(UserManagement);

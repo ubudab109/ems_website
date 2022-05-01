@@ -48,7 +48,7 @@ const UserManagament = () => {
           </div>
         </div>
         <div className="row justify-content-around ml-2">
-          <div className="divider-card mt-3" />
+          <div className="divider-card mt-3 mb-3" />
           <div className="scrollbar" style={{
             overflowY: 'scroll',
             height: '486px',

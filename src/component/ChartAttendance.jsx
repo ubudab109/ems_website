@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import CardShadow from '../../../component/CardShadow';
-import ProgressBar from '../../../component/ProgressBar';
+import CardShadow from './CardShadow';
 import LegendThreeChart from './LegendThreeChart';
+import ProgressBar from './ProgressBar';
 
-const ChartAttendance = () => {
+const ChartAttendance = ({ gapChart }) => {
   const [isLoadedChartAttendance, setIsLoadedChartAttendance] = useState(false);
 
   const totalData = 20;
@@ -32,26 +32,23 @@ const ChartAttendance = () => {
                 height={25}
                 total={totalData}
                 isLoaded={isLoadedChartAttendance}
+                marginBottom={gapChart}
               />
             ))
           }
         </div>
       </div>
-      <div className="col-12" style={{
-        marginTop: '73px',
-      }}>
-        <LegendThreeChart
-          dataOneIcon={`${process.env.PUBLIC_URL}/assets/img/green_label.png`}
-          dataTwoIcon={`${process.env.PUBLIC_URL}/assets/img/yellow_label.png`}
-          dataThreeIcon={`${process.env.PUBLIC_URL}/assets/img/red_label.png`}
-          dataOne={dummyData[0]['completed']}
-          dataTwo={dummyData[1]['completed']}
-          dataThree={dummyData[2]['completed']}
-          dataOneLabel={dummyData[0]['label']}
-          dataTwoLabel={dummyData[1]['label']}
-          dataThreeLabel={dummyData[2]['label']}
-        />
-      </div>
+      <LegendThreeChart
+        dataOneIcon={`${process.env.PUBLIC_URL}/assets/img/green_label.png`}
+        dataTwoIcon={`${process.env.PUBLIC_URL}/assets/img/yellow_label.png`}
+        dataThreeIcon={`${process.env.PUBLIC_URL}/assets/img/red_label.png`}
+        dataOne={dummyData[0]['completed']}
+        dataTwo={dummyData[1]['completed']}
+        dataThree={dummyData[2]['completed']}
+        dataOneLabel={dummyData[0]['label']}
+        dataTwoLabel={dummyData[1]['label']}
+        dataThreeLabel={dummyData[2]['label']}
+      />
     </CardShadow>
   );
 };

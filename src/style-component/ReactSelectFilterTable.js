@@ -11,7 +11,7 @@ export const filterStyles = {
     ...base,
     backgroundColor: '#FFFFFF',
     borderRadius: '5px',
-    border: '2px solid #19C8FF',
+    border: '2px solid #00617F',
     width: '100%',
     minHeight: '25px',
   }),

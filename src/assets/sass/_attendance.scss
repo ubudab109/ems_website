@@ -1,0 +1,56 @@
+.td-text {
+  color: #000000;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.td-text-mute {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  color: #AAAAAA;
+}
+
+table tr td {
+  vertical-align: middle;
+}
+
+table thead {
+  border-bottom: 4px solid #00617F;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #000000;
+}
+
+
+
+/* width */
+.ReNQG::-webkit-scrollbar {
+  width: 6px;
+  cursor: pointer;
+  
+}
+
+
+/* Track */
+.ReNQG::-webkit-scrollbar-track {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+ 
+/* Handle */
+.ReNQG::-webkit-scrollbar-thumb {
+  background: #C4C4C4; 
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 10px;
+}
+
+/* Handle on hover */
+.ReNQG::-webkit-scrollbar-thumb:hover {
+  background: #747070; 
+}

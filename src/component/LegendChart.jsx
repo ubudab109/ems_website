@@ -10,13 +10,12 @@ const LegendChart = ({
   dataTwo,
 }) => {
   return (
-    <div className="row justify-content-end">
-      <div className="col-6">
+    <div className="row justify-content-end" style={{width: '100%'}}>
+      <div className="col-5">
         <div className="d-flex">
           <div
             className="col-12"
             style={{
-              paddingTop: '4px',
               width: '6%',
             }}
           >
@@ -29,22 +28,20 @@ const LegendChart = ({
             />
           </div>
           <div
-            className="col-12"
             style={{
               paddingLeft: '13px'
             }}
           >
-            <span className="text-muted-span">{dataOneLabel}</span>
-            <p className="text-blue-dark">{dataOne}</p>
+            <span className="text-muted-span span-block">{dataOneLabel}</span>
+            <span className="text-blue-dark span-block">{dataOne}</span>
           </div>
         </div>
       </div>
-      <div className="col-4">
+      <div className="col-5">
         <div className="d-flex">
           <div
             className="col-12"
             style={{
-              paddingTop: '4px',
               width: '6%',
             }}
           >
@@ -57,13 +54,12 @@ const LegendChart = ({
             />
           </div>
           <div
-            className="col-12"
             style={{
               paddingLeft: '13px'
             }}
           >
-            <span className="text-muted-span">{dataTwoLabel}</span>
-            <p className="text-blue-dark">{dataTwo}</p>
+            <span className="text-muted-span span-block">{dataTwoLabel}</span>
+            <span className="text-blue-dark span-block">{dataTwo}</span>
           </div>
         </div>
       </div>
