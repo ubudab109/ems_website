@@ -48,16 +48,16 @@ const Login = () => {
 
   return (
     <Fragment>
-      <div className="container-fluid">
+      <div className="container">
         <div className="row no-gutter">
           <div className="col-xl-7 col-lg-12 col-md-12 col-sm-12 d-none d-md-flex">
-            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 left-bg">
+            <div className="col-xl-12 col-lg-6 col-md-6 col-sm-6 left-bg">
               <div className="title-wrap">
                 <h3 className="title-welcome">Selamat Datang</h3>
                 <h4 className="subtitle-welcome">Kelola Staf Anda Dengan Mudah</h4>
               </div>
-              <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12 img-welcome">
-                <img src={`${process.env.PUBLIC_URL}/assets/img/login_bg_left.png`} alt="" width="607" />
+              <div className="p-5 align-items-center">
+                <img src={`${process.env.PUBLIC_URL}/assets/img/login_bg_left.png`} alt="" width="450" />
               </div>
             </div>
           </div>

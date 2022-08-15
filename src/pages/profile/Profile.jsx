@@ -104,7 +104,7 @@ const Profile = () => {
 
   return (
     <Fragment>
-      <h1 className="mt-4 breadcumb">My Profile</h1>
+      {/* <h1 className="mt-4 breadcumb">My Profile</h1>
       <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
         <div className="card card-shadow">
           <span className="mt-4 breadcumb pl-40" style={{
@@ -243,7 +243,7 @@ const Profile = () => {
 
           </div>
         </div>
-      </div>
+      </div> */}
     </Fragment>
   );
 };

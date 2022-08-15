@@ -1,9 +1,20 @@
 import React, { Fragment } from 'react';
+import PageHeading from "./components/employee/PageHeading/pageheading"
 
 const Employee = () => {
   return (
     <Fragment>
-      <h1 className="mt-4 breadcumb">Employee</h1>
+      <div>
+        <div id='wrapper'>      
+          <div id="content-wrapper" className="d-flex flex-column"> 
+              <div id="content"> 
+                <div className='container-fluid p-2'>
+                <PageHeading />
+                </div>
+              </div>
+          </div>
+          </div>
+    </div>
     </Fragment>
   );
 };
