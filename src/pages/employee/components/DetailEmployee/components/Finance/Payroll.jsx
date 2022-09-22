@@ -1,34 +1,34 @@
-import React from "react";
+import React from 'react'
 
-const Third = () => {
+const Payroll = () => {
   return (
-    <div className="col-xl-12">
+    <div className="col-xl-9">
       <div className="card mb-3">
         <div className="card-body">
-          <div className="col-xl-12">
-            <div>
-              <p>Payroll</p>
-              <p style={{ color: "#AAAAAA", fontSize: 12 }}>
-                Input Employee Salary
-              </p>
-            </div>
-            <div class="col-xl-6 ml-5">
-              <div class="form-group ">
-                <label for="name">Payment Date</label>
-                <input
-                  type="datetime-local"
-                  class="form-control"
-                  id="basicInput"
-                  placeholder="Select Date"
-                />
-              </div>
+        <div className="col-xl-12 mb-5">
+            <div className="row">
+                <div class="col-xl-3">
+                  <div class="form-group">
+                    <label for="name">Salary Type</label>
+                    <input type="text" class="form-control" id="basicInput" />
+                  </div>
+                </div>
+                <div class="col-xl-3">
+                  <div class="form-group">
+                    <label for="name">Payment Date</label>
+                    <input type="text" class="form-control" id="basicInput" />
+                  </div>
+                </div>
+                <div class="col-xl-3">
+                  <div class="form-group">
+                    <label for="name">Effective Date</label>
+                    <input type="text" class="form-control" id="basicInput" />
+                  </div>
+                </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="card mb-3">
-        <div className="card-body">
-          <div className="col-xl-12">
+          <hr className='mb-5'/>
+          <div className="col-xl-12 mb-5">
             <div className="row">
               <div className="col-xl-4">
                 <p>Bank Account</p>
@@ -60,10 +60,7 @@ const Third = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="card mb-3">
-        <div className="card-body">
+          <hr className='mb-5'/>
           <div className="col-xl-12">
             <div className="row">
               <div className="col-xl-4">
@@ -98,10 +95,7 @@ const Third = () => {
               </div>             
             </div>
           </div>
-        </div>
-      </div>
-      <div className="card mb-3">
-        <div className="card-body">
+          <hr className='mb-5'/>
           <div className="col-xl-12">
             <div className="row">
               <div className="col-xl-4">
@@ -133,10 +127,7 @@ const Third = () => {
               </div>              
             </div>
           </div>
-        </div>
-      </div>
-      <div className="card mb-3">
-        <div className="card-body">
+          <hr className='mb-5'/>
           <div className="col-xl-12">
             <div className="row">
               <div className="col-xl-4">
@@ -209,10 +200,7 @@ const Third = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="card mb-3">
-        <div className="card-body">
+          <hr className='mb-5'/>
           <div className="col-xl-12">
             <div className="row">
               <div className="col-xl-4">
@@ -235,9 +223,8 @@ const Third = () => {
           </div>
         </div>
       </div>
-      
     </div>
-  );
-};
+  )
+}
 
-export default Third;
+export default Payroll

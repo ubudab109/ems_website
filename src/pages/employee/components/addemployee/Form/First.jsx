@@ -24,7 +24,7 @@ const First = () => {
                   </div>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="basicInput">Last Name</label>
                     <input
                       type="text"
@@ -34,7 +34,7 @@ const First = () => {
                     />
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-3">
                   <label for="exampleInputEmail1">Email address</label>
                   <input
                     type="email"
@@ -48,7 +48,7 @@ const First = () => {
                   </small>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="basicInput">Mobile Phone</label>
                     <input
                       type="text"
@@ -59,7 +59,7 @@ const First = () => {
                   </div>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="basicInput">Phone</label>
                     <input
                       type="text"
@@ -70,23 +70,23 @@ const First = () => {
                   </div>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="basicInput">Places Of Birth</label>
                     <input type="text" class="form-control" id="basicInput" />
                   </div>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="basicInput">Birthdate</label>
                     <input
-                      type="text"
+                      type="datetime-local"
                       class="form-control"
                       id="basicInput"
                       placeholder="Select Date"
                     />
                   </div>
                 </div>
-                <div class="col-xl-6">
+                <div class="col-xl-6 mb-3">
                   <label for="basicInput">Gender</label>
                   <div class="form-check">
                     <input
@@ -115,7 +115,7 @@ const First = () => {
                   </div>
                 </div>
                 <div className="col-xl-6">
-                  <label for="basicInput">Gender</label>
+                  <label for="basicInput">Marital Status</label>
                   <select
                     class="form-select"
                     aria-label="Default select example"
@@ -152,14 +152,15 @@ const First = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-6">
+            <div className="v-divider"></div>
+            <div className="col-xl-5">
               <p>Identity & Adress</p>
               <p style={{ color: "#AAAAAA", fontSize: 12 }}>
                 Employee Identity & Address Information
               </p>
               <div class="row">
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="name">Identity Type</label>
                     <select
                       class="form-select"
@@ -173,7 +174,7 @@ const First = () => {
                   </div>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="basicInput">Identity Number</label>
                     <input
                       type="text"
@@ -184,7 +185,7 @@ const First = () => {
                   </div>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="basicInput">Identity Expired Date</label>
                     <input
                       type="text"
@@ -204,7 +205,7 @@ const First = () => {
                   </div>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label for="basicInput">Postal Code</label>
                     <input
                       type="text"

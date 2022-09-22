@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Second = () => {
   return (
@@ -6,15 +6,17 @@ const Second = () => {
       <div className="card">
         <div className="card-body">
           <div className="row">
-              <p>Employment Data</p>
-              <p style={{ color: "#AAAAAA", fontSize: 12 }}>
-                Fill All Employee Basic Information Data
-              </p>
+            <p>Employment Data</p>
+            <p style={{ color: "#AAAAAA", fontSize: 12 }}>
+              Fill All Employee Basic Information Data
+            </p>
+            
             <div className="col-xl-6">
               <div class="row">
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-4">
                     <label for="name">Employee ID</label>
+                    
                     <input
                       type="text"
                       class="form-control"
@@ -22,10 +24,12 @@ const Second = () => {
                       placeholder="Employee ID"
                     />
                   </div>
+                  
                 </div>
                 <div class="col-xl-6">
                   <div class="form-group">
                     <label for="basicInput">Job Position</label>
+                    
                     <input
                       type="text"
                       class="form-control"
@@ -35,7 +39,7 @@ const Second = () => {
                   </div>
                 </div>
                 <div class="col-xl-6">
-                  <div class="form-group">
+                  <div class="form-group mb-4">
                     <label for="basicInput">Employee Status</label>
                     <input
                       type="text"
@@ -82,9 +86,10 @@ const Second = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-6">
-              <div class="row">          
-                <div class="form-group">
+            <div className="v-divider"></div>
+            <div className="col-xl-5">
+              <div class="row">
+                <div class="form-group mb-4">
                   <label for="exampleInputEmail1">Branch</label>
                   <input
                     type="email"
@@ -122,7 +127,7 @@ const Second = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Second
+export default Second;

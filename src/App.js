@@ -11,6 +11,7 @@ import http from './service/PrivateConfigRequest';
 import { connect, useSelector } from 'react-redux';
 import './assets/sass/App.scss';
 import Forbidden from './pages/forbidden/Forbidden';
+import addEmployee from "../src/pages/employee/components/DetailEmployee/DetailEmployee"
 
 
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
                 }
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/forbidden" component={Forbidden} />
+                <Route exact path="/addemployee" component={addEmployee} />
                 </div>
               </div>
             </div>
