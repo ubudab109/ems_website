@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+import { isActionAllowed } from '../../../utils/helper';
 
 export const CustomToggle = forwardRef(({ children, onClick }, ref) => (
   <a
     href=""
     ref={ref}
     style={{
-      paddingRight : '24px'
+      margin : 0
     }}
     onClick={(e) => {
       e.preventDefault();
@@ -43,8 +45,15 @@ export const CustomMenu = forwardRef(
 );
 
 const DropdownUserAccepted = ({
-  onView, onChangeRole, onRemove, isUserSuperadmin, canView, canChange
+  onView, 
+  onChangeRole, 
+  onRemove, 
+  isUserSuperadmin,
 }) => {
+  const permissionData = useSelector(state => state.auth.permissions.filter(e => e.name === 'Management')[0]); // get permission for management, to check if current user if can access a few menu in this views
+  const canView=isActionAllowed(permissionData.permissions, 'user-management-permission-detail');
+  const canChange=isActionAllowed(permissionData.permissions, 'user-management-permission-update');
+
   return (
     <Dropdown>
       <Dropdown.Toggle as={CustomToggle} >
@@ -84,13 +93,8 @@ DropdownUserAccepted.propTypes = {
   onRemove: PropTypes.func,
   idDropdown: PropTypes.any,
   isUserSuperadmin: PropTypes.bool,
-  canView: PropTypes.bool,
-  canChange: PropTypes.bool,
 };
 
-DropdownUserAccepted.defaultProps = {
-  canView : true,
-  canChange: true,
-}
+
 
 export default DropdownUserAccepted;

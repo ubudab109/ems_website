@@ -1,30 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { Table } from 'react-bootstrap';
-import { withRouter, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
 import Select from 'react-select';
+import { useSelector } from 'react-redux';
 import SearchFilterInput from '../../../component/SearchFilterInput';
 import http from '../../../service/PrivateConfigRequest';
 import { useEffect } from 'react';
-import DropdownUserPending from '../components/DropwdownUserPending';
-import DropdownUserAccepted from '../components/DropwdownUserAccepted';
-import UsePagination from '../../../component/UsePagination';
 import CustomModalForm from '../../../component/CustomModalForm';
 import { customStyles } from '../../../style-component/ReactSelectCustomStyle';
 import method from '../../../service/Method';
-import swal from 'sweetalert';
 import CustomModal from '../../../component/CustomModal';
 import CustomModalDetail from '../../../component/CustomModalDetail';
 import { filterStyles } from '../../../style-component/ReactSelectFilterTable';
 import { INVITE_STATUS } from '../../../utils/constant';
-import { isActionAllowed, isString } from '../../../utils/helper';
 import DetailDataUser from '../modal/DetailDataUser';
+import DataTable from 'react-data-table-component';
+import columnUsers from '../data/column_users_header';
+import FormInviteSuperadmin from '../components/FormInviteSuperadmin';
+import FormInviteManager from '../components/FormInviteManager';
+import ButtonBlueFilter from '../../../component/ButtonBlueFilter';
 
 
-const UserManagement = ({ tabActive }) => {
-  const permissionData = useSelector(state => state.auth.permissions.filter(e => e.name === 'Management')[0]); // get permission for management, to check if current user if can access a few menu in this views
+const UserManagement = () => {
+  const isSuperAdmin = useSelector(state => state.auth.isSuperAdmin);
   const history = useHistory();
   const [keyword, setKeyword] = useState(''); // state for search data by keyword
 
@@ -43,6 +42,7 @@ const UserManagement = ({ tabActive }) => {
   const [formInviteUser, setFormInviteUser] = useState({
     user_id: '',
     role: '',
+    branchId: null,
   }); // state for form invite user
 
   const [detailEmployee, setDetailEmployee] = useState({
@@ -50,8 +50,6 @@ const UserManagement = ({ tabActive }) => {
     email: '',
   }); // detail data selected employee in form selected invite user
 
-  const [currentPage, setCurrentPage] = useState(1); // state for pagination current page
-  const [lastPage, setLastPage] = useState(0); // state for pagination last page
   const [userData, setUserData] = useState([]); // state for all user data
   const [isLoading, setIsLoading] = useState(false); // state for checking fetching data in this pages
   const [errorMessage, setErrorMessage] = useState(''); // state if there was an error in fetching data
@@ -61,7 +59,9 @@ const UserManagement = ({ tabActive }) => {
   const [showModalDetailUser, setShowModalDetailUser] = useState(false); //state for show or hide modal resend detail user
   const [showModalChangeRole, setShowModalChangeRole] = useState(false); // state for show or hide modal change role user
   const [optionsEmployee, setOptionsEmployee] = useState([]); // state for list select options data employee in form invite user
+  const [optionsBranch, setOptionsBranch] = useState([]); // state for list select options data branch in form invite form invite user
   const [optionsRole, setOptionsRole] = useState([]); // state for list select options data role in form invite form invite user
+  const [optionsFilterBranch, setOptionsFilterBranch] = useState([]); // state for list options data branch in filter data by branch
   const [optionsFilterRole, setOptionsFilterRole] = useState([]); // state for list options data role in filter data by role
   const [isFetchingEmployee, setIsFetchingEmployee] = useState(false); // state for checking fetching data employee in form invite user
 
@@ -73,6 +73,11 @@ const UserManagement = ({ tabActive }) => {
   const [selectedEmployee, setSelectedEmployee] = useState({
     value: '',
     label: 'Select Employee'
+  }); // state for selected value for select options in selected employee in invite form user
+
+  const [selectedBranch, setSelectedBranch] = useState({
+    value: '',
+    label: 'Select Branch'
   }); // state for selected value for select options in selected employee in invite form user
 
   const [selectedRole, setSelectedRole] = useState({
@@ -90,34 +95,7 @@ const UserManagement = ({ tabActive }) => {
   const [isFilterActive, setFilterActive] = useState(false); // state for appearing filter data
 
   const [postRequestLoading, setPostRequestLoading] = useState(false); // state for checking any request to create or update data
-  
-  /**
-   * Next Page in Pagination
-   * @param {event} e 
-   */
-  const goToNextPage = (e) => {
-    e.preventDefault();
-    setCurrentPage(page => page + 1);
-  };
 
-  /**
-   * Prev Page in Pagination
-   * @param {event} e 
-   */
-  const goToPreviousPage = (e) => {
-    e.preventDefault();
-    setCurrentPage(page => page - 1);
-  };
-
-  /**
-   * Go to Page in Pagination
-   * @param {event} e 
-   */
-  const changePage = (event) => {
-    event.preventDefault();
-    const pageNumber = Number(event.target.textContent);
-    setCurrentPage(pageNumber);
-  }
 
   /**
    * Search keyword data user event
@@ -148,6 +126,10 @@ const UserManagement = ({ tabActive }) => {
       value: '',
       label: 'Select Role'
     });
+    setSelectedBranch({
+      value: '',
+      label: 'Select Branch'
+    })
   }
 
   /**
@@ -223,8 +205,8 @@ const UserManagement = ({ tabActive }) => {
    * @param {number} page 
    * @returns {array} 
    */
-  const requestGetUserManagement = async (keyword, role, status, page) => {
-    return await http.get(`user?keyword=${keyword}&role=${role}&status=${status}&page=${page}`)
+  const requestGetUserManagement = async (keyword, role, status) => {
+    return await http.get(`user?keyword=${keyword}&role=${role}&status=${status}`)
   }
 
   /**
@@ -253,16 +235,23 @@ const UserManagement = ({ tabActive }) => {
   }
 
   /**
+   * Request get dataset branch
+   * @returns {Array}
+   */
+  const requestGetDatasetBranch = async () => {
+    return await http.get('dataset/company-branch');
+  }
+
+  /**
    * Callbact for request ger user management
    */
   const fetchUser = useCallback(() => {
     let keywordSearch = keyword;
     let roleFilter = role !== null ? role.value : '';
     let statusFilter = status !== null ? status.value : '';
-    let current_page = currentPage;
-    return requestGetUserManagement(keywordSearch, roleFilter, statusFilter, current_page);
+    return requestGetUserManagement(keywordSearch, roleFilter, statusFilter);
 
-  }, [keyword, role, status, currentPage]);
+  }, [keyword, role, status]);
 
   /**
    * Callback from request get dataset employee
@@ -276,6 +265,13 @@ const UserManagement = ({ tabActive }) => {
    */
   const fetchDatasetRoleManager = useCallback(() => {
     return requestGetDatasetRoleManager();
+  });
+
+  /**
+   * Callback from request get dataset company branch
+   */
+  const fetchDatasetCompanyBranch = useCallback(() => {
+    return requestGetDatasetBranch();
   });
 
   /**
@@ -298,7 +294,7 @@ const UserManagement = ({ tabActive }) => {
       });
       setSelectedEmployee({
         value: data.id,
-        label: `${data.name} | ${data.nip}`
+        label: `${data.firstname} ${data.lastname} | ${data.nip}`
       })
     }).catch((err) => {
       alert('Error When Fetching Data Employee. Please Try Again');
@@ -311,11 +307,9 @@ const UserManagement = ({ tabActive }) => {
   const handleFetchAllData = () => {
     setIsLoading(true);
     fetchUser().then((res) => {
-      let userData = res.data.data.data;
-      let lastPage = res.data.data.pagination.last_page;
+      let userData = res.data.data;
       setIsLoading(false);
       setUserData(userData);
-      setLastPage(parseInt(lastPage));
       fetchDatasetEmployee().then((res) => {
         let data = res.data.data;
         setOptionsEmployee(data);
@@ -325,15 +319,20 @@ const UserManagement = ({ tabActive }) => {
         setOptionsRole(data);
         setOptionsFilterRole(data);
       });
+      fetchDatasetCompanyBranch().then((res) => {
+        let data = res.data.data;
+        setOptionsBranch(data);
+        setOptionsFilterBranch(data);
+      });
 
     }).catch((err) => {
       if (err.response.status === 403) {
         swal(err.response.data.message, {
-          icon : 'error'
+          icon: 'error'
         }).then(() => {
           history.push('/forbidden');
         });
-      } 
+      }
       setIsLoading(false);
       setErrorMessage('There Was An Error. Please Reload The Page');
     });
@@ -347,9 +346,10 @@ const UserManagement = ({ tabActive }) => {
     return () => {
       setIsLoading(false);
       setUserData([]);
-      setLastPage('');
       setOptionsEmployee([]);
       setOptionsRole([]);
+      setOptionsBranch([]);
+      setOptionsFilterBranch([]);
       setErrorMessage('');
     };
   }, [fetchUser])
@@ -487,67 +487,121 @@ const UserManagement = ({ tabActive }) => {
   const FormInvite = () => {
     return (
       <Fragment>
-        <div className="form-group">
-          <label htmlFor="name" className="text-blue-dark my-2">Name</label>
-          <Select
-            id="name"
-            options={optionsEmployee}
-            styles={customStyles}
-            onChange={e => fetchDetailEmployee(e.value)}
-            value={selectedEmployee}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="role" className="text-blue-dark my-2">Role</label>
-          <Select
-            id="role"
-            options={optionsRole}
-            styles={customStyles}
-            value={selectedRole}
-            defaultValue={'test'}
-            onChange={e => {
-              setSelectedRole(e);
-              setFormInviteUser({
-                ...formInviteUser,
-                role: e.value
-              })
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="nip" className="text-blue-dark my-2">NIP</label>
-          <input
-            type="text"
-            name="nip"
-            id="nip"
-            readOnly
-            className="form-control input-text-custom"
-            value={isFetchingEmployee ? 'Getting Data...' : detailEmployee.nip}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email" className="text-blue-dark my-2">Email</label>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            readOnly
-            className="form-control input-text-custom"
-            value={isFetchingEmployee ? 'Getting Data...' : detailEmployee.email}
-          />
-        </div>
+        {
+          isSuperAdmin ?
+            <FormInviteSuperadmin
+              customStyles={customStyles}
+              optionsEmployee={optionsEmployee}
+              onChangeSelectEmployee={e => fetchDetailEmployee(e.value)}
+              selectedEmployee={selectedEmployee}
+              optionsBranch={optionsBranch}
+              onChangeSelectBranch={e => {
+                setSelectedBranch(e);
+                setFormInviteUser({
+                  ...formInviteUser,
+                  branchId: e.value
+                })
+              }}
+              selectedBranch={selectedBranch}
+              optionsRole={optionsRole}
+              selectedRole={selectedRole}
+              onChangeSelectedRole={e => {
+                setSelectedRole(e);
+                setFormInviteUser({
+                  ...formInviteUser,
+                  role: e.value
+                })
+              }}
+              isFetchingEmployee={isFetchingEmployee}
+              detailEmployee={detailEmployee}
+            /> :
+            <FormInviteManager
+              customStyles={customStyles}
+              optionsEmployee={optionsEmployee}
+              onChangeSelectEmployee={e => fetchDetailEmployee(e.value)}
+              selectedEmployee={selectedEmployee}
+              optionsRole={optionsRole}
+              selectedRole={selectedRole}
+              onChangeSelectedRole={e => {
+                setSelectedRole(e);
+                setFormInviteUser({
+                  ...formInviteUser,
+                  role: e.value
+                })
+              }}
+              isFetchingEmployee={isFetchingEmployee}
+              detailEmployee={detailEmployee}
+            />
+        }
       </Fragment>
     );
   };
 
-  
+  /**
+   * OnCancel Handler
+   * @param {number} userId 
+   */
+  const onCancel = (userId) => {
+    handleShowModalDelete();
+    setUserId(userId);
+  };
+
+  /**
+   * OnResend Handler
+   * @param {number} userId 
+   */
+  const onResend = (userId) => {
+    handleShowModalResend();
+    setUserId(userId);
+  };
+
+  /**
+   * On Remove user handler
+   * @param {number} userId 
+   */
+  const onRemove = (userId) => {
+    handleShowModalDelete();
+    setUserId(userId);
+  }
+
+  /**
+   * On Change Role Handler
+   * @param {number} userId
+   * @param {number} roleId 
+   * @param {string} roleLabel 
+   */
+  const onChangeRole = (userId, roleId, roleLabel) => {
+    handleShowModalChangeRole();
+    setUserId(userId);
+    setSelectedChangeRole({
+      value: roleId,
+      label: roleLabel
+    });
+  }
+
+  /**
+   * On View Detail User Handler
+   * @param {string} userName 
+   * @param {string} avatar 
+   * @param {string} email 
+   * @param {string} role 
+   */
+  const onView = (userName, avatar, email, role) => {
+    handleShowModalDetail(true);
+    setViewDetailData({
+      name: userName,
+      avatar: avatar,
+      email: email,
+      role: role
+    });
+  }
 
   return (
-    <div className={`tab-pane ${tabActive ? 'active' : ''}`} role="tabpanel" id="noanim-tab-example-tabpane-user">
+    <div className="tab-pane active" role="tabpanel" id="noanim-tab-example-tabpane-user">
 
       {/* Modal Detail User */}
       <CustomModalDetail
-        size="sm"
+        size="xl"
         children={
           <DetailDataUser
             srcAvatar={viewDetailData.avatar}
@@ -629,6 +683,7 @@ const UserManagement = ({ tabActive }) => {
                       <Select
                         id="name"
                         options={optionsFilterRole}
+                        className="high-index"
                         styles={filterStyles}
                         isClearable={role !== null && role.value !== '' ? true : false}
                         onChange={e => {
@@ -645,6 +700,7 @@ const UserManagement = ({ tabActive }) => {
                         options={INVITE_STATUS}
                         isClearable={status !== null && status.value !== '' ? true : false}
                         styles={filterStyles}
+                        className="high-index"
                         onChange={e => setStatus(e)}
                         placeholder={'Select Status...'}
                         value={status}
@@ -657,121 +713,33 @@ const UserManagement = ({ tabActive }) => {
               {/* END */}
               <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
                 <div className="row row-absolute">
-                  <button className="btn-blues mx-auto my-2 font-12" onClick={() => setShowModalForm(true)}>Invite</button>
+                  <ButtonBlueFilter name="Invite" onClick={() => setShowModalForm(true)} />
                 </div>
               </div>
             </div>
 
             <div className="row mt-5 v-50">
-              <Table bordered hover responsive>
-                <thead>
-                  <tr>
-                    <th className="text-left" style={{ paddingLeft: '29px' }}>Name</th>
-                    <th className="text-left">Email</th>
-                    <th className="text-left">Role</th>
-                    <th className="text-left">Status</th>
-                    <th className="text-right mx-2"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    isLoading ?
-                      <tr>
-                        <td colSpan={5}>Fetching Data....</td>
-                      </tr>
-                      : errorMessage === '' ?
-                        userData.length < 1 ?
-                          <tr>
-                            <td colSpan={5} rowSpan={5}>No Data....</td>
-                          </tr>
-                          :
-                          userData.map((value, index) => {
-                            return (
-                              <tr key={index}>
-                                <td className="text-left" style={{ paddingLeft: '29px' }}>
-                                  <img
-                                    className="img-circle"
-                                    src={value.avatar}
-                                    alt=""
-                                    width={30}
-                                    style={{ marginRight: '3px', paddingBottom: '1px' }}
-                                  />
-                                  <span className="text-muted">{value.name}</span>
-                                </td>
-                                <td className="text-left">
-                                  <span className="text-muted">{value.email}</span>
-                                </td>
-                                <td className="text-left">
-                                  <span className="text-muted">{value.role}</span>
-                                </td>
-                                <td className="text-left">
-                                  <span className={value.invited_status === '0' ? 'my-badge-pending' : 'my-badge-success'}>
-                                    {value.invited_status === '0' ? 'Pending' : 'Accepted'}
-                                  </span>
-                                </td>
-                                <td className="text-right mx-2">
-                                  {
-                                    value.invited_status === '0' ?
-                                      <DropdownUserPending
-                                        onCancel={() => {
-                                          handleShowModalDelete();
-                                          setUserId(value.id);
-                                        }}
-                                        onResend={() => {
-                                          handleShowModalResend();
-                                          setUserId(value.id);
-                                        }}
-                                        canResend={isActionAllowed(permissionData.permissions, 'user-management-permission-resend')}
-                                        canCancel={isActionAllowed(permissionData.permissions, 'user-management-permission-delete')}
-                                      /> :
-                                      <DropdownUserAccepted
-                                        onRemove={() => {
-                                          handleShowModalDelete();
-                                          setUserId(value.id);
-                                        }}
-                                        onChangeRole={() => {
-                                          handleShowModalChangeRole();
-                                          setUserId(value.id);
-                                          setSelectedChangeRole({
-                                            value: value.roles[0].id,
-                                            label: value.role
-                                          });
-                                        }}
-                                        onView={() => {
-                                          handleShowModalDetail(true);
-                                          setViewDetailData({
-                                            name: value.name,
-                                            avatar: value.avatar,
-                                            email: value.email,
-                                            role: value.role
-                                          });
-                                        }}
-                                        isUserSuperadmin={value.role === 'Superadmin' || value.role === 'superadmin' ? true : false}
-                                        canView={isActionAllowed(permissionData.permissions, 'user-management-permission-detail')}
-                                        canChange={isActionAllowed(permissionData.permissions, 'user-management-permission-update')}
-                                      />
-                                  }
-                                </td>
-                              </tr>
-                            )
-                          }) :
-                        <tr>
-                          <td colSpan={5}>{errorMessage}</td>
-                        </tr>
-                  }
-                </tbody>
-              </Table>
-            </div>
-
-            {/* PAGINATION */}
-            <div className="row justify-content-end">
-              <UsePagination
-                goToNextPage={(e) => goToNextPage(e)}
-                changePage={(e) => changePage(e)}
-                goToPreviousPage={(e) => goToPreviousPage(e)}
-                currentPage={currentPage}
-                pageLimit={isString(lastPage) ? 1 : lastPage}
-              />
+              <div className="table-responsive">
+                {
+                  errorMessage !== '' ? errorMessage :
+                    <DataTable
+                      columns={
+                        columnUsers(
+                          onCancel,
+                          onResend,
+                          onRemove,
+                          onChangeRole,
+                          onView
+                        )
+                      }
+                      data={userData}
+                      progressPending={isLoading}
+                      pagination
+                      fixedHeader
+                      fixedHeaderScrollHeight={'100vh'}
+                    />
+                }
+              </div>
             </div>
           </div>
         </div>
@@ -780,8 +748,4 @@ const UserManagement = ({ tabActive }) => {
   );
 };
 
-UserManagement.propTypes = {
-  tabActive : PropTypes.bool.isRequired,
-};
-
-export default withRouter(UserManagement);
+export default UserManagement;

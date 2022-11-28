@@ -30,7 +30,7 @@ const CustomModalDetail = ({
 };
 
 CustomModalDetail.propTypes = {
-  show: PropTypes.bool,
+  show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
   headerTitle: PropTypes.string,
   children: PropTypes.node.isRequired,

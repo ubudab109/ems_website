@@ -1,50 +1,23 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { forwardRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+import { isActionAllowed } from '../../../utils/helper';
+import { CustomMenu, CustomToggle } from '../../components/DropdownCustomToggle';
 
-export const CustomToggle = forwardRef(({ children, onClick }, ref) => (
-  <a
-    href=""
-    ref={ref}
-    style={{
-      paddingRight: '24px'
-    }}
-    onClick={(e) => {
-      e.preventDefault();
-      onClick(e);
-    }}
-  >
-    {children}
-  </a>
-));
 
-export const CustomMenu = forwardRef(
-  ({
-    children, style, className, 'aria-labelledby': labeledBy,
-  }, ref) => {
-    return (
-      <div
-        ref={ref}
-        style={style}
-        className={className + ' card-shadow min-w-auto'}
-        aria-labelledby={labeledBy}
-      >
-        <div className="card-body">
-          <ul className="text-table">
-            {children}
-          </ul>
-        </div>
-      </div>
-    );
-  },
-);
 
 const DropdownUserPending = ({
-  onResend, onCancel, canResend, canCancel
+  onResend, onCancel
 }) => {
+
+  const permissionData = useSelector(state => state.auth.permissions.filter(e => e.name === 'Management')[0]); // get permission for management, to check if current user if can access a few menu in this views
+
+  const canResend=isActionAllowed(permissionData.permissions, 'user-management-permission-resend');
+  const canCancel=isActionAllowed(permissionData.permissions, 'user-management-permission-delete');
+  
   return (
     <Dropdown>
       <Dropdown.Toggle as={CustomToggle} >
@@ -78,13 +51,7 @@ DropdownUserPending.propTypes = {
   onChangeRole: PropTypes.func,
   onRemove: PropTypes.func,
   idDropdown: PropTypes.any,
-  canResend: PropTypes.bool,
-  canCancel: PropTypes.bool,
 };
 
-DropdownUserPending.defaultProps = {
-  canResend : true,
-  canCancel : true,
-};
 
 export default DropdownUserPending;

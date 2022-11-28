@@ -6,21 +6,24 @@ import { Route, Switch } from 'react-router-dom';
 import routes, { Profile } from './route/Route';
 import { GuestRoute, PrivateRoute } from './route/RouteHelper';
 import Login from './pages/auth/Login';
-import { clearAllItem, getStore } from './utils/helper';
+import { clearAllItem, getStore, isActionAllowed } from './utils/helper';
 import http from './service/PrivateConfigRequest';
 import { connect, useSelector } from 'react-redux';
 import './assets/sass/App.scss';
 import Forbidden from './pages/forbidden/Forbidden';
+import superadminRoutes from './route/RouteSuperadmin';
+import AddEmployee from './pages/employee/AddEmployee';
 
 
 const App = () => {
 
-  
+
 
   /**
    * Selector to get data permissions from redux
    */
   const permissions = useSelector(state => state.auth.permissions);
+  const isSuperAdmin = useSelector(state => state.auth.isSuperAdmin);
   // const [permissions, setPermissions] = useState([]);
   const isLoggedIn = localStorage.getItem('web-token');
   useEffect(() => {
@@ -39,39 +42,60 @@ const App = () => {
   });
 
   return (
-    <Suspense 
-        fallback={
-          <div className="d-flex justify-content-center">
-  
-          </div>
-        }
-      >
-        <Switch>
-          <GuestRoute exact path="/" component={Login} />
-          <Fragment>
-            <div className="d-flex" id="wrapper">
-              <Sidebar />
-              {/* <!-- Page content wrapper--> */}
-              <div id="page-content-wrapper">
-                <Navbar />
-                {/* <!-- Page content--> */}
-                <div className="container-fluid">
+    <Suspense
+      fallback={
+        <div className="d-flex justify-content-center">
+
+        </div>
+      }
+    >
+      <Switch>
+        <GuestRoute exact path="/" component={Login} />
+        <Fragment>
+          <div className="d-flex" id="wrapper">
+            <Sidebar />
+            {/* <!-- Page content wrapper--> */}
+            <div id="page-content-wrapper">
+              <Navbar />
+              {/* <!-- Page content--> */}
+              <div className="container-fluid">
                 {/* CONTENT HERE */}
                 {
-                  routes.map((route, index) => {
-                    return (
-                      <PrivateRoute key={index} {...route} canAccess={isLoggedIn ? permissions[index].is_scope_access : false} />
-                    )
-                  })
+                  isSuperAdmin ?
+                    superadminRoutes.map((route, index) => {
+                      return (
+                        <PrivateRoute
+                          key={index}
+                          {...route}
+                          canAccess={true}
+                        />
+                      )
+                    }) :
+                    routes.map((route, index) => {
+                      return (
+                        <PrivateRoute
+                          key={index}
+                          {...route}
+                          canAccess={
+                            isLoggedIn && !route.withoutPermissions ?
+                              isActionAllowed(
+                                permissions.filter(
+                                  e => e.name === route.scopePermissions)[0].permissions,
+                                route.listPermissions
+                              )
+                              : true
+                          }
+                        />
+                      )
+                    })
                 }
-                <Route exact path="/profile" component={Profile} />
                 <Route exact path="/forbidden" component={Forbidden} />
-                </div>
               </div>
             </div>
-          </Fragment>
-        </Switch>
-      </Suspense>
+          </div>
+        </Fragment>
+      </Switch>
+    </Suspense>
   );
 }
 

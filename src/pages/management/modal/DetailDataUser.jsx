@@ -12,7 +12,7 @@ const DetailDataUser = ({
     <Fragment>
       <div className="row justify-content-center">
         <div className="col-xl-5 col-lg-5 col-md-8 col-sm-10">
-          <img src={srcAvatar} alt="avatar" className="img-center" />
+          <img src={srcAvatar} alt="avatar" className="img-center img-circle" />
         </div>
       </div>
       <div className="row justify-content-center">
@@ -23,8 +23,8 @@ const DetailDataUser = ({
             name=""
             id="detail_name"
             readOnly
-            disabled c
-            lassName="form-control input-text-custom"
+            disabled
+            className="form-control input-text-custom"
             value={name}
           />
         </div>

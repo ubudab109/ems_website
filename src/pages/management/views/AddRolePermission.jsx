@@ -4,7 +4,7 @@ import { Accordion } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 import method from '../../../service/Method';
-import { arrayUnique, capitalizeFirstLetter } from '../../../utils/helper';
+import { arrayUnique, capitalizeFirstLetter, setMessageError } from '../../../utils/helper';
 
 const AddRolePermissions = (props) => {
 
@@ -140,11 +140,11 @@ const AddRolePermissions = (props) => {
       swal(res.data.message, {
         icon: "success",
       }).then(() => {
-        history.push('/management/role')
+        history.push('/management')
       });
-    }).catch(() => {
+    }).catch((err) => {
       setLoadingCreate(false);
-      swal("There is something wrong. Please Try Again!", {
+      swal(setMessageError(err.response.status), {
         icon: "error",
       })
     })
@@ -152,7 +152,7 @@ const AddRolePermissions = (props) => {
 
 
   return (
-    <div className={`tab-pane ${props.tabActive ? 'active' : ''}`} role="tabpanel" id="noanim-tab-example-tabpane-role">
+    <div className={`tab-pane active`} role="tabpanel" id="noanim-tab-example-tabpane-role">
       <div className="card card-shadow">
         <h1 className="mt-4 breadcumb">Create Role & Permission</h1>
         <div className="card-body">
@@ -241,7 +241,7 @@ const AddRolePermissions = (props) => {
           </Accordion>
           <hr />
           <div className="row justify-content-end p-5">
-            <button className="btn-border-blue my-1 mx-2 font-12" onClick={() => history.push('/management/role')}>Cancel</button>
+            <button className="btn-border-blue-small my-1 mx-2 font-12" onClick={() => history.push('/management')}>Cancel</button>
 
             <button disabled={loadingCreate} className="btn-blues-small my-1 font-12" onClick={(e) => handleSubmitCreateRole(e)}>
               {loadingCreate ? 'Sending...' : 'Save'}

@@ -6,8 +6,6 @@ import React, {
   useRef,
   useState
 } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
@@ -26,8 +24,9 @@ import ChartAttendance from '../../../component/ChartAttendance';
 import ScheduleManagement from '../../dashboard/components/ScheduleManagement';
 import CustomModalDetail from '../../../component/CustomModalDetail';
 import DetailAttendance from '../modal/DetailAttendance';
+import { setMessageError } from '../../../utils/helper';
 
-const AttendanceManagement = ({ tabActive }) => {
+const AttendanceManagement = () => {
   /**
    * history for route
    */
@@ -39,7 +38,8 @@ const AttendanceManagement = ({ tabActive }) => {
   const [attendanceData, setAttendanceData] = useState([]);
   const [detailAttendance, setDetailAttendance] = useState({});
   const [shiftTime, setShiftTime] = useState('');
-  const [errorDetailAttendance, setErrorDetailAttendance] = useState(null);
+  const [errorDetailAttendance, setErrorDetailAttendance] = useState(false);
+  const [errorDetailMessages, setErrorDetailMessages] = useState('');
   const [isFetchingDetail, setIsFetchingDetail] = useState(false);
   const [showModalDetailAttendance, setShowModalDetailAttendance] = useState(false);
   const [isLoadingAttendance, setIsLoadingAttendance] = useState(false);
@@ -139,8 +139,9 @@ const AttendanceManagement = ({ tabActive }) => {
         setShiftTime(shiftTime);
         setIsFetchingDetail(false);
       }).catch(err => {
-        let status = err.response.status;
         setIsFetchingDetail(false);
+        setErrorDetailAttendance(true);
+        setErrorDetailMessages(setMessageError(err.response.status))
       });
 
 
@@ -149,7 +150,7 @@ const AttendanceManagement = ({ tabActive }) => {
   const handleCloseModalDetailAttendance = () => {
     setShowModalDetailAttendance(false);
     setDetailAttendance({});
-    setErrorDetailAttendance(null);
+    setErrorDetailAttendance(false);
   };
 
   /**
@@ -168,7 +169,7 @@ const AttendanceManagement = ({ tabActive }) => {
 
 
   return (
-    <div className={`tab-pane ${tabActive ? 'active' : ''}`} role="tabpanel" id="noanim-tab-example-tabpane-attendance">
+    <div className="tab-pane active" role="tabpanel" id="noanim-tab-example-tabpane-attendance">
       {/* MODAL DETAIL ATTENDANCE */}
       <CustomModalDetail
         children={
@@ -182,6 +183,8 @@ const AttendanceManagement = ({ tabActive }) => {
           </Fragment>
           :
           <DetailAttendance
+            errorMesages={errorDetailMessages}
+            isError={errorDetailAttendance}
             avatar={
               detailAttendance.employee ?
                 detailAttendance.employee.avatar :
@@ -229,6 +232,15 @@ const AttendanceManagement = ({ tabActive }) => {
               detailAttendance.workplace_name
             }
             shiftTime={shiftTime}
+            attendanceLocation={
+              detailAttendance.attendance_location
+            }
+            clockIn={
+              detailAttendance.clock_in
+            }
+            clockOut={
+              detailAttendance.clock_out
+            }
           />
         }
         headerTitle="Detail Attendance"
@@ -311,7 +323,6 @@ const AttendanceManagement = ({ tabActive }) => {
                         pagination
                         fixedHeader
                         fixedHeaderScrollHeight={'61vh'}
-                      // paginationComponent={UsePagination}
                       />
                   }
                 </div>
@@ -357,8 +368,6 @@ const AttendanceManagement = ({ tabActive }) => {
   );
 };
 
-AttendanceManagement.propTypes = {
-  tabActive: PropTypes.bool.isRequired,
-};
 
-export default withRouter(AttendanceManagement);
+
+export default AttendanceManagement;

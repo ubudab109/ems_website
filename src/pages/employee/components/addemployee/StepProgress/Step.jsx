@@ -8,19 +8,19 @@ const Step = () => {
         <p style={{ color: "#00617F" }}>
           <b className="mr-5">Step Progress</b>
         </p>
-        <div class="col-xl-12">
-          <ul class="timeline">
-            <li>
-              <p>Personal Data</p>
+        <div className="col-xl-12">
+          <ul className="timeline">
+            <li className="step-1 active">
+              <p style={{marginLeft : '20px', paddingTop: '10px'}}>Personal Data</p>
             </li>
-            <li>
-              <p>Employment Data</p>
+            <li className="step-2">
+              <p style={{marginLeft : '20px', paddingTop: '10px'}}>Employment Data</p>
             </li>
-            <li>
-              <p>Payroll</p>
+            <li className="step-3">
+              <p style={{marginLeft : '20px', paddingTop: '10px'}}>Payroll</p>
             </li>
-            <li>
-              <p>Invited Employee</p>
+            <li className="step-4">
+              <p style={{marginLeft : '20px', paddingTop: '10px'}}>Invited Employee</p>
             </li>
           </ul>
         </div>

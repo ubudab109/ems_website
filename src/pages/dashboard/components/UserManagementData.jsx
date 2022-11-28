@@ -17,7 +17,6 @@ const UserManagementData = ({
           }} />
         </div>
         <div className="col-6">
-
           <div className="col-12 text-left mt-1">
             <ul className="ul-db">
               <li className="text-um" style={{ fontSize: '14px', fontWeight: '600' }}>{name}</li>

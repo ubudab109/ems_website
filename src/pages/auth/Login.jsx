@@ -35,8 +35,16 @@ const Login = () => {
       const data = res.data.data.user_data;
       const role = res.data.data.role;
       const permissions = res.data.data.permissions;
-      dispatch(loginProcess(data, role, permissions));
+      let branchId;
+      if (res.data.data.branch !== null) {
+        branchId = res.data.data.branch.branch_id;
+      } else {
+        branchId = null;
+      }
+      const isSuperAdmin = res.data.data.user_data.is_superadmin
+      dispatch(loginProcess(data, role, permissions, isSuperAdmin));
       setStore('web-token', token);
+      setStore('branch-selected', branchId);
       setSubmitted(false)
       window.location.reload();
     } catch (err) {

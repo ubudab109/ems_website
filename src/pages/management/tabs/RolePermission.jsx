@@ -6,9 +6,6 @@ import React, {
   useEffect,
 } from 'react';
 import {
-  Route,
-  Switch,
-  useRouteMatch,
   withRouter,
   useHistory,
 } from 'react-router-dom';
@@ -22,9 +19,10 @@ import { getRole } from '../../../app/redux/rolePermissionReducer';
 import swal from 'sweetalert';
 
 
-const RolePermission = (props) => {
+const RolePermission = () => {
   const permissionData = useSelector(state => state.auth.permissions.filter(e => e.name === 'Management')[0]);
   const [keyword, setKeyword] = useState('');
+  const [roleId, setRoleId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currendIndexTab, setCurrentIndexTab] = useState();
   const dispatch = useDispatch();
@@ -34,9 +32,6 @@ const RolePermission = (props) => {
   const requestGetRole = async (keyword) => {
     return await http.get(`role?keyword=${keyword}`);
   }
-
-  const { path, url } = useRouteMatch();
-
 
   const fetchRole = useCallback(() => {
     let searchRoleName = keyword;
@@ -81,12 +76,16 @@ const RolePermission = (props) => {
     setCurrentIndexTab(index);
   }
 
+  const forceUpdate = useCallback(() => setRoleId(null), []);
+  
   const onClickDetailRole = (idRole) => {
-    history.push(`${path}/${idRole}`)
-  }
+    forceUpdate();
+    setRoleId(idRole);
+  };
+
 
   return (
-    <div className={`tab-pane ${props.tabActive ? 'active' : ''}`} role="tabpanel" id="noanim-tab-example-tabpane-role">
+    <div className={`tab-pane active`} role="tabpanel" id="noanim-tab-example-tabpane-role">
       <div className="row">
         <div className="col-xl-2 col-lg-4 col-md-11 col-sm-11 mt-2">
           <div className="card card-shadow">
@@ -124,7 +123,7 @@ const RolePermission = (props) => {
                                             onClickDetailRole(data['id']);
                                           } else {
                                             swal("Sorry. You Don't Have Permission To Access This Resource", {
-                                              icon : 'error'
+                                              icon: 'error'
                                             });
                                           }
                                         }}
@@ -153,7 +152,7 @@ const RolePermission = (props) => {
               {
                 isActionAllowed(permissionData.permissions, 'role-permission-create') ?
                   <div className="col-12 text-center my-3">
-                    <button className="btn-blues" style={{ width: '100%' }} onClick={() => history.push(`/management/add/role`)}>
+                    <button className="btn-blues" style={{ width: '100%' }} onClick={() => history.push(`/management/add-role`)}>
                       <div className="row justify-content-center">
 
                         <div className="col-1">
@@ -171,17 +170,19 @@ const RolePermission = (props) => {
             </div>
           </div>
         </div>
-        <Switch>
-          <Fragment>
-            <div className="col-xl-10 col-lg-8 col-md-11 col-sm-11 mt-2">
-              <div className="card card-shadow">
-                <div className="card-body">
-                  <Route exact path={`${url}/:roleId`} component={withRouter(PermissionRole)}></Route>
-                </div>
+        <Fragment>
+          <div className="col-xl-10 col-lg-8 col-md-11 col-sm-11 mt-2">
+            <div className="card card-shadow">
+              <div className="card-body">
+                {
+                  roleId !== null ?
+                    <PermissionRole roleId={roleId} />
+                    : null
+                }
               </div>
             </div>
-          </Fragment>
-        </Switch>
+          </div>
+        </Fragment>
 
 
       </div>

@@ -7,7 +7,6 @@ const columnAttendance = memoize(
       name: 'ID',
       selector : row => row.id,
       sortable: true,
-      
     },
     {
       name: 'Employee Name',

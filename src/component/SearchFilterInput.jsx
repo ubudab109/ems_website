@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SearchFilterInput = ({
-  clickFilter, onChangeInput, input, canFilter
+  clickFilter, onChangeInput, input, canFilter, onKeyDown
 }) => {
   return (
     <div className="input-group">
@@ -22,9 +22,11 @@ const SearchFilterInput = ({
       value={input} 
       className="form-control input-search" 
       placeholder="Search" 
+      onKeyDown={onKeyDown}
       style={{
         borderRight: canFilter ? '0' : '1',
-        borderLeft: '0'
+        borderLeft: '0',
+        background: 'none'
       }}
         onChange={onChangeInput} />
       {
@@ -45,6 +47,7 @@ SearchFilterInput.propTypes = {
   onChangeInput: PropTypes.func,
   input: PropTypes.any,
   canFilter: PropTypes.bool,
+  onKeyDown: PropTypes.func
 }
 
 SearchFilterInput.defaultProps = {

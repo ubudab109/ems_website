@@ -26,7 +26,7 @@ const restoreById = async (endpoint, id) => {
   return await http.patch(`/${endpoint}/${id}`);
 }
 
-const createDataWihtOneUpload = async (endpoint, data) => {
+const createDataWithOneUpload = async (endpoint, data) => {
   return await http.post(`/${endpoint}`, data);
 }
 
@@ -54,7 +54,7 @@ const method = {
   getDataset,
   deleteById,
   restoreById,
-  createDataWihtOneUpload,
+  createDataWithOneUpload,
   createDataWithoutUpload,
   updateDataById,
   updateDataByIdWithPut

@@ -6,7 +6,6 @@ import { Accordion } from 'react-bootstrap';
 import { Fragment } from 'react';
 import { arrayUnique, capitalizeFirstLetter, isActionAllowed } from '../../../utils/helper';
 import CustomModal from '../../../component/CustomModal';
-import { useParams } from 'react-router-dom';
 import method from '../../../service/Method';
 import swal from 'sweetalert';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +13,7 @@ import { permissionUpdate } from '../../../app/redux/reducer';
 import { useHistory } from 'react-router-dom';
 import { deleteRole } from '../../../app/redux/rolePermissionReducer';
 
-const PermissionRole = () => {
+const PermissionRole = ({ roleId }) => {
   const permissionData = useSelector(state => state.auth.permissions.filter(e => e.name === 'Management')[0]);
   const [isLoading, setIsLoading] = useState(false); // state for loading when fetching data
   const [errorMessage, setErrorMessage] = useState(''); // state for error message if fetching data was error
@@ -35,7 +34,7 @@ const PermissionRole = () => {
   const handleShow = () => setShow(true);
 
   // params role id
-  let { roleId } = useParams();
+  // let { roleId } = useParams();
 
 
   /**
@@ -155,7 +154,7 @@ const PermissionRole = () => {
       setIsUserCurrentRole(false);
     };
   },
-    []
+    [roleId]
   );
 
   /**
@@ -204,13 +203,23 @@ const PermissionRole = () => {
         swal(res.data.message, {
           icon: "success",
         }).then(() => {
-          history.push('/management/role');
+          history.push('/management');
           dispatch(deleteRole(roleId));
+          handleClose();
+          setRole('');
+          setRoleEdit('');
+          setPermissionRole([]);
+          setPermissionRoleEdit([]);
+          setIsLoading(false);
+          setErrorMessage('');
+          setIsUserCurrentRole(false);
         });
       }).catch(() => {
         swal("There is something wrong. Please Try Again!", {
           icon: "error",
-        })
+        });
+        handleClose();
+
       })
   }
 
@@ -219,8 +228,9 @@ const PermissionRole = () => {
       <CustomModal
         show={show}
         handleClose={handleClose}
-        text='Are you sure you want to delete the Role Name ?'
+        text='Are you sure you want to delete the Role? All User Was Related To This Role Must Be Assigned For New Role'
         handleSure={() => onDeleteRole()}
+        submitText="Sure"
       />
       <div className="">
         <div className="row justify-content-start">
@@ -335,7 +345,7 @@ const PermissionRole = () => {
       <hr />
       {
         !isCantEdit ? <div className="row justify-content-end p-4">
-          <button className="btn-border-blue my-1 font-11" onClick={onDiscardChanges}>Discard</button>
+          <button className="btn-border-blue-small my-1 font-11" onClick={onDiscardChanges}>Discard</button>
           <button disabled={loadingUpdate} className="btn-blues-small my-1 mx-2 font-12" onClick={(e) => onUpdateRolePermissions(e)}>
             {loadingUpdate ? 'Sending...' : 'Save'}
           </button>

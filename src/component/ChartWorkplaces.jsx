@@ -16,7 +16,7 @@ const ChartWorkplaces = () => {
    * @returns {JSON}
    */
   const requestChartEmployee = async () => {
-    return await http.get('dashboard/chart-employee');
+    return await http.get('dashboard/chart-workplaces');
   }
 
   /**

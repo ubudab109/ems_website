@@ -10,15 +10,17 @@ const CustomModalForm = ({
       <Modal.Header style={{ justifyContent : 'center'}}>
         <h4 className="text-blue-dark text-center">{headerTitle}</h4>
       </Modal.Header>
-      <Modal.Body>
-        <h1 className="modal-body-logout">
-          {children}
-        </h1>
-      </Modal.Body>
-      <Modal.Footer>
-        <button className="btn-border-blue" onClick={handleClose}>Cancel</button>
-        <button className="btn-blue" disabled={isSendButtonDisabled} onClick={handleSure}>{submitText}</button>
-      </Modal.Footer>
+      <form onSubmit={handleSure}>
+        <Modal.Body>
+          <div className="modal-body-logout">
+            {children}
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <button type="button" className="btn-border-blue" onClick={handleClose}>Cancel</button>
+          <button type="submit" className="btn-blue" disabled={isSendButtonDisabled}>{submitText}</button>
+        </Modal.Footer>
+      </form>
     </Modal>
   );
 };

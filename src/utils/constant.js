@@ -1,4 +1,4 @@
-export const URL_SERVICE = 'http://localhost:8000/api/v1/web/';
+export const URL_SERVICE = process.env.REACT_APP_BACKEND_URL;
 export const INVITE_STATUS = [
   {
     value : '0',
@@ -7,6 +7,29 @@ export const INVITE_STATUS = [
   {
     value : '1',
     label : 'Accepted'
+  },
+];
+
+export const JOB_STATUS = [
+  {
+    id: 0,
+    value: 'all',
+    label: 'All Status (Default)'
+  },
+  {
+    id: 1,
+    value: '0',
+    label: 'Permanent'
+  },
+  {
+    id: 2,
+    value: '1',
+    label: 'Contract',
+  },
+  {
+    id: 3,
+    value: '2',
+    label: 'Probation',
   },
 ];
 
@@ -101,3 +124,120 @@ export const TIME_STATUS_OPTION = [
     label: 'Absent'
   },
  ];
+
+export const EMPLOYEE_STATUS = [
+  {
+    value : '',
+    label: 'All',
+  },
+  {
+    value: '0',
+    label: 'Inactive',
+  },
+  {
+    value: '1',
+    label: 'Active',
+  },
+  {
+    value: '2',
+    label: 'Pending',
+  },
+];
+
+export const MARITAL_STATUS = [
+  {
+    name: 'marital_status',
+    value: 'single',
+    label: 'Single'
+  },
+  {
+    name: 'marital_status',
+    value: 'married',
+    label: 'Married',
+  },
+  {
+    name: 'marital_status',
+    value: 'divorce',
+    label: 'Divorce'
+  },
+];
+
+
+export const BLOOD_TYPE = [
+  {
+    name: 'blood_type',
+    value: 'A',
+    label: 'A',
+  },
+  {
+    name: 'blood_type',
+    value: 'AB',
+    label: 'AB',
+  },
+  {
+    name: 'blood_type',
+    value: 'B',
+    label: 'B',
+  },
+  {
+    name: 'blood_type',
+    value: 'O',
+    label: 'O',
+  },
+];
+
+export const RELIGION = [
+  {
+    name: 'religion',
+    value: 'Islam',
+    label: 'Islam',
+  },
+  {
+    name: 'religion',
+    value: 'Protestant',
+    label: 'Protestant',
+  },
+  {
+    name: 'religion',
+    value: 'Catholic',
+    label: 'Catholic',
+  },
+  {
+    name: 'religion',
+    value: 'Hindu',
+    label: 'Hindu',
+  },
+  {
+    name: 'religion',
+    value: 'Buddha',
+    label: 'Buddha',
+  },
+  {
+    name: 'religion',
+    value: 'Konhucu',
+    label: 'Konhucu',
+  },
+  {
+    name: 'religion',
+    value: 'Other',
+    label: 'Other',
+  },
+];
+
+export const IDENTITY_TYPE = [
+  {
+    name: 'identity_type',
+    value: '0',
+    label: 'National ID Card (KTP)',
+  },
+  {
+    name: 'identity_type',
+    value: '1',
+    label: 'Passport',
+  },
+  {
+    name: 'identity_type',
+    value: '2',
+    label: 'Driver License (SIM)',
+  }
+];

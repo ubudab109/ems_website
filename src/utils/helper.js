@@ -151,3 +151,33 @@ export const sumArray = (array) => {
   }
   return sum;
 }
+
+
+/**
+ * Set Error Messages
+ * @param {number} status 
+ * @returns 
+ */
+export const setMessageError = (status) => {
+  let messages;
+  if (status === 404) {
+    messages = 'Data Not Found. Please Refresh Your Page To Get Freshly Data';
+  } else if (status === 500) {
+    messages = 'Internal Server Error. Please Try Again Later';
+  } else if (status === 422) {
+    messages = 'Form Invalid. Please Check Your Input';
+  }
+
+  return messages;
+}
+
+/**
+ * Replace the first letter of each word with its uppercase equivalent.
+ * @param str - The string to be converted.
+ * @returns the string with the first letter of each word capitalized.
+ */
+export const ucwords = (str) => {
+  return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
+      return $1.toUpperCase();
+  });
+}
