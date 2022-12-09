@@ -12,7 +12,7 @@ import { connect, useSelector } from 'react-redux';
 import './assets/sass/App.scss';
 import Forbidden from './pages/forbidden/Forbidden';
 import superadminRoutes from './route/RouteSuperadmin';
-import AddEmployee from './pages/employee/AddEmployee';
+import DetailEmployee from './pages/employee/components/DetailEmployee/DetailEmployee';
 
 
 const App = () => {
@@ -90,6 +90,8 @@ const App = () => {
                     })
                 }
                 <Route exact path="/forbidden" component={Forbidden} />
+                {/* Testing */}
+                {/* <Route exact path="/detail" component={DetailEmployee} /> */}
               </div>
             </div>
           </div>
