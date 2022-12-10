@@ -1,4 +1,7 @@
 import React from 'react'
+import { Tabs, Tab, Col, Nav, Row } from "react-bootstrap";
+import General from '../General/Tabbing'
+import Attendance from '../Attendance/Attendance'
 
 const CardLeft = () => {
   return (
@@ -18,7 +21,40 @@ const CardLeft = () => {
     </div>
     <div className="card mb-3 p-3">
       <div class="d-grid gap-2">
-        <button class="btn btn-link" type="button">
+      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+      <Row>
+        <Col sm={3}>
+          <Nav variant="pills" className="flex-column text-center">
+            <Nav.Item>
+              <Nav.Link eventKey="first">General</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="second">Attendance</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="second">Time Management</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="second">Finance</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="second">Warning Letter</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Col>
+        <Col sm={9}>
+          <Tab.Content>
+            <Tab.Pane eventKey="first">
+              <General />
+            </Tab.Pane>
+            <Tab.Pane eventKey="second">
+              <Attendance />
+            </Tab.Pane>
+          </Tab.Content>
+        </Col>
+      </Row>
+    </Tab.Container>
+        {/* <button class="btn btn-link" type="button">
           General
         </button>
         <button class="btn btn-link" type="button">
@@ -32,7 +68,7 @@ const CardLeft = () => {
         </button>
         <button class="btn btn-link" type="button">
           Warning Letter
-        </button>
+        </button> */}
       </div>
     </div>
   </div>
