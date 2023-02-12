@@ -15,13 +15,14 @@ import roleReducers from "./rolePermissionReducer";
  * @param {*} data 
  * @returns 
  */
-export const loginProcess = (data, role, permissions, isSuperAdmin) => {
+export const loginProcess = (data, role, permissions, isSuperAdmin, branch) => {
   return {
     type: LOGIN,
     payload: data,
     role: role,
     isSuperAdmin: isSuperAdmin,
     permissions: permissions,
+    branch: branch,
   };
 };
 
@@ -61,6 +62,7 @@ export const pictureUpdate = (picture) => {
 const initialState = {
   dataUser: {},
   branchId: 0,
+  branch: {},
   role: '',
   isSuperAdmin : false,
   permissions : [],
@@ -81,7 +83,8 @@ const reducers = (state = initialState, action) => {
         branchId: action.branchId,
         role: action.role,
         isSuperAdmin: action.isSuperAdmin,
-        permissions: action.permissions
+        permissions: action.permissions,
+        branch: action.branch
       }
     case PERMISSION_UPDATE: 
       return {

@@ -8,8 +8,8 @@ const style = {
   color: '#00617F',
 };
 
-const ButtonWhiteFilter = ({ name, onClick }) => (
-  <button className="btn mr-5" style={style} onClick={onClick}>
+const ButtonWhiteFilter = ({ name, onClick, disabled }) => (
+  <button className="btn mr-5" style={style} onClick={onClick} disabled={disabled}>
     {name}
   </button>
 );
@@ -17,6 +17,11 @@ const ButtonWhiteFilter = ({ name, onClick }) => (
 ButtonWhiteFilter.propTypes = {
   name: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+};
+
+ButtonWhiteFilter.defaultProps = {
+  disabled: false,
 };
 
 export default ButtonWhiteFilter;

@@ -41,7 +41,8 @@ const Employee = () => {
       label: "All (Default)",
     },
   });
-
+  const [selectedEmployee, setSelectedEmployee] = useState([]);
+  const [loadingDelete, setLoadingDelete] = useState(false);
   const history = useHistory();
 
   const permissionEmployee = useSelector(
@@ -77,8 +78,16 @@ const Employee = () => {
     });
   };
 
+  /**
+   * It takes an object with a property called selectedRows, and returns an array of objects.
+   * Select Data from table Employee
+   */
   const handleSelectData = ({ selectedRows }) => {
-    console.log(selectedRows);
+    let data = [];
+    selectedRows.forEach(value => {
+      data.push(value);
+    })
+    setSelectedEmployee(data);
   };
 
   /**
@@ -179,6 +188,69 @@ const Employee = () => {
     });
   };
 
+  /**
+   * Handle delete employee from selected employee data
+   */
+  const handleDeleteEmployee = async () => {
+    swal({
+      title: 'Are You Sure?',
+      text: 'Delete this selected Employee?. You can not revert this action and data will lost',
+      buttons: true,
+      icon: 'warning',
+      dangerMode: true,
+    })
+    .then(async willDelete => {
+      setLoadingDelete(true);
+      if (willDelete) {
+        let data = [];
+        selectedEmployee.forEach(value => {
+          data.push(value.id);
+        });
+        let req = JSON.stringify(data);
+        await http.delete(`delete-employee?data=${req}`)
+        .then(async () => {
+          setLoadingDelete(false);
+          swal({
+            title: 'Success',
+            text: "Employee Deleted Successfully",
+            icon: 'success',
+          });
+          fetchEmployee()
+            .then((res) => {
+              let data = res.data.data.data;
+              setEmployeeData(data);
+              setFetchingEmployee(false);
+            })
+            .catch(() => {
+              swal("Error when fetching data", {
+                icon: "error",
+              });
+              setFetchingEmployee(false);
+            });
+        })
+        .catch(() => {
+          setLoadingDelete(false);
+          swal({
+            title: 'Failed',
+            text: "Failed to Delete Employee. Please Contact Administrator",
+            icon: 'error',
+          });
+        })
+      } else {
+        return false;
+      }
+    })
+  };
+
+  /**
+   * On View Click Handler
+   * @param {number} employeeId 
+   */
+  const onViewDetail = employeeId  => {
+    history.push(`/employee/detail/${employeeId}`);
+  }
+
+
   useEffect(() => {
     let isMounted = true;
     setFetchingEmployee(true);
@@ -192,6 +264,7 @@ const Employee = () => {
       })
       .catch(() => {
         swal("Error when fetching data", {
+          text: "Check Your connection or contact us if the problem still there",
           icon: "error",
         });
         if (isMounted) {
@@ -387,7 +460,6 @@ const Employee = () => {
                     styles={filterStyles}
                     isClearable={false}
                     onChange={(e) => {
-                      console.log(e);
                       setFilterEmployee({
                         ...filterEmployee,
                         status: e,
@@ -401,25 +473,27 @@ const Employee = () => {
             </div>
             <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12">
               <div className="btn-group btn-group-sm" style={{ float: "right" }}>
-                  <ButtonWhiteFilter name="Export" />
+                  <ButtonWhiteFilter disabled={selectedEmployee.length < 1} name="Export" />
                   {
                     isActionAllowed(permissionEmployee.permissions, 'employee-management-update') ?
                     <ButtonWhiteFilter name="Employee Transfer" /> : null
                   }
                   {
                     isActionAllowed(permissionEmployee.permissions, 'employee-management-delete') ?
-                    <ButtonWhiteFilter name="Delete Employee" /> : null
+                    <ButtonWhiteFilter onClick={handleDeleteEmployee} disabled={selectedEmployee.length < 1 || loadingDelete} name="Delete Employee" /> : null
                   }
                   {
                     isActionAllowed(permissionEmployee.permissions, 'employee-management-create') ?
-                    <ButtonBlueFilter name="Add Employee" onClick={() => history.push('/employee/add-employee')} /> : null
+                    <ButtonBlueFilter name="Add Employee" onClick={() => history.push('/employee/add/add-employee')} /> : null
                   }
               </div>
             </div>
           </div>
           <div className="table-responsive">
             <DataTable
-              columns={columnEmployee(() => console.log("work"))}
+              columns={columnEmployee(
+                onViewDetail
+              )}
               selectableRows
               data={employeeData}
               pagination

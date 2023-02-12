@@ -1,9 +1,8 @@
 import React from "react";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const RequiredIcon = () => (
-  <span className="text-red">
-    <FontAwesomeIcon icon={faCircleExclamation} /> Required
+  <span className="text-light-red" style={{ fontWeight: '500' }}>
+    <img src={`${process.env.PUBLIC_URL}/assets/img/warning.png`} alt="warning" />
+    <span className="ml-4">Required</span>
   </span>
 );

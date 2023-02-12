@@ -1,3 +1,5 @@
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import memoize from "memoize-one";
 import { rupiah, ucwords } from "../../../utils/helper";
 
@@ -83,7 +85,6 @@ const columnEmployee = memoize((viewDetail) => [
     cell: (row) => (
       <span
         className="badge badge-radius"
-        onClick={() => viewDetail(row.id)}
         style={{
           background: row.status_badge.badge,
           color: row.status_badge.color,
@@ -91,6 +92,18 @@ const columnEmployee = memoize((viewDetail) => [
       >
         {row.status_name}
       </span>
+    ),
+  },
+  {
+    name: "Detail",
+    sortable: true,
+    cell: (row) => (
+      <FontAwesomeIcon 
+        icon={faEye}
+        onClick={() => viewDetail(row.id)}
+        style={{color : 'rgb(0, 97, 127)', cursor: 'pointer'}}
+        title="Detail"
+      />
     ),
   },
 ]);

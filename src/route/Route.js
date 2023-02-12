@@ -8,6 +8,7 @@ const Absen = lazy(() => import('../pages/absent/Absen'));
 export const Profile = lazy(() => import('../pages/profile/Profile'));
 const AddRolePermission = lazy(() => import('../pages/management/views/AddRolePermission'));
 const AddEmployee = lazy(() => import('../pages/employee/AddEmployee'));
+const DetailEmployee = lazy(() => import('../pages/employee/DetailEmployee'));
 
 const routes = [
   {
@@ -71,9 +72,21 @@ const routes = [
     icon: `${process.env.PUBLIC_URL}/assets/icon_menu/2 User.png`,
   },
   {
-    path: '/employee/add-employee',
+    path: '/employee/add/add-employee',
     component: AddEmployee,
     parentRoute : '/employee',
+    isSubRoute: true,
+    listPermissions : '',
+    scopePermissions: '',
+    name: '',
+    exact: false,
+    icon: ``,
+    withoutPermissions: true,
+  },
+  {
+    path: '/employee/detail/:id',
+    component: DetailEmployee,
+    parentRoute : '',
     isSubRoute: true,
     listPermissions : '',
     scopePermissions: '',
