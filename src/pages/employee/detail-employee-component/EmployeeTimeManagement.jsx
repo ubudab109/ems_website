@@ -1,27 +1,29 @@
 import React, { Fragment } from 'react';
 import TabWithoutPermission from '../../../component/TabWithoutPermission';
+import Overtime from '../tab-time-management-detail/Overtime';
 
-const EmployeeTimeManagement = () => {
+const EmployeeTimeManagement = ({ id }) => {
   const dataTabs = [
     {
       tabName: 'overtime',
       label: 'Overtime',
-      components: (
-        <div>Overtiem</div>
-      ),
+      key: 0,
+      components: <Overtime key={1} id={id} />,
     },
     {
       tabName: 'paid-leave',
       label: 'Paid Leave',
+      key: 1,
       components: (
-        <div>Paid Leave</div>
+        <div key={2}>Paid Leave</div>
       ),
     },
     {
       tabName: 'permit',
       label: 'Permit',
+      key: 2,
       components: (
-        <div>Permit</div>
+        <div key={3}>Permit</div>
       ),
     }
   ];

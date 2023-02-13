@@ -85,7 +85,7 @@ const columnEmployeAttendance = memoize((viewDetail) => [
     selector: row => row.id,
     cell: row => {
       return (
-        <DropdownAttendance onViewDetail={() => viewDetail(row.id, 'detail')} onEdit={() => viewDetail(row.id, 'edit')} />
+        <DropdownAttendance onViewDetail={() => viewDetail(row.id,)} />
       )
     }
   }

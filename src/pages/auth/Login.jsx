@@ -35,20 +35,24 @@ const Login = () => {
       const data = res.data.data.user_data;
       const role = res.data.data.role;
       const permissions = res.data.data.permissions;
-      const branch = res.data.data.branch.branch;
+      const branch = res.data.data.branch !== null ? res.data.data.branch.branch : null;
       let branchId;
       if (res.data.data.branch !== null) {
         branchId = branch.id;
       } else {
         branchId = null;
       }
-      const isSuperAdmin = res.data.data.user_data.is_superadmin
+      const isSuperAdmin = res.data.data.user_data.is_superadmin;
+      console.log(isSuperAdmin);
       dispatch(loginProcess(data, role, permissions, isSuperAdmin, branch));
       setStore('web-token', token);
-      setStore('branch-selected', branchId);
+      if (!isSuperAdmin) {
+        setStore('branch-selected', branchId);
+      }
       setSubmitted(false)
       window.location.reload();
     } catch (err) {
+      console.log(err);
       setError(err.response.data.message)
       setSubmitted(false)
     }

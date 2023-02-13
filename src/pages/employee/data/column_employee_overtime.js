@@ -1,5 +1,7 @@
 import memoize from 'memoize-one';
 import { formatedDate, formatingTime } from "../../../utils/helper";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 const columnEmployeeOvertime = memoize((viewDetail) => [
   {
@@ -33,11 +35,27 @@ const columnEmployeeOvertime = memoize((viewDetail) => [
         );
       } else if (row.status === '1') {
         return (
-          <div className="td-text mb-1 text-warning">Pending</div>
+          <div className="td-text mb-1 text-success">Applied</div>
         );
       } else {
-
+        return (
+          <div className="td-text mb-1 text-danger">Rejected</div>
+        );
       }
     }
+  },
+  {
+    name: 'Action',
+    sortable: false,
+    cell: row => (
+      <FontAwesomeIcon
+        icon={faEye}
+        onClick={() => viewDetail(row.id, 'detail')}
+        style={{ color: 'rgb(0, 97, 127)', cursor: 'pointer' }}
+        title="Detail"
+      />
+    )
   }
 ]);
+
+export default columnEmployeeOvertime;

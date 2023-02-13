@@ -33,15 +33,15 @@ const EmployeeAttendance = ({ id }) => {
       label: date.getFullYear(),
     },
     status: {
-      value: '',
-      label: 'All (Default)',
+      value: "",
+      label: "All (Default)",
     },
   });
   const [detailAttendance, setDetailAttendance] = useState({});
-  const [shiftTime, setShiftTime] = useState('');
+  const [shiftTime, setShiftTime] = useState("");
   const [isFetchingDetail, setIsFetchingDetail] = useState(false);
   const [errorDetailAttendance, setErrorDetailAttendance] = useState(false);
-  const [errorDetailMessages, setErrorDetailMessages] = useState('');
+  const [errorDetailMessages, setErrorDetailMessages] = useState("");
   const [showModalDetailAttendance, setShowModalDetailAttendance] =
     useState(false);
   const [showModalEditAttendance, setShowModalEditAttendance] = useState(false);
@@ -85,9 +85,9 @@ const EmployeeAttendance = ({ id }) => {
    * @param {string} type
    */
   const onViewDetail = (attendanceId, type) => {
-    if (type === 'detail') {
+    if (type === "detail") {
       setShowModalDetailAttendance(true);
-    } else if (type === 'edit') {
+    } else if (type === "edit") {
       setShowModalEditAttendance(true);
     }
     setIsFetchingDetail(true);
@@ -464,7 +464,7 @@ const EmployeeAttendance = ({ id }) => {
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="table-responsive">
           <DataTable
             columns={columnEmployeAttendance(onViewDetail)}
             data={dataAttendance}

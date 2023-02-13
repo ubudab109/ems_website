@@ -333,3 +333,28 @@ export const OVERTIME_STATUS = [
     label: 'Rejected',
   }
 ];
+
+
+// 0 pending, 1 approve, 2 rejected
+export const OVERTIME_STATUS_FILTER = [
+  {
+    name: 'status',
+    value: '',
+    label: 'ALL'
+  },
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Has Been Applied',
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected',
+  }
+];
