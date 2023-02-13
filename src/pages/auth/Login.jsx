@@ -139,7 +139,7 @@ const Login = () => {
             <img
               src={`${process.env.PUBLIC_URL}/assets/img/login_bg_left.png`}
               alt=""
-              width="450"
+              width="350"
             />
           </div>
         </div>
