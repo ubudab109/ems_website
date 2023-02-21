@@ -2,7 +2,7 @@ import { lazy } from 'react';
 const Dashboard = lazy(() => import('../pages/dashboard/Dashboard'));
 const Employee = lazy(() => import('../pages/employee/Employee'));
 const Management = lazy(() => import('../pages/management/Management'));
-const Payroll = lazy(() => import('../pages/payroll/Payroll'));
+const Payroll = lazy(() => import('../pages/payroll/Finance'));
 const Schedule = lazy(() => import('../pages/schedule/Schedule'));
 const Absen = lazy(() => import('../pages/absent/Absen'));
 export const Profile = lazy(() => import('../pages/profile/Profile'));
