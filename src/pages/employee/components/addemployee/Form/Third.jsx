@@ -445,6 +445,20 @@ const Third = ({
             </div>
           </div>
         </div>
+<<<<<<< HEAD
+
+      {/* TOTAL SALARY */}
+      <div className="col-xl-12 mb-4">
+        <div className="card card-shadow">
+          <div className="d-flex flex-wrap">
+            <div className="col-xl-4 col-lg-12 col-md-12 px-3 p-3">
+              <span className="mt-4 text-bold my-4">
+                Total Salary
+              </span>
+              <br />
+              <span className="text-muted my-4">
+                Total Employee Salary
+              </span>
       </div>
 
       {/* TOTAL SALARY */}

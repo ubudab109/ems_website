@@ -7,7 +7,15 @@
     border-radius: 2px;
 }
 
-.v-divider{
-    width: 1px;
-    border-left: 1px solid #AAAAAA;
+// custom table css
+table:not(.sticky) {
+    margin-top: 0px;
+}
+
+p{
+    font-weight: 500;
+}
+
+label{
+    color:#00617F
 }
