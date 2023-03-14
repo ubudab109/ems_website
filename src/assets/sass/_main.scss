@@ -4209,6 +4209,7 @@ fieldset:disabled .btn {
   position: absolute;
   z-index: 1000;
   display: none;
+  width: 200px;
   padding: 0.5rem 0;
   margin: 0;
   font-size: 1rem;
@@ -4219,7 +4220,8 @@ fieldset:disabled .btn {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-  left: -34px;
+  // left: -34px;
+  right: 10px;
   margin-top: 11px;
 }
 
@@ -4227,7 +4229,7 @@ fieldset:disabled .btn {
   position: absolute;
   z-index: 1000;
   display: none;
-  min-width: 26rem;
+  width: 200px;
   padding: 0.5rem 0;
   margin: 0;
   font-size: 1rem;
@@ -4238,7 +4240,7 @@ fieldset:disabled .btn {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-  left: -236px;
+  left: 62.5rem;
   margin-top: 11px;
 }
 
@@ -12942,7 +12944,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
-  color: #AAAAAA;
+  color: #FFFFFF;
 }
 
 .card-shadow {
