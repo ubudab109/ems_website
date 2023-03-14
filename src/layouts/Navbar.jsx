@@ -208,7 +208,7 @@ const Navbar = () => {
 
     //   </div>
     // </nav>
-    <div class="container-fluid text-center">
+    <div className="container-fluid text-center">
          {/* MODAL LOGOUT */}
         <CustomModal
           show={show}
@@ -218,9 +218,9 @@ const Navbar = () => {
           handleSure={logout}
         />
         {/* END */}
-      <div class="row">
-        <div class="col-xl-9" />
-        <div class="col-xl-3 bg-blue custom-border p-2">
+      <div className="row">
+        <div className="col-xl-9" />
+        <div className="col-xl-3 bg-blue custom-border p-2">
           <div className="row justify-content-end">
             <div className="col-xl-2 notif-margin">
               <div className="col" onClick={toggleDropdownNotif}>

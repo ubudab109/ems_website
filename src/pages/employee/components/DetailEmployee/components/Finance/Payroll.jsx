@@ -7,22 +7,22 @@ const Payroll = () => {
         <div className="card-body">
         <div className="col-xl-12 mb-5">
             <div className="row">
-                <div class="col-xl-3">
-                  <div class="form-group">
+                <div className="col-xl-3">
+                  <div className="form-group">
                     <label for="name">Salary Type</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
-                <div class="col-xl-3">
-                  <div class="form-group">
+                <div className="col-xl-3">
+                  <div className="form-group">
                     <label for="name">Payment Date</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
-                <div class="col-xl-3">
-                  <div class="form-group">
+                <div className="col-xl-3">
+                  <div className="form-group">
                     <label for="name">Effective Date</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
             </div>
@@ -38,22 +38,22 @@ const Payroll = () => {
               </div>
               <div className="col-xl-8">
               <div className="row">
-                <div class="col-xl-5">
-                  <div class="form-group">
+                <div className="col-xl-5">
+                  <div className="form-group">
                     <label for="name">Bank Name</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
-                <div class="col-xl-5 mb-3">
-                  <div class="form-group">
+                <div className="col-xl-5 mb-3">
+                  <div className="form-group">
                     <label for="name">Account Number</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
-                <div class="col-xl-12">
-                  <div class="form-group">
+                <div className="col-xl-12">
+                  <div className="form-group">
                     <label for="name">Account Holder Name</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
               </div>
@@ -71,21 +71,21 @@ const Payroll = () => {
               </div>
               <div className="col-xl-8">
               <div className="row">
-                <div class="col-xl-6">
-                  <div class="form-group">
+                <div className="col-xl-6">
+                  <div className="form-group">
                     <label for="name">Basic Salary</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
               </div>
               <div className="row">
-                <div class="col-xl-6">
-                  <div class="form-group">
+                <div className="col-xl-6">
+                  <div className="form-group">
                     <label for="name">Overtime</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
-                <div class="col-xl-2">
+                <div className="col-xl-2">
                   <p className="mt-5">/ Hours</p>
                 </div>
               </div>
@@ -106,18 +106,18 @@ const Payroll = () => {
               </div>
               <div className="col-xl-8">
               <div className="row">
-                <div class="col-xl-6">
-                  <div class="form-group">
+                <div className="col-xl-6">
+                  <div className="form-group">
                     <label for="name">Tax</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
               </div>
               <div className="row">
-                <div class="col-xl-6 mb-3">
-                  <div class="form-group">
+                <div className="col-xl-6 mb-3">
+                  <div className="form-group">
                     <label for="name">BPJS</label>
-                    <input type="text" class="form-control" id="basicInput" />
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
               </div>
@@ -138,12 +138,12 @@ const Payroll = () => {
               </div>
               <div className="col-xl-8">
               <div className="row">
-                <div class="col-xl-4">
+                <div className="col-xl-4">
                   <p style={{ color: "#FF1111" }}>Absent</p>
-                  <div class="form-group mb-3">
+                  <div className="form-group mb-3">
                     <label for="name">Day</label>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                     >
                       <option selected>1 Days</option>
@@ -155,19 +155,19 @@ const Payroll = () => {
                 </div>
               </div>
               <div className="row">
-                <div class="col-xl-6 mb-3">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="basicInput" />
+                <div className="col-xl-6 mb-3">
+                  <div className="form-group">
+                    <input type="text" className="form-control" id="basicInput" />
                   </div>
                 </div>
               </div>
               <div className="row">
                 <p style={{ color: "#FFC900" }}>Late</p>
-                <div class="col-xl-4">
-                  <div class="form-group">
+                <div className="col-xl-4">
+                  <div className="form-group">
                     <label for="name">Time</label>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                     >
                       <option selected>15 Minutes</option>
@@ -177,11 +177,11 @@ const Payroll = () => {
                     </select>
                   </div>
                 </div>
-                <div class="col-xl-4 mb-3">
-                  <div class="form-group">
+                <div className="col-xl-4 mb-3">
+                  <div className="form-group">
                     <label for="name">Day</label>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                     >
                       <option selected>1 Days</option>
@@ -191,9 +191,9 @@ const Payroll = () => {
                     </select>
                   </div>
                 </div>
-                <div class="col-xl-8">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="basicInput" placeholder="Rp. " />
+                <div className="col-xl-8">
+                  <div className="form-group">
+                    <input type="text" className="form-control" id="basicInput" placeholder="Rp. " />
                   </div>
                 </div>
               </div>             
@@ -211,10 +211,10 @@ const Payroll = () => {
               </div>
               <div className="col-xl-8">
               <div className="row">
-                <div class="col-xl-6">
-                  <div class="form-group">
+                <div className="col-xl-6">
+                  <div className="form-group">
                   <label for="name">Basic Salary</label>
-                    <input type="text" class="form-control" id="basicInput" placeholder="Rp. 7.500.000"/>
+                    <input type="text" className="form-control" id="basicInput" placeholder="Rp. 7.500.000"/>
                   </div>
                 </div>
               </div>

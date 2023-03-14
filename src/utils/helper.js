@@ -1,4 +1,7 @@
-import { MONTH_LIST } from "./constant"
+import swal from "sweetalert"
+import {
+  MONTH_LIST
+} from "./constant"
 
 /**
  * Set localStorage
@@ -57,6 +60,28 @@ export const formatPhoneNumber = (value) => {
   }
 }
 
+/**
+ * INPUT RUPIAH FORMAT
+ * @param {string} number 
+ * @param {string} prefix 
+ * @returns 
+ */
+export const rupiahInputFormat = (number, prefix) => {
+  var number_string = number.toString().replace(/[^,\d]/g, '').toString(),
+    split = number_string.split(','),
+    sisa = split[0].length % 3,
+    rupiah = split[0].substring(0, sisa),
+    ribuan = split[0].substring(sisa).match(/\d{3}/gi);
+  let separator = "";
+  // tambahkan titik jika yang di input sudah menjadi angka ribuan
+  if (ribuan) {
+    separator = sisa ? ',' : '';
+    rupiah += separator + ribuan.join(',');
+  }
+
+  rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+  return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
 
 /**
  * Rupiah Format
@@ -180,7 +205,7 @@ export const setMessageError = (status) => {
  */
 export const ucwords = (str) => {
   return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
-      return $1.toUpperCase();
+    return $1.toUpperCase();
   });
 }
 
@@ -198,12 +223,12 @@ export const datePerMonth = (name = null) => {
       date.push({
         name: name,
         value: i,
-        label : i,
+        label: i,
       });
     } else {
       date.push({
         value: i,
-        label : i,
+        label: i,
       });
     }
   }
@@ -267,7 +292,6 @@ export const formatedDate = stringDate => {
   }
   const month = date.getMonth();
   const year = date.getFullYear();
-
   return `${day} ${MONTH_LIST[month].label_en} ${year}`;
 }
 
@@ -312,4 +336,32 @@ export const yearsOption = () => {
     data.push(option);
   }
   return data;
+}
+
+/**
+ * NOTIF FOR ERROR SWEET ALERT
+ * @param {string} title 
+ * @param {string} text 
+ * @returns 
+ */
+export const notifError = (title, text) => {
+  return swal({
+    title,
+    text,
+    icon: "error",
+  });
+};
+
+/**
+ * NOTIF FOR SUCCESS SWEET ALERT
+ * @param {string} title
+ * @param {string} text 
+ * @returns 
+ */
+export const notifSuccess = (title, text) => {
+  return swal({
+    title,
+    text,
+    icon: "success",
+  });
 }

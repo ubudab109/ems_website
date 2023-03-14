@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import TabWithoutPermission from '../../../component/TabWithoutPermission';
 import Overtime from '../tab-time-management-detail/Overtime';
+import PaidLeave from '../tab-time-management-detail/PaidLeave';
+import Permit from '../tab-time-management-detail/Permit';
 
 const EmployeeTimeManagement = ({ id }) => {
   const dataTabs = [
@@ -14,17 +16,13 @@ const EmployeeTimeManagement = ({ id }) => {
       tabName: 'paid-leave',
       label: 'Paid Leave',
       key: 1,
-      components: (
-        <div key={2}>Paid Leave</div>
-      ),
+      components: <PaidLeave key={2} id={id} /> ,
     },
     {
       tabName: 'permit',
       label: 'Permit',
       key: 2,
-      components: (
-        <div key={3}>Permit</div>
-      ),
+      components: <Permit key={3} id={id} />,
     }
   ];
 

@@ -326,13 +326,13 @@ const UserManagement = () => {
       });
 
     }).catch((err) => {
-      if (err.response.status === 403) {
-        swal(err.response.data.message, {
-          icon: 'error'
-        }).then(() => {
-          history.push('/forbidden');
-        });
-      }
+        if (err.response.status === 403) {
+          swal(err.response.data.message, {
+            icon: 'error'
+          }).then(() => {
+            history.push('/forbidden');
+          });
+        }
       setIsLoading(false);
       setErrorMessage('There Was An Error. Please Reload The Page');
     });
@@ -711,7 +711,7 @@ const UserManagement = () => {
               }
 
               {/* END */}
-              <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+              <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12">
                 <div className="row row-absolute">
                   <ButtonBlueFilter name="Invite" onClick={() => setShowModalForm(true)} />
                 </div>
@@ -736,7 +736,7 @@ const UserManagement = () => {
                       progressPending={isLoading}
                       pagination
                       fixedHeader
-                      fixedHeaderScrollHeight={'100vh'}
+                      fixedHeaderScrollHeight={'200vh'}
                     />
                 }
               </div>

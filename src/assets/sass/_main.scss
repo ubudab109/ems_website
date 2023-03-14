@@ -752,6 +752,10 @@ progress {
   color: #6c757d;
 }
 
+.pl-0 {
+  padding-left: 0 !important;
+}
+
 .container,
 .container-fluid,
 .container-xxl,
@@ -13194,7 +13198,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   border-radius: 5px !important;
   width: 100% !important;
   height: 25px !important;
-  font-size: 11px;
+  font-size: 15px;
   border: none;
 }
 
@@ -13372,6 +13376,13 @@ hr.divider-gray {
 .high-index {
   position: relative;
   z-index: 94;
+}
+
+.box-border-div {
+  border: 1px solid #ced4da;
+  color: black;
+  border-radius: 11px;
+  padding: 10px;
 }
 
 .hr-blue {

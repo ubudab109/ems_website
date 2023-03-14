@@ -4,14 +4,14 @@ import {BsList} from "react-icons/bs"
 const Reimbursement = () => {
   return (
     <div className="col-xl-9">
-      <div class="card shadow mb-4">
-        <div class="card-body">
-          <div class="row d-flex mb-3">
-            <div class="col-lg-6 align-items-center">
-              <div class="d-flex">
-                <div class="dropdown mr-5">
+      <div className="card shadow mb-4">
+        <div className="card-body">
+          <div className="row d-flex mb-3">
+            <div className="col-lg-6 align-items-center">
+              <div className="d-flex">
+                <div className="dropdown mr-5">
                   <button
-                    class="btn btn-outline-primary dropdown-toggle rounded-3"
+                    className="btn btn-outline-primary dropdown-toggle rounded-3"
                     type="button"
                     id="dropdownMenuButton1"
                     data-bs-toggle="dropdown"
@@ -20,21 +20,21 @@ const Reimbursement = () => {
                     January
                   </button>
                   <ul
-                    class="dropdown-menu"
+                    className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Another action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Something else here
                       </a>
                     </li>
@@ -43,11 +43,11 @@ const Reimbursement = () => {
               </div>
             </div>
           </div>
-          <div class="table-wrapper-scroll-y custom-scrollbar">
-            <table class="table mb-0">
+          <div className="table-wrapper-scroll-y custom-scrollbar">
+            <table className="table mb-0">
               <thead>
                 <tr>
-                <th scope="col"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></th>
+                <th scope="col"><input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></th>
                   <th scope="col">Date</th>
                   <th scope="col">Claim Type</th>
                   <th scope="col">Total</th>
@@ -57,14 +57,14 @@ const Reimbursement = () => {
               </thead>
               <tbody>
                 <tr>
-                    <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></td>
+                    <td><input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></td>
                   <td>1 Jan 2022</td>
                   <td>Medical Claim</td>
                   <td>
                    Rp. 300.000
                   </td>
                   <td>
-                  <span class="badge bg-success">Approved</span>
+                  <span className="badge bg-success">Approved</span>
                   </td>
                   <td>
                   <button className="btn btn-primary rounded-pill">

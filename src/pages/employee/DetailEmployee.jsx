@@ -8,6 +8,7 @@ import { isValidEmail, ucwords } from "../../utils/helper";
 import method from "../../service/Method";
 import EmployeeAttendance from "./detail-employee-component/EmployeeAttendance";
 import EmployeeTimeManagement from "./detail-employee-component/EmployeeTimeManagement";
+import EmployeeFinance from "./detail-employee-component/EmployeeFinance";
 
 const DetailEmployee = () => {
   const history = useHistory();
@@ -227,7 +228,8 @@ const DetailEmployee = () => {
       }}
     />,
     <EmployeeAttendance key={1} id={id} />,
-    <EmployeeTimeManagement key={2} id={id} />
+    <EmployeeTimeManagement key={2} id={id} />,
+    <EmployeeFinance key={3} id={id} />
   ];
 
   const fetchDetailEmployee = async () => {

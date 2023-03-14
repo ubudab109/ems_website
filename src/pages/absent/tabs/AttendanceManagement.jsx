@@ -111,11 +111,16 @@ const AttendanceManagement = () => {
       setIsLoadingAttendance(false);
       setAttendanceData(attendanceData);
     }).catch((err) => {
-      if (err.status === 403) {
+      if (err.response.status === 403) {
         swal(err.response.data.message, {
           icon: 'error'
         }).then(() => {
           history.push('/forbidden');
+        });
+      } else {
+        swal("Error when fetching data", {
+          text: "Check Your connection or contact us if the problem still there",
+          icon: "error",
         });
       }
       setIsLoadingAttendance(false);

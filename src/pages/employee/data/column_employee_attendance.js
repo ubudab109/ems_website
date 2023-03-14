@@ -2,10 +2,11 @@ import memoize from "memoize-one";
 import { formatedDate, formatingTime } from "../../../utils/helper";
 import DropdownAttendance from "../components/DropdownAttendance";
 
-const columnEmployeAttendance = memoize((viewDetail) => [
+const columnEmployeAttendance = memoize((onViewDetail) => [
   {
     name: "Date",
     sortable: true,
+    selector: row => row.date,
     cell: row => (
       <div className="td-text mb-1">{formatedDate(row.date)}</div>
     )
@@ -13,6 +14,7 @@ const columnEmployeAttendance = memoize((viewDetail) => [
   {
     name: "Clock In",
     sortable: true,
+    selector: row => row.clock_in,
     cell: row => (
       <div className="td-text mb-1">{formatingTime(row.clock_in)}</div>
     )
@@ -20,6 +22,7 @@ const columnEmployeAttendance = memoize((viewDetail) => [
   {
     name: "Clock Out",
     sortable: true,
+    selector: row => row.clock_out,
     cell: row => {
       if (row.clock_out !== null) {
         return(
@@ -35,6 +38,7 @@ const columnEmployeAttendance = memoize((viewDetail) => [
   {
     name: "Work Places",
     sortable: true,
+    selector: row => row.workplace_name,
     cell: row => {
       if (row.absent_status !== "Absent") {
         return (
@@ -85,7 +89,7 @@ const columnEmployeAttendance = memoize((viewDetail) => [
     selector: row => row.id,
     cell: row => {
       return (
-        <DropdownAttendance onViewDetail={() => viewDetail(row.id,)} />
+        <DropdownAttendance onViewDetail={() => onViewDetail(row.id, 'detail')} onEdit={() => onViewDetail(row.id, 'edit')} />
       )
     }
   }

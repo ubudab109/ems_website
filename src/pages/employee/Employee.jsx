@@ -131,7 +131,7 @@ const Employee = () => {
     })
     .catch(err => {
       setIsLoadingAddDepartment(false);
-      swal("There was an error when creating department", {
+      swal("There was an error when creating department. Contact administrator if problem still exists", {
         icon: 'error'
       });
     });
@@ -262,11 +262,19 @@ const Employee = () => {
           setFetchingEmployee(false);
         }
       })
-      .catch(() => {
-        swal("Error when fetching data", {
-          text: "Check Your connection or contact us if the problem still there",
-          icon: "error",
-        });
+      .catch((err) => {
+        if (err.response.status === 403) {
+          swal(err.response.data.message, {
+            icon: 'error'
+          }).then(() => {
+            history.push('/forbidden');
+          });
+        } else {
+          swal("Error when fetching data", {
+            text: "Check Your connection or contact us if the problem still there",
+            icon: "error",
+          });
+        }
         if (isMounted) {
           setFetchingEmployee(false);
         }

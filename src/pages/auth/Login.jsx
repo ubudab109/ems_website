@@ -43,7 +43,6 @@ const Login = () => {
         branchId = null;
       }
       const isSuperAdmin = res.data.data.user_data.is_superadmin;
-      console.log(isSuperAdmin);
       dispatch(loginProcess(data, role, permissions, isSuperAdmin, branch));
       setStore('web-token', token);
       if (!isSuperAdmin) {
@@ -52,7 +51,6 @@ const Login = () => {
       setSubmitted(false)
       window.location.reload();
     } catch (err) {
-      console.log(err);
       setError(err.response.data.message)
       setSubmitted(false)
     }

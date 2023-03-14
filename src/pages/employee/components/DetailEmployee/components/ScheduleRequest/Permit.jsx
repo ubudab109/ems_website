@@ -5,14 +5,14 @@ import {BsList} from "react-icons/bs"
 const Permit = () => {
   return (
     <div className="col-xl-9">
-      <div class="card shadow mb-4">
-        <div class="card-body">
-          <div class="row d-flex mb-3">
-            <div class="col-lg-6 align-items-center">
-              <div class="d-flex">
-                <div class="dropdown mr-5">
+      <div className="card shadow mb-4">
+        <div className="card-body">
+          <div className="row d-flex mb-3">
+            <div className="col-lg-6 align-items-center">
+              <div className="d-flex">
+                <div className="dropdown mr-5">
                   <button
-                    class="btn btn-outline-primary dropdown-toggle rounded-3"
+                    className="btn btn-outline-primary dropdown-toggle rounded-3"
                     type="button"
                     id="dropdownMenuButton1"
                     data-bs-toggle="dropdown"
@@ -21,21 +21,21 @@ const Permit = () => {
                     January
                   </button>
                   <ul
-                    class="dropdown-menu"
+                    className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Another action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Something else here
                       </a>
                     </li>
@@ -44,8 +44,8 @@ const Permit = () => {
               </div>
             </div>
           </div>
-          <div class="table-wrapper-scroll-y custom-scrollbar">
-            <table class="table mb-0">
+          <div className="table-wrapper-scroll-y custom-scrollbar">
+            <table className="table mb-0">
               <thead>
                 <tr>
                   <th scope="col">Created Date</th>
@@ -67,7 +67,7 @@ const Permit = () => {
                     3 Times
                   </td>
                   <td>
-                  <span class="badge bg-success">Approval</span>
+                  <span className="badge bg-success">Approval</span>
                   </td>
                   <td>
                   <button className="btn">

@@ -17,8 +17,8 @@ const EmployeeTransfer = () => {
         <hr className="hr1" />
       </div>
       <div className="col-xl-12">
-        <div class="card shadow mb-4">
-          <div class="card-body">
+        <div className="card shadow mb-4">
+          <div className="card-body">
             <div className="col-xl-12">
               <div className="row">
                 <div className="col-xl-3">
@@ -34,7 +34,7 @@ const EmployeeTransfer = () => {
                       </div>
                       <input
                         type="search"
-                        class="form-control"
+                        className="form-control"
                         placeholder="Search Employee"
                         aria-controls="DataTables_Table_0"
                       />
@@ -43,7 +43,7 @@ const EmployeeTransfer = () => {
                 </div>
               </div>
             </div>
-            <table class="table mb-0">
+            <table className="table mb-0">
               <thead>
                 <tr>
                   <th scope="col">Employee Name</th>

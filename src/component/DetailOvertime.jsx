@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-import { formatedDate, formatingTime } from "../../../utils/helper";
 import PropTypes from "prop-types";
+import parse from 'html-react-parser';
+import { formatedDate, formatingTime } from "../utils/helper";
 
 const DetailOvertime = ({
   isError,
@@ -13,6 +14,8 @@ const DetailOvertime = ({
   status,
   department,
   statusColor,
+  desc,
+  files,
 }) => {
   return (
     <Fragment>
@@ -119,6 +122,28 @@ const DetailOvertime = ({
                 />
               </div>
             </div>
+            <div className="row mb-2">
+              <div className="col-12">
+                <label htmlFor="desc">Description</label>
+                <div className="box-border-div">
+                  {parse(desc)}
+                </div>
+              </div>
+            </div>
+            <div className="row mb-2">
+              <div className="col-12">
+                <label htmlFor="desc">Attachment</label>
+                <div className="box-border-div">
+                  <div className="d-flex flex-wrap justify-content-center">
+                    {
+                      files.map(val => (
+                        <a key={val.id} href={val.files} target="_blank" rel="noreferrer" className="mb-3 px-2"><img src={val.files} alt="" srcSet="" width={250} /></a>
+                      ))
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -137,6 +162,8 @@ DetailOvertime.propTypes = {
   status: PropTypes.string,
   department: PropTypes.string,
   statusColor: PropTypes.string,
+  desc: PropTypes.string,
+  files: PropTypes.array
 };
 
 export default DetailOvertime;

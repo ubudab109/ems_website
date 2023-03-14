@@ -17,20 +17,20 @@ const CardLeft = () => {
       </div>
     </div>
     <div className="card mb-3 p-3">
-      <div class="d-grid gap-2">
-        <button class="btn btn-link" type="button">
+      <div className="d-grid gap-2">
+        <button className="btn btn-link" type="button">
           General
         </button>
-        <button class="btn btn-link" type="button">
+        <button className="btn btn-link" type="button">
           Attendance
         </button>
-        <button class="btn btn-link" type="button">
+        <button className="btn btn-link" type="button">
           Time Management
         </button>
-        <button class="btn btn-link" type="button">
+        <button className="btn btn-link" type="button">
           Finance
         </button>
-        <button class="btn btn-link" type="button">
+        <button className="btn btn-link" type="button">
           Warning Letter
         </button>
       </div>

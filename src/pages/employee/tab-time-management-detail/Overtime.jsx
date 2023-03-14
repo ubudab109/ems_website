@@ -13,7 +13,7 @@ import { filterStyles } from "../../../style-component/ReactSelectFilterTable";
 import { OVERTIME_STATUS_FILTER } from "../../../utils/constant";
 import ButtonBlueFilter from "../../../component/ButtonBlueFilter";
 import CustomModalDetail from "../../../component/CustomModalDetail";
-import DetailOvertime from "../../absent/modal/DetailOvertime";
+import DetailOvertime from "../../../component/DetailOvertime";
 
 const Overtime = ({ id }) => {
   const date = new Date();
@@ -36,7 +36,6 @@ const Overtime = ({ id }) => {
   const [isFetchingDetail, setIsFetchingDetail] = useState(false);
   const [errorDetailOvertime, setErrorDetailOvertime] = useState(false);
   const [showModalDetailOvertime, setShowModalDetailOvertime] = useState(false);
-  const [formEditOvertime, setFormEditOvertime] = useState({});
 
   /**
    * This function returns a promise that resolves to the result of an HTTP GET request.
@@ -71,8 +70,7 @@ const Overtime = ({ id }) => {
 
   /**
    * On View Click Handler
-   * @param {number} attendanceId
-   * @param {string} type
+   * @param {number} overtimeId
    */
   const onViewDetail = (overtimeId) => {
     setShowModalDetailOvertime(true);
@@ -80,17 +78,6 @@ const Overtime = ({ id }) => {
     requestDetailOvertime(overtimeId)
       .then((res) => {
         let data = res.data.data;
-        let formEdit = {
-          id: data.id,
-          onlyStatus: 0,
-          in: data.in,
-          out: data.out,
-          date: data.date,
-          status_name: data.status_name,
-          taken_hour: data.taken_hour,
-          employee: data.employee
-        };
-        setFormEditOvertime(formEdit);
         setDetailOvertime(data);
         setIsFetchingDetail(false);
       })
@@ -213,11 +200,13 @@ const Overtime = ({ id }) => {
               inRequest={detailOvertime ? detailOvertime.in : ''}
               outRequest={detailOvertime ? detailOvertime.out : ''}
               isEdit={false}
+              desc={detailOvertime ? detailOvertime.description : ''}
               status={detailOvertime ? detailOvertime.status_name : ''}
               statusColor={detailOvertime ? detailOvertime.status_color : ''}
               takenDate={detailOvertime ? detailOvertime.date : ''}
               takenHour={detailOvertime ? detailOvertime.taken_hour : ''}
               isError={errorDetailOvertime}
+              files={detailOvertime ? detailOvertime.files : []}
               key={1}
             />
           )

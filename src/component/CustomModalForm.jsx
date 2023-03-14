@@ -6,7 +6,7 @@ const CustomModalForm = ({
   show, handleClose, handleSure, children, headerTitle, submitText, isSendButtonDisabled
 }) => {
   return (
-    <Modal show={show} onHide={handleClose} size="sm" centered>
+    <Modal show={show} onHide={handleClose} size="md" centered>
       <Modal.Header style={{ justifyContent : 'center'}}>
         <h4 className="text-blue-dark text-center">{headerTitle}</h4>
       </Modal.Header>

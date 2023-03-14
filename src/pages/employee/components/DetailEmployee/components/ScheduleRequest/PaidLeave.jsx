@@ -5,8 +5,8 @@ import {BsList} from "react-icons/bs"
 const PaidLeave = () => {
   return (
     <div className="col-xl-9">
-      <div class="card shadow mb-4">
-        <div class="card-body">
+      <div className="card shadow mb-4">
+        <div className="card-body">
           <div className='row text-center p-3 container'>
           <div className='col-xl-6'>
           <h5 className="mb-3">Cuti Wajib Karyawan</h5>
@@ -18,12 +18,12 @@ const PaidLeave = () => {
           <h5 className="mb-3">0 Days</h5>
           </div>
           </div>
-          <div class="row d-flex mb-3">
-            <div class="col-lg-6 align-items-center">
-              <div class="d-flex">
-                <div class="dropdown mr-5">
+          <div className="row d-flex mb-3">
+            <div className="col-lg-6 align-items-center">
+              <div className="d-flex">
+                <div className="dropdown mr-5">
                   <button
-                    class="btn btn-outline-primary dropdown-toggle rounded-3"
+                    className="btn btn-outline-primary dropdown-toggle rounded-3"
                     type="button"
                     id="dropdownMenuButton1"
                     data-bs-toggle="dropdown"
@@ -32,29 +32,29 @@ const PaidLeave = () => {
                     January
                   </button>
                   <ul
-                    class="dropdown-menu"
+                    className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Another action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Something else here
                       </a>
                     </li>
                   </ul>
                 </div>
-                <div class="dropdown mr-5">
+                <div className="dropdown mr-5">
                   <button
-                    class="btn btn-outline-primary dropdown-toggle rounded-3"
+                    className="btn btn-outline-primary dropdown-toggle rounded-3"
                     type="button"
                     id="dropdownMenuButton1"
                     data-bs-toggle="dropdown"
@@ -63,21 +63,21 @@ const PaidLeave = () => {
                     2022
                   </button>
                   <ul
-                    class="dropdown-menu"
+                    className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Another action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Something else here
                       </a>
                     </li>
@@ -85,11 +85,11 @@ const PaidLeave = () => {
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 ">
-              <div class="d-flex float-end">
-                <div class="dropdown mr-5">
+            <div className="col-lg-6 ">
+              <div className="d-flex float-end">
+                <div className="dropdown mr-5">
                   <button
-                    class="btn btn-outline-primary dropdown-toggle rounded-3"
+                    className="btn btn-outline-primary dropdown-toggle rounded-3"
                     type="button"
                     id="dropdownMenuButton1"
                     data-bs-toggle="dropdown"
@@ -98,36 +98,36 @@ const PaidLeave = () => {
                     All
                   </button>
                   <ul
-                    class="dropdown-menu"
+                    className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Another action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Something else here
                       </a>
                     </li>
                   </ul>
                 </div>
-                <div class="mr-5">
-                  <button class="btn btn-outline-primary rounded-3" type="button">
+                <div className="mr-5">
+                  <button className="btn btn-outline-primary rounded-3" type="button">
                     Export
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="table-wrapper-scroll-y custom-scrollbar">
-            <table class="table mb-0">
+          <div className="table-wrapper-scroll-y custom-scrollbar">
+            <table className="table mb-0">
               <thead>
                 <tr>
                   <th scope="col">Created Date</th>
@@ -150,7 +150,7 @@ const PaidLeave = () => {
                     3 Times
                   </td>
                   <td>
-                  <span class="badge bg-success">Approval</span>
+                  <span className="badge bg-success">Approval</span>
                   </td>
                   <td>
                   <button className="btn">

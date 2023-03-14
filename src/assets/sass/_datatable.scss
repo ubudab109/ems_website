@@ -1,15 +1,23 @@
+.rdt_TableHeadRow {
+  text-align: center;
+}
+
+.react-table-header-align-center .rt-resizable-header-content {
+  margin: 0 auto;
+}
+
 .rdt_TableHead {
   border-bottom: 1px solid black;
   margin-bottom: 25px;
 }
 
 .rdt_TableCol {
-  font-family: Roboto;
+  color: #00617F;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: bolder;
-  font-size: 14px;
-  line-height: 16px;
-  color: black;
+  font-size: 16px;
+  text-align: center !important;
 }
 
 .rdt_TableCell {
@@ -29,6 +37,7 @@
   font-family: Roboto;
   font-style: normal;
   line-height: 16px;
+  font-weight: 500;
 }
 
 .rdt_TableCell .td-text-mute {

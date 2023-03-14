@@ -1,12 +1,11 @@
 import memoize from 'memoize-one';
 import { formatedDate, formatingTime } from "../../../utils/helper";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 const columnEmployeeOvertime = memoize((viewDetail) => [
   {
     name: "Date",
     sortable: true,
+    selector: row => row.date,
     cell: row => (
       <div className="td-text mb-1">{formatedDate(row.date)}</div>
     )
@@ -14,6 +13,7 @@ const columnEmployeeOvertime = memoize((viewDetail) => [
   {
     name: "Overtime In",
     sortable: true,
+    selector: row => row.in,
     cell: row => (
       <div className="td-text mb-1">{formatingTime(row.in)}</div>
     )
@@ -21,39 +21,28 @@ const columnEmployeeOvertime = memoize((viewDetail) => [
   {
     name: "Overtime Out",
     sortable: true,
+    selector: row => row.out,
     cell: row => (
-      <div className="td-text mb-1">{formatingTime(row.in)}</div>
+      <div className="td-text mb-1">{formatingTime(row.out)}</div>
     )
   },
   {
     name: 'Status',
     sortable: true,
+    selector: row => row.status,
     cell: row => {
-      if (row.status === '0') {
-        return (
-          <div className="td-text mb-1 text-warning">Pending</div>
-        );
-      } else if (row.status === '1') {
-        return (
-          <div className="td-text mb-1 text-success">Applied</div>
-        );
-      } else {
-        return (
-          <div className="td-text mb-1 text-danger">Rejected</div>
-        );
-      }
+      return (
+        <div className="td-text mb-1">
+          <span className="badge badge-radius" style={{background: row.status_color}}>{row.status_name}</span>
+        </div>
+      );
     }
   },
   {
     name: 'Action',
     sortable: false,
     cell: row => (
-      <FontAwesomeIcon
-        icon={faEye}
-        onClick={() => viewDetail(row.id, 'detail')}
-        style={{ color: 'rgb(0, 97, 127)', cursor: 'pointer' }}
-        title="Detail"
-      />
+      <button type="button" className="btn-detail" onClick={() => viewDetail(row.id)}>View</button>
     )
   }
 ]);
