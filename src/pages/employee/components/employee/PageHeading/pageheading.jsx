@@ -11,30 +11,30 @@ const PageHeading = () => (
       <div className="col-xl-3">
         <div className="card mb-3">
           <div style={{ width: "18rem;" }}>
-            <div class="card-header" style={{ color: "#00617F" }}>
+            <div className="card-header" style={{ color: "#00617F" }}>
               <b>Department</b>
               <button type="button" className="btn float-end">
                 <MdAdd size={23} color="#00617F" />
               </button>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">All Department</li>
-              <li class="list-group-item">HR Department</li>
-              <li class="list-group-item">Accounting Department</li>
-              <li class="list-group-item">IT Department</li>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">All Department</li>
+              <li className="list-group-item">HR Department</li>
+              <li className="list-group-item">Accounting Department</li>
+              <li className="list-group-item">IT Department</li>
             </ul>
           </div>
         </div>
         <div className="card mb-3">
           <div style={{ width: "18rem;" }}>
-            <div class="card-header" style={{ color: "#00617F" }}>
+            <div className="card-header" style={{ color: "#00617F" }}>
               <b>Job Status</b>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">All Status (Default)</li>
-              <li class="list-group-item">Permanent</li>
-              <li class="list-group-item">Contract</li>
-              <li class="list-group-item">Probation</li>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">All Status (Default)</li>
+              <li className="list-group-item">Permanent</li>
+              <li className="list-group-item">Contract</li>
+              <li className="list-group-item">Probation</li>
             </ul>
           </div>
         </div>
@@ -44,16 +44,16 @@ const PageHeading = () => (
           <Link to={`/employee`}>
             <button
               type="button"
-              class="btn btn-outline-primary"
+              className="btn btn-outline-primary"
               style={{ width: "136px" }}
             >
               Add Employee
             </button>
           </Link>
         </div>
-        <div class="row d-flex justify-content-between align-items-center mb-3">
-          <div class="col-lg-6 d-flex align-items-center">
-            <div class="d-flex">
+        <div className="row d-flex justify-content-between align-items-center mb-3">
+          <div className="col-lg-6 d-flex align-items-center">
+            <div className="d-flex">
               <div className="search mr-5">
                 <div className="d-flex">
                   <div className="searchIcon border-primary">
@@ -63,15 +63,15 @@ const PageHeading = () => (
                   </div>
                   <input
                     type="search"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Search Employee"
                     aria-controls="DataTables_Table_0"
                   />
                 </div>
               </div>
-              <div class="dropdown mr-5">
+              <div className="dropdown mr-5">
                 <button
-                  class="btn btn-outline-primary dropdown-toggle"
+                  className="btn btn-outline-primary dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
@@ -79,19 +79,19 @@ const PageHeading = () => (
                 >
                   All Status
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Action
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Another action
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Something else here
                     </a>
                   </li>
@@ -99,24 +99,24 @@ const PageHeading = () => (
               </div>
             </div>
           </div>
-          <div class="col-lg-6 d-flex align-items-center justify-content-lg-end">
-            <div class="mr-3">
-              <button class="btn btn-outline-primary shadow-sm" type="submit">
+          <div className="col-lg-6 d-flex align-items-center justify-content-lg-end">
+            <div className="mr-3">
+              <button className="btn btn-outline-primary shadow-sm" type="submit">
                 Export
               </button>
             </div>
-            <div class="mr-3">
+            <div className="mr-3">
               <button
-                class="btn btn-outline-primary shadow-sm"
+                className="btn btn-outline-primary shadow-sm"
                 type="submit"
                 style={{ width: "144px" }}
               >
                 Employee Transfer
               </button>
             </div>
-            <div class="">
+            <div className="">
               <button
-                class="btn btn-outline-primary shadow-sm"
+                className="btn btn-outline-primary shadow-sm"
                 type="submit"
                 style={{ width: "136px" }}
               >
@@ -125,10 +125,10 @@ const PageHeading = () => (
             </div>
           </div>
         </div>
-        <div class="card shadow mb-4">
-          <div class="card-body">
-            <div class="table-wrapper-scroll-y custom-scrollbar">
-              <table class="table mb-0">
+        <div className="card shadow mb-4">
+          <div className="card-body">
+            <div className="table-wrapper-scroll-y custom-scrollbar">
+              <table className="table mb-0">
                 <thead>
                   <tr>
                     <th scope="col">Employee Name</th>

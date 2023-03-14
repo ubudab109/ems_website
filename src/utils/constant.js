@@ -99,7 +99,7 @@ export const MONTH_LIST = [
     label_en: 'April',
   },
   {
-    value: 4,
+    value: 5,
     label: 'Mei',
     label_en: 'May',
   },
@@ -332,4 +332,145 @@ export const OVERTIME_STATUS = [
     value: '2',
     label: 'Rejected',
   }
+];
+
+
+// 0 pending, 1 approve, 2 rejected
+export const OVERTIME_STATUS_FILTER = [
+  {
+    name: 'status',
+    value: '',
+    label: 'ALL'
+  },
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Has Been Applied',
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected',
+  }
+];
+
+// 0 pending, 1 approve, 2 rejected
+export const PAID_LEAVE_STATUS_FILTER = [
+  {
+    name: 'status',
+    value: '',
+    label: 'All',
+  },
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Approved',
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected',
+  },
+];
+
+// 0 pending, 1 approve, 2 rejected
+export const PAID_LEAVE_STATUS = [
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Approved',
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected',
+  },
+];
+
+
+export const SALARY_TYPE_FILTER = [
+  {
+    name: 'type',
+    value: '',
+    label: 'All',
+  },
+  {
+    name: 'type',
+    value: 'income',
+    label: 'Income',
+  },
+  {
+    name: 'type',
+    value: 'cut',
+    label: 'Cut',
+  },
+];
+
+export const SALARY_TYPE_VALUE = [
+  {
+    name: 'type',
+    value: 'income',
+    label: 'Income',
+  },
+  {
+    name: 'type',
+    value: 'cut',
+    label: 'Cut',
+  },
+];
+
+export const REIMBURSEMENT_STATUS_FILTER = [
+  {
+    name: 'status',
+    value: 'all',
+    label: 'All',
+  },
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending'
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Approved'
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected'
+  },
+];
+
+export const REIMBURSEMENT_STATUS_INPUT = [
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending'
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Approved'
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected'
+  },
 ];

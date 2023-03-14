@@ -3,9 +3,12 @@ import Select from "react-select";
 import PropTypes from "prop-types";
 import { NumericFormat } from "react-number-format";
 import { selectStyles } from "../../../../../style-component/ReactSelectFilterTable";
-import { arraySum, datePerMonth, daysForCuts} from "../../../../../utils/helper";
+import {
+  arraySum,
+  datePerMonth,
+  daysForCuts,
+} from "../../../../../utils/helper";
 import { RequiredIcon } from "../../../../components/PiecesComponent";
-import ButtonPlaint from "../../../../../component/ButtonPlaint";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -16,25 +19,18 @@ const Third = ({
   dataAttendanceCut,
   onChangeSelect,
   onChange,
-  handleAddNewIncome,
-  handleAddNewCuts,
-  onSubmitIncomeName,
-  onSubmitCutsName,
   onChangeIncome,
   onChangeCuts,
   onChangeCutAttendance,
   onChangeSelectAttendanceCut,
-  onRemoveIncomeSalary,
-  onRemoveCutsSalary,
 }) => {
   let [totalSalary, setTotalSalary] = useState([]);
   useEffect(() => {
     let concatSalary = dataIncomeSalary.concat(dataCutSalary);
-    console.log(concatSalary);
     let data = [];
     concatSalary.forEach((value, key) => {
       if (!isNaN(value.amount)) {
-        if (value.type === 'income') {
+        if (value.type === "income") {
           if (key !== 1) {
             data.push(parseFloat(value.amount));
           }
@@ -42,9 +38,9 @@ const Third = ({
           data.push(parseFloat(-value.amount));
         }
       }
-    })
+    });
     setTotalSalary(data);
-  },[dataCutSalary, dataIncomeSalary])
+  }, [dataCutSalary, dataIncomeSalary]);
 
   return (
     <div className="col-xl-12">
@@ -172,26 +168,9 @@ const Third = ({
               {dataIncomeSalary.map((data, key) => (
                 <div className="row mt-3 px-3" key={key}>
                   <div className="form-group col-xl-4 col-lg-5 col-md-8 col-sm-12">
-                    {!data.submitted ? (
-                      <form onSubmit={onSubmitIncomeName} data-key={key}>
-                        <input
-                          type="text"
-                          key={key}
-                          value={dataIncomeSalary[key].name}
-                          name="name"
-                          onChange={onChangeIncome}
-                          id={`income-${key}`}
-                          data-key={key}
-                          autoFocus
-                          placeholder="Insert Income Name"
-                          style={{ border: "none" }}
-                        />
-                      </form>
-                    ) : (
-                      <label htmlFor="amount" className="text-bold">
-                        {data.name}
-                      </label>
-                    )}
+                    <label htmlFor="amount" className="text-bold">
+                      {data.name}
+                    </label>
                     <NumericFormat
                       value={dataIncomeSalary[key].currencyAmount}
                       data-key={key}
@@ -204,42 +183,8 @@ const Third = ({
                       thousandSeparator=","
                     />
                   </div>
-                  {data.isDefault ? (
-                    <div
-                      className="col-xl-2 col-lg-3 col-md-4 col-sm-12"
-                      style={{ paddingTop: "27px" }}
-                    >
-                      <span>{data.slug}</span>
-                    </div>
-                  ) : (
-                    <div
-                      className="col-xl-2 col-lg-3 col-md-4 col-sm-12"
-                      style={{ paddingTop: "27px" }}
-                    >
-                      <button
-                        title="Remove"
-                        className="btn-transparent mr-5 text-red"
-                        data-key={key}
-                        onClick={onRemoveIncomeSalary}
-                      >
-                        X
-                      </button>
-                    </div>
-                  )}
                 </div>
               ))}
-              <ButtonPlaint
-                disabled={dataIncomeSalary.some(
-                  (data) => data.submitted === false
-                )}
-                name={
-                  dataIncomeSalary.some((data) => data.submitted === false)
-                    ? "Enter to Submit"
-                    : "Add New"
-                }
-                onClick={handleAddNewIncome}
-                margin="17px"
-              />
             </div>
           </div>
         </div>
@@ -265,26 +210,9 @@ const Third = ({
               {dataCutSalary.map((data, key) => (
                 <div className="row mt-3 px-3" key={key}>
                   <div className="form-group col-xl-4 col-lg-5 col-md-8 col-sm-12">
-                    {!data.submitted ? (
-                      <form onSubmit={onSubmitCutsName} data-key={key}>
-                        <input
-                          type="text"
-                          key={key}
-                          value={dataCutSalary[key].name}
-                          name="name"
-                          onChange={onChangeCuts}
-                          id={`cuts-${key}`}
-                          data-key={key}
-                          autoFocus
-                          placeholder="Insert Cuts Name (Enter to Submit)"
-                          style={{ border: "none" }}
-                        />
-                      </form>
-                    ) : (
-                      <label htmlFor="amount" className="text-bold">
-                        {data.name}
-                      </label>
-                    )}
+                    <label htmlFor="amount" className="text-bold">
+                      {data.name}
+                    </label>
                     <NumericFormat
                       value={dataCutSalary[key].currencyAmount}
                       data-key={key}
@@ -297,42 +225,8 @@ const Third = ({
                       thousandSeparator=","
                     />
                   </div>
-                  {data.isDefault ? (
-                    <div
-                      className="col-xl-2 col-lg-3 col-md-4 col-sm-12"
-                      style={{ paddingTop: "27px" }}
-                    >
-                      <span>{data.slug}</span>
-                    </div>
-                  ) : (
-                    <div
-                      className="col-xl-2 col-lg-3 col-md-4 col-sm-12"
-                      style={{ paddingTop: "27px" }}
-                    >
-                      <button
-                        title="Remove"
-                        className="btn-transparent mr-5 text-red"
-                        data-key={key}
-                        onClick={onRemoveCutsSalary}
-                      >
-                        X
-                      </button>
-                    </div>
-                  )}
                 </div>
               ))}
-              <ButtonPlaint
-                disabled={dataCutSalary.some(
-                  (data) => data.submitted === false
-                )}
-                name={
-                  dataCutSalary.some((data) => data.submitted === false)
-                    ? "Enter to Submit"
-                    : "Add New"
-                }
-                onClick={handleAddNewCuts}
-                margin="17px"
-              />
             </div>
           </div>
         </div>
@@ -452,17 +346,12 @@ const Third = ({
         <div className="card card-shadow">
           <div className="d-flex flex-wrap">
             <div className="col-xl-4 col-lg-12 col-md-12 px-3 p-3">
-              <span className="mt-4 text-bold my-4">
-                Total Salary
-              </span>
+              <span className="mt-4 text-bold my-4">Total Salary</span>
               <br />
-              <span className="text-muted my-4">
-                Total Employee Salary
-              </span>
+              <span className="text-muted my-4">Total Employee Salary</span>
             </div>
 
             <div className="col-xl-8 col-lg-12 mb-3">
-
               {/* ACCOUNT HOLDER NAME */}
               <div className="row mt-3 px-3">
                 <div className="form-group col-md-8">
@@ -471,13 +360,13 @@ const Third = ({
                   </label>
 
                   <NumericFormat
-                      value={arraySum(totalSalary)}
-                      className="form-control input-border-grey"
-                      readOnly
-                      id="totalSalary"
-                      prefix={"Rp. "}
-                      thousandSeparator=","
-                    />
+                    value={arraySum(totalSalary)}
+                    className="form-control input-border-grey"
+                    readOnly
+                    id="totalSalary"
+                    prefix={"Rp. "}
+                    thousandSeparator=","
+                  />
                 </div>
               </div>
             </div>
@@ -493,15 +382,9 @@ Third.propTypes = {
   onChangeSelect: PropTypes.func,
   dataIncomeSalary: PropTypes.array.isRequired,
   dataCutSalary: PropTypes.array.isRequired,
-  handleAddNewIncome: PropTypes.func,
-  onSubmitIncomeName: PropTypes.func,
   onChangeIncome: PropTypes.func,
-  onRemoveIncomeSalary: PropTypes.func,
   onChange: PropTypes.func,
-  handleAddNewCuts: PropTypes.func,
-  onSubmitCutsName: PropTypes.func,
   onChangeCuts: PropTypes.func,
-  onRemoveCutsSalary: PropTypes.func,
   onChangeCutAttendance: PropTypes.func,
   onChangeSelectAttendanceCut: PropTypes.func,
   totalSalary: PropTypes.array,

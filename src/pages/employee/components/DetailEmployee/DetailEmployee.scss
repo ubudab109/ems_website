@@ -1,0 +1,21 @@
+.hr1 {
+    border: 2px solid #00617F;
+    margin: 1rem 0;
+    color: inherit;
+    background-color: currentColor;
+    opacity: 1;
+    border-radius: 2px;
+}
+
+// custom table css
+table:not(.sticky) {
+    margin-top: 0px;
+}
+
+p{
+    font-weight: 500;
+}
+
+label{
+    color:#00617F
+}

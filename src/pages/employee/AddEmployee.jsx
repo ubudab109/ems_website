@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import swal from "sweetalert";
@@ -20,79 +21,39 @@ const AddEmployee = () => {
     isPermanentIdCard: false,
   });
   const [departmentData, setDepartmentData] = useState([]);
-  const [existsErrorType, setExistErrorType] = useState('');
+  const [existsErrorType, setExistErrorType] = useState("");
   const [isEmailValid, setEmailIsValid] = useState(true);
   const [formStep, setFormStep] = useState(0);
-  const [dataIncomeSalary, setDataIncomeSalary] = useState([
-    {
-      type: 'income',
-      amount: 0,
-      currencyAmount: '',
-      name: 'Basic Salary',
-      slug: '',
-      isDefault: true,
-      submitted: true,
-    }, 
-    {
-      type: 'income',
-      amount: 0,
-      currencyAmount: '',
-      name: 'Overtime',
-      slug: '/ 1 Hours',
-      isDefault: true,
-      submitted: true,
-    }
-  ]);
-  const [dataCutSalary, setDataCutSalary] = useState([
-    {
-      type: 'cuts',
-      amount: 0,
-      currencyAmount: '',
-      name: 'Tax',
-      slug: '',
-      isDefault: true,
-      submitted: true,
-    }, 
-    {
-      type: 'cuts',
-      amount: 0,
-      currencyAmount: '',
-      name: 'BPJS TK',
-      slug: '',
-      isDefault: true,
-      submitted: true,
-    }
-  ]);
-
+  const [dataIncomeSalary, setDataIncomeSalary] = useState([]);
+  const [dataCutSalary, setDataCutSalary] = useState([]);
   const [dataAttendanceCut, setDataAttendanceCut] = useState([
     {
-      type: 'absent',
+      type: "absent",
       amount: 0,
-      currencyAmount: '',
-      name: 'Absent',
+      currencyAmount: "",
+      name: "Absent",
       days: {
-        name: 'days',
+        name: "days",
         keyData: 0,
-        value: '',
-        label: 'Select days...'
+        value: "",
+        label: "Select days...",
       },
-      time: '',
-    }, 
+      time: "",
+    },
     {
-      type: 'late',
+      type: "late",
       amount: 0,
-      currencyAmount: '',
-      name: 'Late',
-      time: '',
+      currencyAmount: "",
+      name: "Late",
+      time: "",
       days: {
-        name: 'days',
+        name: "days",
         keyData: 1,
-        value: '',
-        label: 'Total..'
+        value: "",
+        label: "Total..",
       },
-    }
+    },
   ]);
-
   const [formAddEmployee, setFormAddEmployee] = useState({
     // FOR FIRST FORM
     firstname: "",
@@ -104,9 +65,9 @@ const AddEmployee = () => {
     dob: "",
     gender: "male",
     marital_status: {
-      name: 'marital_status',
-      value: '',
-      label: 'Select Status...'
+      name: "marital_status",
+      value: "",
+      label: "Select Status...",
     },
     blood_type: {
       name: "blood_type",
@@ -114,14 +75,14 @@ const AddEmployee = () => {
       label: "Select Blood Type",
     },
     identity_type: {
-      name: 'identity_type',
-      value: '',
-      label: 'Select Type...'
+      name: "identity_type",
+      value: "",
+      label: "Select Type...",
     },
     religion: {
-      name: 'religion',
-      value: '',
-      label: 'Select Religion...',
+      name: "religion",
+      value: "",
+      label: "Select Religion...",
     },
     identity_expired: "",
     identity_number: "",
@@ -142,37 +103,86 @@ const AddEmployee = () => {
       value: "",
       label: "Select Job Status....",
     },
-    join_date: '',
-    end_date: '',
+    join_date: "",
+    end_date: "",
 
     // FOR THIRD FORM
     payment_date: {
-      name: 'payment_date',
-      value: '',
-      label: 'Select Date...'
+      name: "payment_date",
+      value: "",
+      label: "Select Date...",
     },
-    bank_name: '',
-    account_holder_name: '',
-    account_number: '',
+    bank_name: "",
+    account_holder_name: "",
+    account_number: "",
     salary: dataIncomeSalary,
     cuts: dataCutSalary,
   });
 
-  
+  /**
+   * Request SALARY COMPONENT DATASET
+   * @param {string} type 
+   * @returns 
+   */
+  const requestGetSalaryComponent = async (type) => {
+    return await http.get(`dataset/salary-component?type=${type}`);
+  }
+
+  const fetchSalaryIncome = async () => {
+    await requestGetSalaryComponent('income')
+    .then((res) => {
+      let data = res.data.data;
+      let state = [];
+      data.forEach(val => {
+        state.push({
+          id: val.id,
+          type: val.type,
+          amount: 0,
+          currencyAmount: "",
+          name: val.name,
+          slug: "",
+          isDefault: true,
+          submitted: true,
+        });
+      });
+      setDataIncomeSalary(state);
+    });
+  };
+
+  const fetchSalaryCut = async () => {
+    await requestGetSalaryComponent('cut')
+    .then((res) => {
+      let data = res.data.data;
+      let state = [];
+      data.forEach(val => {
+        state.push({
+          id: val.id,
+          type: val.type,
+          amount: 0,
+          currencyAmount: "",
+          name: val.name,
+          slug: "",
+          isDefault: true,
+          submitted: true,
+        });
+      });
+      setDataCutSalary(state);
+    });
+  };
 
   /**
    * It fetches department data from the API and sets the data to the state.
    */
-   const fetchDepartment = async () => {
+  const fetchDepartment = async () => {
     await http.get("dataset/department").then((res) => {
       let data = res.data.data;
       let options = [];
       data.forEach((res) => {
         let item = {
-          name: 'division_id',
+          name: "division_id",
           value: res.id,
           label: res.division_name,
-        }
+        };
         options.push(item);
       });
       setDepartmentData(options);
@@ -185,151 +195,121 @@ const AddEmployee = () => {
    * @returns The result of the http.get request.
    */
   const requestCheckUserExists = async (param, value) => {
-    return await http.get(`dataset/exists-employee?${param}=${value}`)
-      .then(res => {
+    return await http
+      .get(`dataset/exists-employee?${param}=${value}`)
+      .then((res) => {
         let result = res.data.data;
         if (result.result) {
-          setExistErrorType(result.type)
+          setExistErrorType(result.type);
         } else {
-          setExistErrorType('');
+          setExistErrorType("");
         }
-    })
-  }
+      });
+  };
 
   /**
    * "If the data is email, check if the email is valid, if it is, check if the email exists, if it
    * doesn't, set the email to valid."
    */
   const handleCheckUser = async (data, value) => {
-    if (data === 'email') {
+    if (data === "email") {
       if (!isValidEmail(value)) {
         setEmailIsValid(false);
       } else {
-        await requestCheckUserExists('email', value);
+        await requestCheckUserExists("email", value);
         setEmailIsValid(true);
       }
-    } else if (data === 'nip') {
-      await requestCheckUserExists('nip', value);
+    } else if (data === "nip") {
+      await requestCheckUserExists("nip", value);
     }
-  }
-
-  /**
-   * When the user clicks the button, add a new object to the array.
-   * Cloning the income salary input
-   */
-  const handleAddNewIncomeForm = () => {
-    setDataIncomeSalary(prevState => [...prevState, {
-      type: 'income',
-      amount: 0,
-      currencyAmount: '',
-      name: '',
-      slug: '',
-      isDefault: false,
-      submitted: false,
-    }])
-  }
-
-  /**
-   * When the user clicks the button, add a new object to the array.
-   * Cloning the cuts salary input
-   */
-   const handleAddNewCutsForm = () => {
-    setDataCutSalary(prevState => [...prevState, {
-      type: 'cuts',
-      amount: 0,
-      currencyAmount: '',
-      name: '',
-      slug: '',
-      isDefault: false,
-      submitted: false,
-    }])
-  }
+  };
 
   /**
    * A validation input for eacth step
-  */
+   */
   const formValidation = async (e) => {
     if (formStep === 0) {
-      if (formAddEmployee.firstname.length < 1
-          || (formAddEmployee.email.length < 1 || !isValidEmail(formAddEmployee.email) || existsErrorType !== '')
-          || formAddEmployee.mobile_phone.length < 1
-          || formAddEmployee.identity_type === ''
-          || formAddEmployee.identity_number === ''
-        ) {
+      if (
+        formAddEmployee.firstname.length < 1 ||
+        formAddEmployee.email.length < 1 ||
+        !isValidEmail(formAddEmployee.email) ||
+        existsErrorType !== "" ||
+        formAddEmployee.mobile_phone.length < 1 ||
+        formAddEmployee.identity_type === "" ||
+        formAddEmployee.identity_number === ""
+      ) {
         swal("Some Data Fill is Still Missing or Wrong. Please fix that.", {
           title: "Validation Error",
-          icon: 'error'
-        })
+          icon: "error",
+        });
       } else {
         setFormStep(1);
       }
     } else if (formStep === 1) {
-
       let startDate = Date.parse(formAddEmployee.join_date);
       let endDate = Date.parse(formAddEmployee.end_date);
       if (
-        (formAddEmployee.nip.length < 1 || existsErrorType === 'nip')
-        || formAddEmployee.job_level.length < 1
-        || formAddEmployee.division_id === ''
-        || formAddEmployee.job_status.value === 'all'
-        || formAddEmployee.join_date === ''
-        || formAddEmployee.job_position === ''
-        || (formAddEmployee.job_status.value !== '0' && formAddEmployee.end_date === '')
+        formAddEmployee.nip.length < 1 ||
+        existsErrorType === "nip" ||
+        formAddEmployee.job_level.length < 1 ||
+        formAddEmployee.division_id === "" ||
+        formAddEmployee.job_status.value === "all" ||
+        formAddEmployee.join_date === "" ||
+        formAddEmployee.job_position === "" ||
+        (formAddEmployee.job_status.value !== "0" &&
+          formAddEmployee.end_date === "")
       ) {
         swal("Some Data Fill is Still Missing or Wrong. Please fix that.", {
           title: "Validation Error",
-          icon: 'error'
-        })
+          icon: "error",
+        });
       } else if (startDate > endDate) {
         swal("Join Date must be less than from End Date", {
           title: "Validation Error",
-          icon: 'error'
-        })
-      } 
-      else {
-
+          icon: "error",
+        });
+      } else {
         setFormStep(2);
       }
     } else if (formStep === 2) {
-      await handleSubmitInviteEmployee(e)
+      await handleSubmitInviteEmployee(e);
     } else {
-      history.push('/employee');
+      history.push("/employee");
     }
-  }
-
+  };
 
   /**
    * When the user changes the value of an input, update the corresponding value in the
    * dataAttendanceCut array.
    */
-  const handleChangeAttendanceCut = e => {
-    let key = e.target.getAttribute('data-key');
+  const handleChangeAttendanceCut = (e) => {
+    let key = e.target.getAttribute("data-key");
     let cloneDataAttendanceCut = [...dataAttendanceCut];
     let obj = cloneDataAttendanceCut[key];
 
-    if (e.target.name === 'currencyAmount') {
+    if (e.target.name === "currencyAmount") {
       let amount = e.target.value;
-      let explode = amount.replace(/[^\d.]/g, '').split('.');
-      obj['amount'] = explode[1];
+      let explode = amount.replace(/[^\d.]/g, "").split(".");
+      obj["amount"] = explode[1];
     }
     obj[e.target.name] = e.target.value;
     cloneDataAttendanceCut[key] = obj;
     setDataAttendanceCut([...cloneDataAttendanceCut]);
-  }
+  };
 
   /**
    * When the user changes the value of an input, update the corresponding value in the
    * dataIncomeSalary or dataCutSalary array.
    */
   const handleChangeSalary = (e, type) => {
-    let key = e.target.getAttribute('data-key');
-    if (type === 'income') {
+    let key = e.target.getAttribute("data-key");
+    if (type === "income") {
       let cloneDataIncome = [...dataIncomeSalary];
       let obj = cloneDataIncome[key];
-      if (e.target.name === 'currencyAmount') {
+      if (e.target.name === "currencyAmount") {
         let amount = e.target.value;
-        let explode = amount.replace(/[^\d.]/g, '').split('.');
-        obj['amount'] = explode[1];
+        let explode = amount.replace(/[^\d.]/g, "").split(".");
+        obj["amount"] = explode[1];
       }
       obj[e.target.name] = e.target.value;
       cloneDataIncome[key] = obj;
@@ -337,199 +317,155 @@ const AddEmployee = () => {
     } else {
       let cloneDataCuts = [...dataCutSalary];
       let obj = cloneDataCuts[key];
-      if (e.target.name === 'currencyAmount') {
+      if (e.target.name === "currencyAmount") {
         let amount = e.target.value;
-        let explode = amount.replace(/[^\d.]/g, '').split('.');
-        obj['amount'] = explode[1];
+        let explode = amount.replace(/[^\d.]/g, "").split(".");
+        obj["amount"] = explode[1];
       }
       obj[e.target.name] = e.target.value;
       cloneDataCuts[key] = obj;
       setDataCutSalary([...cloneDataCuts]);
     }
-  }
-
-
-  /**
-   * If the name is empty, remove the object from the array, otherwise set the submitted property to
-   * true.
-   * On submit income name label in data salary income state
-   */
-  const onSubmitSalaryName = (e, type) => {
-    e.preventDefault();
-    let key = e.target.getAttribute('data-key');
-    if (type === 'income') {
-      let cloneDataIncome = [...dataIncomeSalary];
-      let obj = cloneDataIncome[key];
-      if (obj['name'] === "") {
-        cloneDataIncome.splice(key, 1);
-      } else {
-        obj.submitted = true;
-        cloneDataIncome[key] = obj;
-      }
-      setDataIncomeSalary([...cloneDataIncome]);
-    } else {
-      let cloneDataIncome = [...dataCutSalary];
-      let obj = cloneDataIncome[key];
-      if (obj['name'] === "") {
-        cloneDataIncome.splice(key, 1);
-      } else {
-        obj.submitted = true;
-        cloneDataIncome[key] = obj;
-      }
-      setDataCutSalary([...cloneDataIncome]);
-    }
-  }
-
+  };
 
   /**
    * Send data from a form to the server using the FormData object.
    * @param {Event} e
    */
-  const handleSubmitInviteEmployee = async e => {
+  const handleSubmitInviteEmployee = async (e) => {
     e.preventDefault();
     swal({
       title: "Send This Form?",
       text: "Make sure the data is correct. You can edit this Employee data in Detail Employee",
-      icon: 'warning',
+      icon: "warning",
       buttons: true,
       dangerMode: true,
-    })
-    .then(async isYes => {
+    }).then(async (isYes) => {
       if (isYes) {
         setLoadingInvite(true);
         let formData = new FormData();
-        formData.append('firstname', formAddEmployee.firstname);
-        formData.append('lastname', formAddEmployee.lastname);
-        formData.append('email', formAddEmployee.email);
-        formData.append('mobile_phone', formAddEmployee.mobile_phone);
-        formData.append('phone_number', formAddEmployee.phone_number);
-        formData.append('pob', formAddEmployee.pob);
-        formData.append('dob', formAddEmployee.dob);
-        formData.append('gender', formAddEmployee.gender);
-        formData.append('marital_status', formAddEmployee.marital_status.value);
-        formData.append('blood_type', formAddEmployee.blood_type.value);
-        formData.append('identity_type', formAddEmployee.identity_type.value);
-        formData.append('identity_number', formAddEmployee.identity_number);
-        formData.append('marital_status', formAddEmployee.marital_status.value);
-        formData.append('is_address_same', firstFormCondition.isSameCitizentAddress ? 1 : 0);
+        formData.append("firstname", formAddEmployee.firstname);
+        formData.append("lastname", formAddEmployee.lastname);
+        formData.append("email", formAddEmployee.email);
+        formData.append("mobile_phone", formAddEmployee.mobile_phone);
+        formData.append("phone_number", formAddEmployee.phone_number);
+        formData.append("pob", formAddEmployee.pob);
+        formData.append("dob", formAddEmployee.dob);
+        formData.append("gender", formAddEmployee.gender);
+        formData.append("marital_status", formAddEmployee.marital_status.value);
+        formData.append("blood_type", formAddEmployee.blood_type.value);
+        formData.append("identity_type", formAddEmployee.identity_type.value);
+        formData.append("identity_number", formAddEmployee.identity_number);
+        formData.append("marital_status", formAddEmployee.marital_status.value);
+        formData.append(
+          "is_address_same",
+          firstFormCondition.isSameCitizentAddress ? 1 : 0
+        );
         if (!firstFormCondition.isPermanentIdCard) {
-          formData.append('identity_expired', formAddEmployee.identity_expired);
+          formData.append("identity_expired", formAddEmployee.identity_expired);
         }
-        formData.append('postal_code', formAddEmployee.postal_code);
-        formData.append('religion', formAddEmployee.religion.value);
-        formData.append('citizent_address', formAddEmployee.citizent_address);
+        formData.append("postal_code", formAddEmployee.postal_code);
+        formData.append("religion", formAddEmployee.religion.value);
+        formData.append("citizent_address", formAddEmployee.citizent_address);
         if (firstFormCondition.isSameCitizentAddress) {
-          formData.append('resident_address', formAddEmployee.citizent_address);
+          formData.append("resident_address", formAddEmployee.citizent_address);
         } else {
-          formData.append('resident_address', formAddEmployee.resident_address);
+          formData.append("resident_address", formAddEmployee.resident_address);
         }
-        formData.append('nip',formAddEmployee.nip);
-        formData.append('job_level', formAddEmployee.job_level);
-        formData.append('job_status', formAddEmployee.job_status.value);
-        formData.append('department', formAddEmployee.division_id.value);
-        formData.append('join_date', formAddEmployee.join_date);
-        if (formAddEmployee.job_status.value !== '0') {
-          formData.append('end_date', formAddEmployee.end_date);
+        formData.append("nip", formAddEmployee.nip);
+        formData.append("job_level", formAddEmployee.job_level);
+        formData.append("job_status", formAddEmployee.job_status.value);
+        formData.append("department", formAddEmployee.division_id.value);
+        formData.append("join_date", formAddEmployee.join_date);
+        if (formAddEmployee.job_status.value !== "0") {
+          formData.append("end_date", formAddEmployee.end_date);
         }
-        formData.append('payment_date', formAddEmployee.payment_date.value);
-        formData.append('bank_name', formAddEmployee.bank_name);
-        formData.append('account_holder_name', formAddEmployee.account_holder_name);
-        formData.append('account_number', formAddEmployee.account_number);
-        formData.append('job_position', formAddEmployee.job_position);
-    
+        formData.append("payment_date", formAddEmployee.payment_date.value);
+        formData.append("bank_name", formAddEmployee.bank_name);
+        formData.append(
+          "account_holder_name",
+          formAddEmployee.account_holder_name
+        );
+        formData.append("account_number", formAddEmployee.account_number);
+        formData.append("job_position", formAddEmployee.job_position);
+
         // DATA SALARY
         let salaryData = dataIncomeSalary.concat(dataCutSalary);
         salaryData.forEach((data, index) => {
-          formData.append(`salary[${index}][type]`, data.type);
-          formData.append(`salary[${index}][name]`, data.name);
+          formData.append(`salary[${index}][salary_component_id]`, data.id);
           formData.append(`salary[${index}][amount]`, data.amount);
         });
-    
+
         // DATA ATTENDANCE CUT
         dataAttendanceCut.forEach((data, index) => {
-            formData.append(`cuts[${index}][cut_type]`, data.type);
-            if (data.type === 'late') {
-              formData.append(`cuts[${index}][total]`, `${data.time} / ${data.days.value}`);
-            } else {
-              formData.append(`cuts[${index}][total]`, data.days.value);
-            }
-            formData.append(`cuts[${index}][amount]`, data.amount);
-        })
-    
-        await method.createDataWithoutUpload('employee', formData)
-        .then(res => {
-          setLoadingInvite(false);
-          swal('Employee Invited Successfully', {
-            title: "Success",
-            icon: 'success',
-          }).then(() => {
-            setFormStep(3);
-          });
-        })
-        .catch(err => {
-          setLoadingInvite(false);
-          const errorCode = err.response.status;
-          if (errorCode > 400) {
-            swal("There's a missing form. Please fill required form", {
-              title: "Failed",
-              icon: 'error',
-            });
+          formData.append(`cuts[${index}][cut_type]`, data.type);
+          if (data.type === "late") {
+            formData.append(
+              `cuts[${index}][total]`,
+              `${data.time} / ${data.days.value}`
+            );
           } else {
-            swal("There's something wrong in Server. Please contact the administrator", {
-              title: "Failed",
-              icon: 'error',
-            });
+            formData.append(`cuts[${index}][total]`, data.days.value);
           }
+          formData.append(`cuts[${index}][amount]`, data.amount);
         });
+
+        await method
+          .createDataWithoutUpload("employee", formData)
+          .then((res) => {
+            setLoadingInvite(false);
+            swal("Employee Invited Successfully", {
+              title: "Success",
+              icon: "success",
+            }).then(() => {
+              setFormStep(3);
+            });
+          })
+          .catch((err) => {
+            setLoadingInvite(false);
+            const errorCode = err.response.status;
+            if (errorCode > 400) {
+              swal("There's a missing form. Please fill required form", {
+                title: "Failed",
+                icon: "error",
+              });
+            } else {
+              swal(
+                "There's something wrong in Server. Please contact the administrator",
+                {
+                  title: "Failed",
+                  icon: "error",
+                }
+              );
+            }
+          });
       } else {
         return false;
       }
-    })
-  }
-  
-
-  /**
-   * When the user clicks on the remove button, the function will remove the item from the array and
-   * update the state.
-   * Remove Form Income Salary
-   */
-  const onRemoveIncomeSalary = e => {
-    let key = e.target.getAttribute('data-key');
-    let cloneDataIncome = [...dataIncomeSalary];
-    cloneDataIncome.splice(key, 1);
-    setDataIncomeSalary([...cloneDataIncome]);
-  }
-
-  /**
-   * When the user clicks on the remove button, the function will remove the item from the array and
-   * update the state.
-   * Remove Form Income Salary
-   */
-   const onRemoveCutSalary = e => {
-    let key = e.target.getAttribute('data-key');
-    let cloneDataIncome = [...dataCutSalary];
-    cloneDataIncome.splice(key, 1);
-    setDataCutSalary([...cloneDataIncome]);
-  }
+    });
+  };
 
   /**
    * When the user types in the input field, the value of the input field is set to the value of the
    * state.
    */
-   const handleChangeForm = (e) => {
+  const handleChangeForm = (e) => {
     setFormAddEmployee({
       ...formAddEmployee,
       [e.target.name]: e.target.value,
     });
   };
 
-
   useEffect(() => {
     fetchDepartment();
+    fetchSalaryIncome();
+    fetchSalaryCut();
     return () => {
       setDepartmentData([]);
-    }
-  },[formStep]);
+      setDataCutSalary([]);
+      setDataIncomeSalary([]);
+    };
+  }, [formStep]);
 
   /**
    * FORM COMPONENT FOR STEP FORM
@@ -567,53 +503,47 @@ const AddEmployee = () => {
             ...firstFormCondition,
             isPermanentIdCard: true,
           });
-        } 
+        }
       }}
       onChangeSelect={(e) => handleChangeSelectForm(e)}
-      onChangeExists={e => handleCheckUser(e.target.name, e.target.value)}
+      onChangeExists={(e) => handleCheckUser(e.target.name, e.target.value)}
       isValidEmail={isEmailValid}
     />,
-    <Second 
+    <Second
       data={formAddEmployee}
       errorExistType={existsErrorType}
       departmentData={departmentData}
-      handleCheckUser={e => handleCheckUser(e.target.name, e.target.value)}
-      onChange={e => handleChangeForm(e)}
+      handleCheckUser={(e) => handleCheckUser(e.target.name, e.target.value)}
+      onChange={(e) => handleChangeForm(e)}
       onChangeSelect={(e) => handleChangeSelectForm(e)}
     />,
-    <Third 
+    <Third
       data={formAddEmployee}
-      onChangeSelect={e => handleChangeSelectForm(e)}
+      onChangeSelect={(e) => handleChangeSelectForm(e)}
       dataIncomeSalary={dataIncomeSalary}
       dataCutSalary={dataCutSalary}
-      onChange={e => handleChangeForm(e)}
-      onSubmitIncomeName={e => onSubmitSalaryName(e, 'income')}
-      onChangeIncome={e => handleChangeSalary(e, 'income')}
-      handleAddNewIncome={() => handleAddNewIncomeForm()}
-      onRemoveIncomeSalary={e => onRemoveIncomeSalary(e)}
-      handleAddNewCuts={e => handleAddNewCutsForm(e)}
-      onChangeCuts={e => handleChangeSalary(e, 'cuts')}
-      onRemoveCutsSalary={e => onRemoveCutSalary(e)}
-      onSubmitCutsName={e => onSubmitSalaryName(e, 'cuts')}
+      onChange={(e) => handleChangeForm(e)}
+      onChangeIncome={(e) => handleChangeSalary(e, "income")}
+      onChangeCuts={(e) => handleChangeSalary(e, "cuts")}
       dataAttendanceCut={dataAttendanceCut}
-      onChangeCutAttendance={e => handleChangeAttendanceCut(e)}
-      onChangeSelectAttendanceCut={e => handleSelectChangeAttendanceCut(e)}
+      onChangeCutAttendance={(e) => handleChangeAttendanceCut(e)}
+      onChangeSelectAttendanceCut={(e) => handleSelectChangeAttendanceCut(e)}
     />,
-    <Four />
+    <Four />,
   ];
 
   /**
    * It takes an event object, and then it sets the state of the dataAttendanceCut[days] object to the event
    * object.
    */
-  const handleSelectChangeAttendanceCut = e => {
+  const handleSelectChangeAttendanceCut = (e) => {
     let key = e.keyData;
     let cloneDataAttendanceCut = [...dataAttendanceCut];
     let obj = cloneDataAttendanceCut[key];
     obj.days = e;
     cloneDataAttendanceCut[key] = obj;
     setDataAttendanceCut([...cloneDataAttendanceCut]);
-  }
+  };
 
   /**
    * It takes an event object, and then it sets the state of the formAddEmployee object to the event
@@ -655,13 +585,10 @@ const AddEmployee = () => {
 
         {/* FORM */}
         <div className="col-xl-9 col-lg-8 col-md-12 col-sm-12">
-          <div>
-            {FormComponent[formStep]}
-          </div>
+          <div>{FormComponent[formStep]}</div>
           <div className="col-12 text-center mt-4">
             <div className="btn-group text-center">
-              {
-                formStep < 3 ?
+              {formStep < 3 ? (
                 <ButtonWhiteFilter
                   name={formStep > 0 ? "Back" : "Cancel"}
                   onClick={() => {
@@ -671,14 +598,19 @@ const AddEmployee = () => {
                       history.push("/employee");
                     }
                   }}
-                /> : null
-              }
+                />
+              ) : null}
               <ButtonBlueFilter
                 name={
-                  formStep === 2 ? 'Invite Employee' : 
-                  (formStep === 3 ? 'List' : (loadingInvite ? 'Processing...' : 'Next'))
+                  formStep === 2
+                    ? "Invite Employee"
+                    : formStep === 3
+                    ? "List"
+                    : loadingInvite
+                    ? "Processing..."
+                    : "Next"
                 }
-                onClick={e => formValidation(e)}
+                onClick={(e) => formValidation(e)}
                 disabled={loadingInvite}
               />
             </div>

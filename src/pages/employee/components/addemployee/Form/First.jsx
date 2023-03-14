@@ -329,6 +329,60 @@ const First = ({
                   </label>
                 </div>
               </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="postal_code" className="text-bold">Postal Code</label>
+                <input
+                  type="text"
+                  onChange={onChange}
+                  value={data.postal_code}
+                  className="form-control input-border-grey"
+                  name="postal_code"
+                  id="postal_code"
+                  placeholder="Postal Code"
+                />
+              </div>
+            </div>
+
+            {/* CITIZEN ID ADDRESS */}
+            <div className="row mt-3">
+              <div className="col-md-12">
+                <label className="text-bold" htmlFor="citizent_address">Citizen ID Address</label>
+                <textarea
+                  style={{ height: '90px' }}
+                  className="form-control input-border-grey" 
+                  name="citizent_address" 
+                  id="citizent_address"
+                  value={data.citizent_address}
+                  onChange={onChange}
+                  placeholder="Citizen ID Address"
+                >
+
+                </textarea>
+              </div>
+            </div>
+
+            {/* RESIDENT ADDRESS */}
+            <div className="row mt-3">
+              <div className="col-md-12">
+                <label className="text-bold" htmlFor="resident_address">Resident Address</label>
+                <textarea
+                  style={{ height: '90px' }}
+                  className="form-control input-border-grey" 
+                  name="resident_address"
+                  onChange={onChange}
+                  id="resident_address"
+                  value={isSameCitizentAddress ? data.citizent_address : data.resident_address}
+                  readOnly={isSameCitizentAddress}
+                  placeholder="Citizen ID Address"
+                >
+                </textarea>
+                <div className="form-check">
+                  <input onChange={onChangeCitizentAddress} className="form-check-input" value={isSameCitizentAddress} name="is_same_as_citizent" type="checkbox" id="is_same_as_citizent" />
+                  <label className="form-check-label" htmlFor="is_same_as_citizent">
+                    Use as Citizen Id Address
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </div>

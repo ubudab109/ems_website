@@ -86,3 +86,8 @@ table:not(.sticky) {
     display: grid;
     place-items: center;
   }
+
+  .v-divider{
+    width: 1px;
+    border-left: 1px solid #AAAAAA;
+}

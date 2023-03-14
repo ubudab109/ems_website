@@ -6,7 +6,6 @@ const Menu = ({
   canAccess, path, icon, name, parentRoute,
 }) => {
   if (canAccess) {
-    console.log(parentRoute);
     return (
       <NavLink
         activeClassName="active"

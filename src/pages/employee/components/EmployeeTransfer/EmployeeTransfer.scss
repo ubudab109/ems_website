@@ -1,0 +1,34 @@
+.hr1 {
+    border: 2px solid #00617F;
+    margin: 1rem 0;
+    color: inherit;
+    background-color: currentColor;
+    opacity: 1;
+    border-radius: 2px;
+}
+
+// custom table css
+table:not(.sticky) {
+    margin-top: 0px;
+}
+
+// Search Bar
+  
+.search input {
+  background-color: white;
+  border: 1;
+  border-radius: 2px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  font-size: 18px;
+  height: 35px;
+}
+
+.searchIcon {
+  border: 1;
+  height: 35px;
+  width: 30px;
+  background-color: white;
+  display: grid;
+  place-items: center;
+}

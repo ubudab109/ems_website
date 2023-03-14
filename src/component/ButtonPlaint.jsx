@@ -9,9 +9,10 @@ const ButtonPlaint = ({
   disabled, 
   background, 
   color,
+  className,
 }) => (
   <button 
-  className="btn mr-5"
+  className={`btn mr-5 ${className}`}
   disabled={disabled}
   style={
     {
@@ -32,13 +33,15 @@ ButtonPlaint.propTypes = {
   onClick: PropTypes.func,
   margin: PropTypes.string,
   disabled: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 ButtonPlaint.defaultProps = {
   margin: '0px',
   disabled: false,
   background: 'white',
-  color: 'black'
+  color: 'black',
+  className: '',
 }
 
 export default ButtonPlaint;

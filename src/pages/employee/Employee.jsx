@@ -131,7 +131,7 @@ const Employee = () => {
     })
     .catch(err => {
       setIsLoadingAddDepartment(false);
-      swal("There was an error when creating department", {
+      swal("There was an error when creating department. Contact administrator if problem still exists", {
         icon: 'error'
       });
     });
@@ -262,11 +262,19 @@ const Employee = () => {
           setFetchingEmployee(false);
         }
       })
-      .catch(() => {
-        swal("Error when fetching data", {
-          text: "Check Your connection or contact us if the problem still there",
-          icon: "error",
-        });
+      .catch((err) => {
+        if (err.response.status === 403) {
+          swal(err.response.data.message, {
+            icon: 'error'
+          }).then(() => {
+            history.push('/forbidden');
+          });
+        } else {
+          swal("Error when fetching data", {
+            text: "Check Your connection or contact us if the problem still there",
+            icon: "error",
+          });
+        }
         if (isMounted) {
           setFetchingEmployee(false);
         }
@@ -473,14 +481,14 @@ const Employee = () => {
             </div>
             <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12">
               <div className="btn-group btn-group-sm" style={{ float: "right" }}>
-                  <ButtonWhiteFilter disabled={selectedEmployee.length < 1} name="Export" />
+                  <ButtonWhiteFilter disabled={selectedEmployee.length === 0} name="Export" />
                   {
                     isActionAllowed(permissionEmployee.permissions, 'employee-management-update') ?
                     <ButtonWhiteFilter name="Employee Transfer" /> : null
                   }
                   {
                     isActionAllowed(permissionEmployee.permissions, 'employee-management-delete') ?
-                    <ButtonWhiteFilter onClick={handleDeleteEmployee} disabled={selectedEmployee.length < 1 || loadingDelete} name="Delete Employee" /> : null
+                    <ButtonWhiteFilter onClick={handleDeleteEmployee} disabled={selectedEmployee.length === 0 || loadingDelete} name="Delete Employee" /> : null
                   }
                   {
                     isActionAllowed(permissionEmployee.permissions, 'employee-management-create') ?

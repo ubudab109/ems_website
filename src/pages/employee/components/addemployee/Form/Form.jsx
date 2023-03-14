@@ -3,6 +3,7 @@ import { useState } from 'react'
 import First from './First'
 import Second from './Second'
 import Third from './Third'
+import Fourth from './Fourth'
 
 const Form = () => {
     const [page, setPage] = useState(0)
@@ -12,8 +13,10 @@ const Form = () => {
             return <First />
         } else if (page === 1){
             return <Second />
-        }else{
+        }else if (page === 2){
             return <Third />
+        } else {
+          return <Fourth />
         }
       }
 
@@ -34,7 +37,7 @@ const Form = () => {
           </button>
           <button
           className="btn btn-primary shadow-sm"
-            disabled={page === 2}
+            disabled={page === 3}
             onClick={() => {
               setPage((currPage) => currPage + 1);
             }}

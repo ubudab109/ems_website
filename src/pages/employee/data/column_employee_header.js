@@ -1,11 +1,10 @@
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import memoize from "memoize-one";
 import { rupiah, ucwords } from "../../../utils/helper";
 
 const columnEmployee = memoize((viewDetail) => [
   {
     name: "Employee Name",
+    selector: row => row.firstname,
     sortable: true,
     cell: (row) => (
       <>
@@ -46,6 +45,7 @@ const columnEmployee = memoize((viewDetail) => [
   {
     name: "Job Position",
     sortable: true,
+    selector: row => row.job_position,
     cell: (row) => (
       <>
         <div className="td-text mb-1">{ucwords(row.job_position)}</div>
@@ -55,6 +55,7 @@ const columnEmployee = memoize((viewDetail) => [
   {
     name: "Job Level",
     sortable: true,
+    selector: row => row.job_level,
     cell: (row) => (
       <>
         <div className="td-text mb-1">{ucwords(row.job_level)}</div>
@@ -64,6 +65,7 @@ const columnEmployee = memoize((viewDetail) => [
   {
     name: "Job Status",
     sortable: true,
+    selector: row => row.job_status_name,
     cell: (row) => (
       <>
         <div className="td-text mb-1">{ucwords(row.job_status_name)}</div>
@@ -73,6 +75,7 @@ const columnEmployee = memoize((viewDetail) => [
   {
     name: "Salary",
     sortable: true,
+    selector: row => row.total_salary,
     cell: (row) => (
       <>
         <div className="td-text mb-1">{rupiah(row.total_salary)}</div>
@@ -82,6 +85,7 @@ const columnEmployee = memoize((viewDetail) => [
   {
     name: "Employee Status",
     sortable: true,
+    selector: row => row.status,
     cell: (row) => (
       <span
         className="badge badge-radius"
@@ -98,12 +102,7 @@ const columnEmployee = memoize((viewDetail) => [
     name: "Detail",
     sortable: true,
     cell: (row) => (
-      <FontAwesomeIcon 
-        icon={faEye}
-        onClick={() => viewDetail(row.id)}
-        style={{color : 'rgb(0, 97, 127)', cursor: 'pointer'}}
-        title="Detail"
-      />
+      <button type="button" className="btn-detail" onClick={() => viewDetail(row.id)}>View</button>
     ),
   },
 ]);
