@@ -4226,7 +4226,7 @@ fieldset:disabled .btn {
 }
 
 .dropdown-menu-notif {
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   display: none;
   width: 200px;
@@ -4240,8 +4240,9 @@ fieldset:disabled .btn {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-  left: 62.5rem;
+  // left: 73.5rem;
   margin-top: 11px;
+  right: 225px;
 }
 
 .dropdown-menu[data-bs-popper] {
