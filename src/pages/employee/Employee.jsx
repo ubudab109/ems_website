@@ -27,9 +27,10 @@ const Employee = () => {
   const [fetchingEmployee, setFetchingEmployee] = useState(false);
   const [inputKeyword, setInputKeyword] = useState("");
   const [showModalAddDepartment, setShowModalAddDepartment] = useState(false);
-  const [showModalUpdateDepartment, setShowModalUpdateDepartment] = useState(false);
+  const [showModalUpdateDepartment, setShowModalUpdateDepartment] =
+    useState(false);
   const [formAddDepartment, setFormAddDepartment] = useState({
-    division_name: '',
+    division_name: "",
   });
   const [isLoadingAddDepartment, setIsLoadingAddDepartment] = useState(false);
   const [filterEmployee, setFilterEmployee] = useState({
@@ -46,14 +47,13 @@ const Employee = () => {
   const history = useHistory();
 
   const permissionEmployee = useSelector(
-    state => state.auth.permissions.filter(e => e.name === "Employee")[0]
+    (state) => state.auth.permissions.filter((e) => e.name === "Employee")[0]
   );
-
 
   /**
    * When the user clicks on a department, set the selected department to the id of the department that
    * was clicked, and set the filterEmployee state to the id of the department that was clicked.
-   * 
+   *
    * @param {Number} id
    */
   const handleClickDepartment = (id) => {
@@ -67,7 +67,7 @@ const Employee = () => {
   /**
    * When the user clicks on a job status, set the selected job status to the id of the clicked job
    * status and set the filterEmployee object to the value of the clicked job status.
-   * 
+   *
    * @param {Object} data
    */
   const handleClickJobStatus = (data) => {
@@ -84,20 +84,20 @@ const Employee = () => {
    */
   const handleSelectData = ({ selectedRows }) => {
     let data = [];
-    selectedRows.forEach(value => {
+    selectedRows.forEach((value) => {
       data.push(value);
-    })
+    });
     setSelectedEmployee(data);
   };
 
   /**
    * It makes a GET request to the employee endpoint with the given parameters.
-   * 
+   *
    * @param {any} keyword
    * @param {any} department
    * @param {any} job_status
    * @param {any} status
-   * 
+   *
    * @return {Promise}
    */
   const requestGetEmployee = async (
@@ -114,54 +114,63 @@ const Employee = () => {
   /**
    * It's a function that creates a new department in the database.
    */
-  const handleAddDepartment = async e => {
+  const handleAddDepartment = async (e) => {
     e.preventDefault();
     setIsLoadingAddDepartment(true);
-    await method.createDataWithoutUpload('division', formAddDepartment)
-    .then(() => {
-      setIsLoadingAddDepartment(false);
-      setShowModalAddDepartment(false);
-      setFormAddDepartment({
-        division_name: '',
+    await method
+      .createDataWithoutUpload("division", formAddDepartment)
+      .then(() => {
+        setIsLoadingAddDepartment(false);
+        setShowModalAddDepartment(false);
+        setFormAddDepartment({
+          division_name: "",
+        });
+        fetchDepartment();
+        swal("Department created successfully", {
+          icon: "success",
+        });
       })
-      fetchDepartment();
-      swal("Department created successfully", {
-        icon: 'success'
+      .catch((err) => {
+        setIsLoadingAddDepartment(false);
+        swal(
+          "There was an error when creating department. Contact administrator if problem still exists",
+          {
+            icon: "error",
+          }
+        );
       });
-    })
-    .catch(err => {
-      setIsLoadingAddDepartment(false);
-      swal("There was an error when creating department. Contact administrator if problem still exists", {
-        icon: 'error'
-      });
-    });
   };
 
   /**
    * It's a function that updates a department by id using a put method.
    */
-  const handleUpdateDepartment = async e => {
+  const handleUpdateDepartment = async (e) => {
     e.preventDefault();
     setIsLoadingAddDepartment(true);
-    await method.updateDataByIdWithPut('division', formAddDepartment.id, formAddDepartment)
-    .then(() => {
-      setIsLoadingAddDepartment(false);
-      setShowModalUpdateDepartment(false);
-      fetchDepartment();
-      setFormAddDepartment({
-        division_name: '',
+    await method
+      .updateDataByIdWithPut(
+        "division",
+        formAddDepartment.id,
+        formAddDepartment
+      )
+      .then(() => {
+        setIsLoadingAddDepartment(false);
+        setShowModalUpdateDepartment(false);
+        fetchDepartment();
+        setFormAddDepartment({
+          division_name: "",
+        });
+        swal("Department updated successfully", {
+          icon: "success",
+        });
       })
-      swal("Department updated successfully", {
-        icon: 'success'
+      .catch((err) => {
+        setIsLoadingAddDepartment(false);
+        swal("There was an error when creating department", {
+          icon: "error",
+        });
       });
-    })
-    .catch(err => {
-      setIsLoadingAddDepartment(false);
-      swal("There was an error when creating department", {
-        icon: 'error'
-      });
-    });
-  }
+  };
 
   /* A function that is called when the component is mounted. */
   const fetchEmployee = useCallback(() => {
@@ -193,63 +202,62 @@ const Employee = () => {
    */
   const handleDeleteEmployee = async () => {
     swal({
-      title: 'Are You Sure?',
-      text: 'Delete this selected Employee?. You can not revert this action and data will lost',
+      title: "Are You Sure?",
+      text: "Delete this selected Employee?. You can not revert this action and data will lost",
       buttons: true,
-      icon: 'warning',
+      icon: "warning",
       dangerMode: true,
-    })
-    .then(async willDelete => {
+    }).then(async (willDelete) => {
       setLoadingDelete(true);
       if (willDelete) {
         let data = [];
-        selectedEmployee.forEach(value => {
+        selectedEmployee.forEach((value) => {
           data.push(value.id);
         });
         let req = JSON.stringify(data);
-        await http.delete(`delete-employee?data=${req}`)
-        .then(async () => {
-          setLoadingDelete(false);
-          swal({
-            title: 'Success',
-            text: "Employee Deleted Successfully",
-            icon: 'success',
-          });
-          fetchEmployee()
-            .then((res) => {
-              let data = res.data.data.data;
-              setEmployeeData(data);
-              setFetchingEmployee(false);
-            })
-            .catch(() => {
-              swal("Error when fetching data", {
-                icon: "error",
-              });
-              setFetchingEmployee(false);
+        await http
+          .delete(`delete-employee?data=${req}`)
+          .then(async () => {
+            setLoadingDelete(false);
+            swal({
+              title: "Success",
+              text: "Employee Deleted Successfully",
+              icon: "success",
             });
-        })
-        .catch(() => {
-          setLoadingDelete(false);
-          swal({
-            title: 'Failed',
-            text: "Failed to Delete Employee. Please Contact Administrator",
-            icon: 'error',
+            fetchEmployee()
+              .then((res) => {
+                let data = res.data.data.data;
+                setEmployeeData(data);
+                setFetchingEmployee(false);
+              })
+              .catch(() => {
+                swal("Error when fetching data", {
+                  icon: "error",
+                });
+                setFetchingEmployee(false);
+              });
+          })
+          .catch(() => {
+            setLoadingDelete(false);
+            swal({
+              title: "Failed",
+              text: "Failed to Delete Employee. Please Contact Administrator",
+              icon: "error",
+            });
           });
-        })
       } else {
         return false;
       }
-    })
+    });
   };
 
   /**
    * On View Click Handler
-   * @param {number} employeeId 
+   * @param {number} employeeId
    */
-  const onViewDetail = employeeId  => {
+  const onViewDetail = (employeeId) => {
     history.push(`/employee/detail/${employeeId}`);
-  }
-
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -265,9 +273,9 @@ const Employee = () => {
       .catch((err) => {
         if (err.response.status === 403) {
           swal(err.response.data.message, {
-            icon: 'error'
+            icon: "error",
           }).then(() => {
-            history.push('/forbidden');
+            history.push("/forbidden");
           });
         } else {
           swal("Error when fetching data", {
@@ -293,48 +301,48 @@ const Employee = () => {
   return (
     <Fragment>
       {/* ADD DEPARTMENT MODAL */}
-      <CustomModalForm 
+      <CustomModalForm
         children={
-          <AddDepartmentModal 
+          <AddDepartmentModal
             data={formAddDepartment}
-            onChangeDivision={e => setFormAddDepartment(
-              {
+            onChangeDivision={(e) =>
+              setFormAddDepartment({
                 ...formAddDepartment,
-                [e.target.name] : e.target.value
-              }
-            )}
+                [e.target.name]: e.target.value,
+              })
+            }
           />
         }
-        handleSure={e => handleAddDepartment(e)}
+        handleSure={(e) => handleAddDepartment(e)}
         isSendButtonDisabled={isLoadingAddDepartment}
-        submitText={isLoadingAddDepartment ? 'Processing...' : 'Submit'}
+        submitText={isLoadingAddDepartment ? "Processing..." : "Submit"}
         headerTitle="Add Department"
         show={showModalAddDepartment}
         handleClose={() => setShowModalAddDepartment(false)}
       />
 
       {/* EDIT DEPARTMENT MODAL */}
-      <CustomModalForm 
+      <CustomModalForm
         children={
-          <AddDepartmentModal 
+          <AddDepartmentModal
             data={formAddDepartment}
-            onChangeDivision={e => setFormAddDepartment(
-              {
+            onChangeDivision={(e) =>
+              setFormAddDepartment({
                 ...formAddDepartment,
-                [e.target.name] : e.target.value
-              }
-            )}
+                [e.target.name]: e.target.value,
+              })
+            }
           />
         }
-        handleSure={e => handleUpdateDepartment(e)}
+        handleSure={(e) => handleUpdateDepartment(e)}
         isSendButtonDisabled={isLoadingAddDepartment}
-        submitText={isLoadingAddDepartment ? 'Processing...' : 'Submit'}
+        submitText={isLoadingAddDepartment ? "Processing..." : "Submit"}
         headerTitle="Update Department"
         show={showModalUpdateDepartment}
         handleClose={() => {
           setFormAddDepartment({
-              division_name: '',
-          })
+            division_name: "",
+          });
           setShowModalUpdateDepartment(false);
         }}
       />
@@ -343,21 +351,23 @@ const Employee = () => {
           {/* DEPARTMENT FILTER */}
           <div className="card card-shadow">
             <div className="d-flex flex-wrap justify-content-between">
-            <h1
-              className="text-blue-dark text-left pl-20 mx-1"
-              style={{
-                fontSize: "18px",
-                paddingTop: "7px",
-              }}
-            >
-              Department
-            </h1>
-            <div onClick={() => setShowModalAddDepartment(true)}>
-
-              <button className="btn float-right">
-                <img src={`${process.env.PUBLIC_URL}/assets/img/Add.png`} alt=""/>
-              </button>
-            </div>
+              <h1
+                className="text-blue-dark text-left pl-20 mx-1"
+                style={{
+                  fontSize: "18px",
+                  paddingTop: "7px",
+                }}
+              >
+                Department
+              </h1>
+              <div onClick={() => setShowModalAddDepartment(true)}>
+                <button className="btn float-right">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/assets/img/Add.png`}
+                    alt=""
+                  />
+                </button>
+              </div>
             </div>
             <div className="divider-card" />
             <div
@@ -376,8 +386,14 @@ const Employee = () => {
               />
               {departmentData.map((data, key) => (
                 <DepartmentFilter
-                  isEditAllowed={isActionAllowed(permissionEmployee.permissions, 'department-update')}
-                  isRemoveAllowed={isActionAllowed(permissionEmployee.permissions, 'department-delete')}
+                  isEditAllowed={isActionAllowed(
+                    permissionEmployee.permissions,
+                    "department-update"
+                  )}
+                  isRemoveAllowed={isActionAllowed(
+                    permissionEmployee.permissions,
+                    "department-delete"
+                  )}
                   key={key}
                   onEdit={() => {
                     setFormAddDepartment({
@@ -480,28 +496,45 @@ const Employee = () => {
               </div>
             </div>
             <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-              <div className="btn-group btn-group-sm" style={{ float: "right" }}>
-                  <ButtonWhiteFilter disabled={selectedEmployee.length === 0} name="Export" />
-                  {
-                    isActionAllowed(permissionEmployee.permissions, 'employee-management-update') ?
-                    <ButtonWhiteFilter name="Employee Transfer" /> : null
-                  }
-                  {
-                    isActionAllowed(permissionEmployee.permissions, 'employee-management-delete') ?
-                    <ButtonWhiteFilter onClick={handleDeleteEmployee} disabled={selectedEmployee.length === 0 || loadingDelete} name="Delete Employee" /> : null
-                  }
-                  {
-                    isActionAllowed(permissionEmployee.permissions, 'employee-management-create') ?
-                    <ButtonBlueFilter name="Add Employee" onClick={() => history.push('/employee/add/add-employee')} /> : null
-                  }
+              <div
+                className="btn-group btn-group-sm"
+                style={{ float: "right" }}
+              >
+                <ButtonWhiteFilter
+                  disabled={selectedEmployee.length === 0}
+                  name="Export"
+                />
+                {isActionAllowed(
+                  permissionEmployee.permissions,
+                  "employee-management-update"
+                ) ? (
+                  <ButtonWhiteFilter name="Employee Transfer" />
+                ) : null}
+                {isActionAllowed(
+                  permissionEmployee.permissions,
+                  "employee-management-delete"
+                ) ? (
+                  <ButtonWhiteFilter
+                    onClick={handleDeleteEmployee}
+                    disabled={selectedEmployee.length === 0 || loadingDelete}
+                    name="Delete Employee"
+                  />
+                ) : null}
+                {isActionAllowed(
+                  permissionEmployee.permissions,
+                  "employee-management-create"
+                ) ? (
+                  <ButtonBlueFilter
+                    name="Add Employee"
+                    onClick={() => history.push("/employee/add/add-employee")}
+                  />
+                ) : null}
               </div>
             </div>
           </div>
           <div className="table-responsive">
             <DataTable
-              columns={columnEmployee(
-                onViewDetail
-              )}
+              columns={columnEmployee(onViewDetail)}
               selectableRows
               data={employeeData}
               pagination

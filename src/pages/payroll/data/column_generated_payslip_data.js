@@ -14,7 +14,7 @@ const columnGeneratedPayslipData = memoize((retry) => [
     )
   },
   {
-    name: 'status',
+    name: 'Status',
     sortable: true,
     selector: row => row.status,
     cell: row => {

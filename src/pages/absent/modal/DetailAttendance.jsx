@@ -70,8 +70,8 @@ const DetailAttendance = ({
             </div>
           </div>
           <div className="col-12 text-center mt-2 mb-5">
-            <span className="text-blue-dark mb-1 mx-5">Clock In : {formatingTime(clockIn)}</span>
-            <span className="text-blue-dark mb-1">Clock Out : {clockOut !== null ? formatingTime(clockIn) : '-'}</span>
+            <span className="text-blue-dark mb-1 mr-5">Clock In : {formatingTime(clockIn)}</span> <br />
+            <span className="text-blue-dark mb-1">Clock Out : {clockOut !== null ? formatingTime(clockOut) : '-'}</span>
           </div>
           <div className="d-flex justify-content-center flex-wrap mt-3">
             {workplaceName === "Remote" ? (

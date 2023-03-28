@@ -96,6 +96,8 @@ const UserManagement = () => {
 
   const [postRequestLoading, setPostRequestLoading] = useState(false); // state for checking any request to create or update data
 
+  const [inputKeyword, setInputKeyword] = useState("");
+
 
   /**
    * Search keyword data user event
@@ -661,8 +663,18 @@ const UserManagement = () => {
             <div className="row justify-content-left">
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                 <SearchFilterInput
-                  onChangeInput={(e) => onChangeKeyword(e)}
-                  input={keyword}
+                  onChangeInput={(e) => {
+                    if (e.target.value === "") {
+                      setKeyword(e.target.value);
+                    }
+                    setInputKeyword(e.target.value);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 13) {
+                      setKeyword(e.target.value);
+                    }
+                  }}
+                  input={inputKeyword}
                   canFilter
                   clickFilter={() => {
                     if (isFilterActive) {

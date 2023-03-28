@@ -437,7 +437,7 @@ export const SALARY_TYPE_VALUE = [
 export const REIMBURSEMENT_STATUS_FILTER = [
   {
     name: 'status',
-    value: 'all',
+    value: '',
     label: 'All',
   },
   {

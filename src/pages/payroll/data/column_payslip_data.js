@@ -1,5 +1,6 @@
 import memoize from 'memoize-one';
 import { rupiah, ucwords } from '../../../utils/helper';
+import ButtonPermissions from '../../../component/ButtonPermissions';
 
 const columnPayslipData = memoize((viewDetail) => [
   {
@@ -51,16 +52,46 @@ const columnPayslipData = memoize((viewDetail) => [
   {
     name: 'Total Payment',
     sortable: true,
-    selector: row => row.total_salary,
+    selector: row => row.pay_slip_sum_amount,
     cell: row => (
-      <div className="td-text mb-1">{rupiah(row.total_salary)}</div>
+      <div className="td-text mb-1">{rupiah(row.pay_slip_sum_amount)}</div>
     )
+  },
+  {
+    name: 'Status',
+    sortable: true,
+    selector: row => row.payslip_status.status,
+    cell: row => {
+      if (row.payslip_status.status === 'generated') {
+        return (
+          <div className="td-text mb-1">
+            <span className="badge badge-radius" style={{ background: '#FCB756' }}>GENERATED</span>
+          </div>
+        );
+      } else if (row.payslip_status.status === 'sended') {
+        return (
+          <div className="td-text mb-1">
+            <span className="badge badge-radius" style={{ background: '#19C8FF' }}>SEND TO EMAIL</span>
+          </div>
+        );
+      } else {
+        return (
+          <div className="td-text mb-1">
+            <span className="badge badge-radius" style={{ background: '#FF1111' }}>FAILED</span>
+          </div>
+        );
+      }
+    }
   },
   {
     name: 'Detail',
     sortable: false,
     cell: row => (
-      <button type="button" className="btn-detail" onClick={() => viewDetail(row.id)}>View</button>
+      <ButtonPermissions
+        scopePermission="Finance"
+        permissionName="payslip-detail"
+        handleClick={() => viewDetail(row.id)}
+      />
     )
   },
 ]);
