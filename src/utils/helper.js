@@ -1,3 +1,8 @@
+import swal from "sweetalert"
+import {
+  MONTH_LIST
+} from "./constant"
+
 /**
  * Set localStorage
  */
@@ -55,6 +60,28 @@ export const formatPhoneNumber = (value) => {
   }
 }
 
+/**
+ * INPUT RUPIAH FORMAT
+ * @param {string} number 
+ * @param {string} prefix 
+ * @returns 
+ */
+export const rupiahInputFormat = (number, prefix) => {
+  var number_string = number.toString().replace(/[^,\d]/g, '').toString(),
+    split = number_string.split(','),
+    sisa = split[0].length % 3,
+    rupiah = split[0].substring(0, sisa),
+    ribuan = split[0].substring(sisa).match(/\d{3}/gi);
+  let separator = "";
+  // tambahkan titik jika yang di input sudah menjadi angka ribuan
+  if (ribuan) {
+    separator = sisa ? ',' : '';
+    rupiah += separator + ribuan.join(',');
+  }
+
+  rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+  return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
 
 /**
  * Rupiah Format
@@ -173,11 +200,168 @@ export const setMessageError = (status) => {
 
 /**
  * Replace the first letter of each word with its uppercase equivalent.
- * @param str - The string to be converted.
+ * @param {string} - The string to be converted.
  * @returns the string with the first letter of each word capitalized.
  */
 export const ucwords = (str) => {
   return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
-      return $1.toUpperCase();
+    return $1.toUpperCase();
+  });
+}
+
+
+/**
+ * It returns an array of objects with the value and label properties set to the same value as the
+ * index of the array.
+ * @param {any} - the name of the select box
+ * @returns An array of objects.
+ */
+export const datePerMonth = (name = null) => {
+  let date = [];
+  for (let i = 1; i <= 31; i++) {
+    if (name !== null) {
+      date.push({
+        name: name,
+        value: i,
+        label: i,
+      });
+    } else {
+      date.push({
+        value: i,
+        label: i,
+      });
+    }
+  }
+
+  return date;
+}
+
+/**
+ * It takes a name and a total number of days and returns an array of objects with the name, value, and
+ * label properties.
+ * @param {any} - the name of the object
+ * @param {number} - The total number of days you want to generate.
+ * @returns An array of objects.
+ */
+export const daysForCuts = (total, keyData = null, name = null) => {
+  let days = [];
+  for (let i = 1; i <= total; i++) {
+    if (name !== null && keyData !== null) {
+      days.push({
+        name: name,
+        keyData: keyData,
+        value: i,
+        label: i + ' days',
+      });
+    } else {
+      days.push({
+        value: i,
+        label: i + ' days',
+      });
+    }
+  }
+
+  return days;
+}
+
+/**
+ * It takes an array of arrays, and returns the sum of all the numbers in the array
+ */
+export const arraySum = arr => arr.reduce((partialSum, array) => partialSum + array, 0);
+
+/**
+ * Check whether the data is null or not
+ * @param {any} data 
+ * @returns 
+ */
+export const isNull = data => data === null;
+
+/**
+ * It takes a string date, converts it to a Date object, gets the day, month and year, and returns a
+ * string with the day, month and year.
+ * @returns A string with the day, month and year.
+ */
+export const formatedDate = stringDate => {
+  const date = new Date(stringDate);
+  const dayNumber = date.getDate();
+  let day;
+  if (dayNumber < 10) {
+    day = `0${dayNumber}`;
+  } else {
+    day = dayNumber;
+  }
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  return `${day} ${MONTH_LIST[month].label_en} ${year}`;
+}
+
+/**
+ * It takes a string of time in the format of "HH:MM" and returns a string of time in the format of
+ * "HH.MM"
+ * @param {string} stringTime
+ * @returns A function that takes a string and returns a string.
+ */
+export const formatingTime = stringTime => {
+  const arrString = stringTime.split(":");
+  return `${arrString[0]}.${arrString[1]}`;
+}
+
+/**
+ * conver string to time
+ * @param {string} stringTime 
+ * @returns A function that takes a string and returns a string.
+ */
+export const strToTime = stringTime => {
+  const arrString = stringTime.split(":");
+  return `${arrString[0]}:${arrString[1]}`;
+}
+
+
+/**
+ * It creates an array of objects with the value and label properties set to the current year and the
+ * current year plus 70.
+ * @returns An array of objects.
+ */
+export const yearsOption = () => {
+  const date = new Date();
+  const currentYear = date.getFullYear() - 4;
+  const latestYearData = currentYear + 70;
+  let data = [];
+  for (let i = currentYear; i < latestYearData; i++) {
+    let option = {
+      value: i,
+      label: i,
+    };
+
+    data.push(option);
+  }
+  return data;
+}
+
+/**
+ * NOTIF FOR ERROR SWEET ALERT
+ * @param {string} title 
+ * @param {string} text 
+ * @returns 
+ */
+export const notifError = (title, text) => {
+  return swal({
+    title,
+    text,
+    icon: "error",
+  });
+};
+
+/**
+ * NOTIF FOR SUCCESS SWEET ALERT
+ * @param {string} title
+ * @param {string} text 
+ * @returns 
+ */
+export const notifSuccess = (title, text) => {
+  return swal({
+    title,
+    text,
+    icon: "success",
   });
 }

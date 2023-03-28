@@ -1,0 +1,22 @@
+.nav-custom {
+    border-radius: 0px 0px 0px 191px / 0px 0px 0px 150px;
+    display: inline-block;
+    background-color: #19C8FF;
+    width: 315px;
+}
+
+.responsive-custom{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+
+@media (max-width : 1200px){
+    .nav-custom {
+        width: 0;
+    }
+    .responsive-custom{
+        margin-top: -175px;
+    }
+}

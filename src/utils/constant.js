@@ -1,133 +1,189 @@
 export const URL_SERVICE = process.env.REACT_APP_BACKEND_URL;
 export const INVITE_STATUS = [
   {
-    value : '0',
-    label : 'Pending',
+    value: '0',
+    label: 'Pending',
   },
   {
-    value : '1',
-    label : 'Accepted'
+    value: '1',
+    label: 'Accepted',
   },
 ];
 
 export const JOB_STATUS = [
   {
+    name: 'job_status',
     id: 0,
     value: 'all',
-    label: 'All Status (Default)'
+    label: 'All Status (Default)',
   },
   {
+    name: 'job_status',
     id: 1,
     value: '0',
-    label: 'Permanent'
+    label: 'Permanent',
   },
   {
+    name: 'job_status',
     id: 2,
     value: '1',
     label: 'Contract',
   },
   {
+    name: 'job_status',
     id: 3,
     value: '2',
     label: 'Probation',
   },
 ];
 
-export const MONTH = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-export const YEARS = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2034, 2035, 2036, 2037, 2038, 2039, 2040];
+export const JOB_STATUS_NOT_FILTER = [
+  {
+    name: 'job_status',
+    id: 1,
+    value: '0',
+    label: 'Permanent',
+  },
+  {
+    name: 'job_status',
+    id: 2,
+    value: '1',
+    label: 'Contract',
+  },
+  {
+    name: 'job_status',
+    id: 3,
+    value: '2',
+    label: 'Probation',
+  },
+];
+
+export const MONTH = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+export const YEARS = [
+  2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032,
+  2034, 2035, 2036, 2037, 2038, 2039, 2040,
+];
 
 export const MONTH_LIST = [
   {
-    value     : 'January',
-    label     : 'Januari',
-    label_en  : 'January',
+    value: 1,
+    label: 'Januari',
+    label_en: 'January',
   },
   {
-    value     : 'February',
-    label     : 'Februari',
-    label_en  : 'February',
+    value: 2,
+    label: 'Februari',
+    label_en: 'February',
   },
   {
-    value     : 'March',
-    label     : 'Maret',
-    label_en  : 'March',
+    value: 3,
+    label: 'Maret',
+    label_en: 'March',
   },
   {
-    value     : 'April',
-    label     : 'April',
-    label_en  : 'April',
+    value: 4,
+    label: 'April',
+    label_en: 'April',
   },
   {
-    value     : 'May',
-    label     : 'Mei',
-    label_en  : 'May',
+    value: 5,
+    label: 'Mei',
+    label_en: 'May',
   },
   {
-    value     : 'June',
-    label     : 'Juni',
-    label_en  : 'June',
+    value: 6,
+    label: 'Juni',
+    label_en: 'June',
   },
   {
-    value     : 'July',
-    label     : 'July',
-    label_en  : 'July',
+    value: 7,
+    label: 'July',
+    label_en: 'July',
   },
   {
-    value     : 'August',
-    label     : 'Agustus',
-    label_en  : 'August',
+    value: 8,
+    label: 'Agustus',
+    label_en: 'August',
   },
   {
-    value     : 'September',
-    label     : 'September',
-    label_en  : 'September',
+    value: 9,
+    label: 'September',
+    label_en: 'September',
   },
   {
-    value     : 'October',
-    label     : 'Oktober',
-    label_en  : 'October',
+    value: 10,
+    label: 'Oktober',
+    label_en: 'October',
   },
   {
-    value     : 'November',
-    label     : 'November',
-    label_en  : 'November',
+    value: 11,
+    label: 'November',
+    label_en: 'November',
   },
   {
-    value     : 'December',
-    label     : 'Desember',
-    label_en  : 'December',
+    value: 12,
+    label: 'Desember',
+    label_en: 'December',
   },
 ];
 
 export const WORK_PLACES_OPTION = [
- {
-   value: '0',
-   label: 'On Office',
- },
- {
-   value: '1',
-   label: 'Remote'
- }
+  {
+    name: 'work_places',
+    value: '',
+    label: 'Select Work Places'
+  },
+  {
+    name: 'work_places',
+    value: '0',
+    label: 'On Office',
+  },
+  {
+    name: 'work_places',
+    value: '1',
+    label: 'Remote',
+  },
 ];
 
 export const TIME_STATUS_OPTION = [
   {
+    name: 'status_clock',
+    value: '',
+    label: 'Select Time Status',
+  },
+  {
+    name: 'status_clock',
     value: '0',
     label: 'On Time',
   },
   {
+    name: 'status_clock',
     value: '1',
-    label: 'Late'
+    label: 'Late',
   },
   {
+    name: 'status_clock',
     value: '2',
-    label: 'Absent'
+    label: 'Absent',
   },
- ];
+];
 
 export const EMPLOYEE_STATUS = [
   {
-    value : '',
+    value: '',
     label: 'All',
   },
   {
@@ -148,7 +204,7 @@ export const MARITAL_STATUS = [
   {
     name: 'marital_status',
     value: 'single',
-    label: 'Single'
+    label: 'Single',
   },
   {
     name: 'marital_status',
@@ -158,10 +214,9 @@ export const MARITAL_STATUS = [
   {
     name: 'marital_status',
     value: 'divorce',
-    label: 'Divorce'
+    label: 'Divorce',
   },
 ];
-
 
 export const BLOOD_TYPE = [
   {
@@ -239,5 +294,183 @@ export const IDENTITY_TYPE = [
     name: 'identity_type',
     value: '2',
     label: 'Driver License (SIM)',
+  },
+];
+
+export const STATUS_EMPLOYEE = [
+  {
+    name: 'status',
+    value: '0',
+    label: 'Inactive',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Active',
+  },
+];
+
+// 0 pending, 1 approve, 2 rejected
+export const OVERTIME_STATUS = [
+  {
+    name: 'status',
+    value: '',
+    label: 'Select Overtime Status...'
+  },
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Has Been Applied',
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected',
   }
+];
+
+
+// 0 pending, 1 approve, 2 rejected
+export const OVERTIME_STATUS_FILTER = [
+  {
+    name: 'status',
+    value: '',
+    label: 'ALL'
+  },
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Has Been Applied',
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected',
+  }
+];
+
+// 0 pending, 1 approve, 2 rejected
+export const PAID_LEAVE_STATUS_FILTER = [
+  {
+    name: 'status',
+    value: '',
+    label: 'All',
+  },
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Approved',
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected',
+  },
+];
+
+// 0 pending, 1 approve, 2 rejected
+export const PAID_LEAVE_STATUS = [
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending',
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Approved',
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected',
+  },
+];
+
+
+export const SALARY_TYPE_FILTER = [
+  {
+    name: 'type',
+    value: '',
+    label: 'All',
+  },
+  {
+    name: 'type',
+    value: 'income',
+    label: 'Income',
+  },
+  {
+    name: 'type',
+    value: 'cut',
+    label: 'Cut',
+  },
+];
+
+export const SALARY_TYPE_VALUE = [
+  {
+    name: 'type',
+    value: 'income',
+    label: 'Income',
+  },
+  {
+    name: 'type',
+    value: 'cut',
+    label: 'Cut',
+  },
+];
+
+export const REIMBURSEMENT_STATUS_FILTER = [
+  {
+    name: 'status',
+    value: 'all',
+    label: 'All',
+  },
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending'
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Approved'
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected'
+  },
+];
+
+export const REIMBURSEMENT_STATUS_INPUT = [
+  {
+    name: 'status',
+    value: '0',
+    label: 'Pending'
+  },
+  {
+    name: 'status',
+    value: '1',
+    label: 'Approved'
+  },
+  {
+    name: 'status',
+    value: '2',
+    label: 'Rejected'
+  },
 ];

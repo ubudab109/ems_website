@@ -4,10 +4,12 @@ import { Modal } from 'react-bootstrap';
 
 const CustomModalDetail = ({
   show, 
-  handleClose, 
+  handleClose,
+  handleSave,
   headerTitle, 
   children,
   size,
+  isEditable,
 }) => {
   return (
     <Modal show={show} onHide={handleClose} size={size} centered>
@@ -23,6 +25,9 @@ const CustomModalDetail = ({
         {children}
       </Modal.Body>
       <Modal.Footer>
+        {
+          isEditable ? <button className="btn-blue" onClick={handleSave}>Save</button> : null
+        }
         <button className="btn-border-blue" onClick={handleClose}>Close</button>
       </Modal.Footer>
     </Modal>
@@ -35,10 +40,13 @@ CustomModalDetail.propTypes = {
   headerTitle: PropTypes.string,
   children: PropTypes.node.isRequired,
   size: PropTypes.string,
+  isEditable: PropTypes.bool,
+  handleSave: PropTypes.func,
 };
 
 CustomModalDetail.defaultProps = {
   size: 'xl',
+  isEditable: false,
 };
 
 

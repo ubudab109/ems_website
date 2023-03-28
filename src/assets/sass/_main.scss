@@ -752,6 +752,10 @@ progress {
   color: #6c757d;
 }
 
+.pl-0 {
+  padding-left: 0 !important;
+}
+
 .container,
 .container-fluid,
 .container-xxl,
@@ -1765,6 +1769,11 @@ progress {
     width: 41.66666667%;
   }
 
+  .col-xl-5-1 {
+    flex: 0 0 auto;
+    width: 40.666667%;
+  }
+
   .col-xl-4-5 {
     flex: 0 0 auto;
     width: 39.666667%;
@@ -2430,7 +2439,7 @@ progress {
 
 .form-control:disabled,
 .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: white;
   opacity: 1;
 }
 
@@ -2812,6 +2821,14 @@ textarea.form-control-lg {
   position: absolute;
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
+}
+
+.btn-plaint {
+  border: 1px solid #AAAAAA;
+  border-radius: 5px;
+  background: white !important;
+  font-family: Roboto;
+  color: black;
 }
 
 .btn-detail {
@@ -4192,6 +4209,7 @@ fieldset:disabled .btn {
   position: absolute;
   z-index: 1000;
   display: none;
+  width: 200px;
   padding: 0.5rem 0;
   margin: 0;
   font-size: 1rem;
@@ -4202,15 +4220,16 @@ fieldset:disabled .btn {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-  left: -34px;
+  // left: -34px;
+  right: 10px;
   margin-top: 11px;
 }
 
 .dropdown-menu-notif {
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   display: none;
-  min-width: 26rem;
+  width: 200px;
   padding: 0.5rem 0;
   margin: 0;
   font-size: 1rem;
@@ -4221,8 +4240,9 @@ fieldset:disabled .btn {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-  left: -236px;
+  // left: 73.5rem;
   margin-top: 11px;
+  right: 225px;
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -9064,6 +9084,10 @@ fieldset:disabled .btn {
   color: #d10000 !important;
 }
 
+.text-light-red {
+  color: #FF1111 !important;
+}
+
 
 
 .text-opacity-50 {
@@ -12775,6 +12799,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 
 
+
 .btn-rounded-border-blue {
   border: 2px solid #00617F;
   box-sizing: border-box;
@@ -12910,7 +12935,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 10px;
   color: #200E32;
   line-height: 0px;
 }
@@ -12920,7 +12945,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
-  color: #AAAAAA;
+  color: #FFFFFF;
 }
 
 .card-shadow {
@@ -13176,7 +13201,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   border-radius: 5px !important;
   width: 100% !important;
   height: 25px !important;
-  font-size: 11px;
+  font-size: 15px;
   border: none;
 }
 
@@ -13353,7 +13378,14 @@ hr.divider-gray {
 
 .high-index {
   position: relative;
-  z-index: 100000
+  z-index: 94;
+}
+
+.box-border-div {
+  border: 1px solid #ced4da;
+  color: black;
+  border-radius: 11px;
+  padding: 10px;
 }
 
 .hr-blue {
@@ -13366,4 +13398,15 @@ hr.divider-gray {
 
 .text-blue-dark {
   color: #00617F
+}
+
+.list-none {
+  list-style: none;
+}
+
+.active-div {
+  background-color: #19C8FF;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
 }

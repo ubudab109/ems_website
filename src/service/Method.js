@@ -47,6 +47,14 @@ const updateDataByIdWithPut = async (endpoint, id, data) => {
     })
 }
 
+const updateDataPut = async (endpoint, data) => {
+  return await http.put(`/${endpoint}`, qs.stringify(data), {
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+  });
+};
+
 const method = {
   getAll,
   getTrashed,
@@ -57,7 +65,8 @@ const method = {
   createDataWithOneUpload,
   createDataWithoutUpload,
   updateDataById,
-  updateDataByIdWithPut
+  updateDataByIdWithPut,
+  updateDataPut,
 };
 
 export default method;

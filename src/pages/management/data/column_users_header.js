@@ -14,7 +14,7 @@ const columnUsers = memoize(
         name: 'Name',
         sortable: true,
         cell: row => (
-          <div className="text-left" style={{ paddingLeft: '29px' }}>
+          <div className="td-text mb-1 " style={{ paddingLeft: '0px' }}>
             <img
               className="img-circle"
               src={row.avatar}
@@ -22,7 +22,7 @@ const columnUsers = memoize(
               width={30}
               style={{ marginRight: '3px', paddingBottom: '1px' }}
             />
-            <span className="text-muted">{row.name}</span>
+            <span className="">{row.name}</span>
           </div>
         )
       },
@@ -30,8 +30,8 @@ const columnUsers = memoize(
         name: 'Email',
         sortable: true,
         cell: row => (
-          <div className="text-left">
-            <span className="text-muted">{row.email}</span>
+          <div className="td-text mb-1 text-left">
+            <span className="">{row.email}</span>
           </div>
         )
       },
@@ -39,8 +39,8 @@ const columnUsers = memoize(
         name: 'Role',
         sortable: true,
         cell: row => (
-          <div className="text-left">
-            <span className="text-muted">{row.role}</span>
+          <div className="td-text mb-1 text-left">
+            <span className="">{row.branch_assign[0].pivot.role.name}</span>
           </div>
         )
       },
@@ -48,7 +48,7 @@ const columnUsers = memoize(
         name: 'Status',
         sortable: true,
         cell: row => (
-          <div className="text-left">
+          <div className="td-text mb-1 text-left">
             <span className={row.invited_status === '0' ? 'my-badge-pending' : 'my-badge-success'}>
               {row.invited_status === '0' ? 'Pending' : 'Accepted'}
             </span>
@@ -60,7 +60,7 @@ const columnUsers = memoize(
         sortable: false,
         cell: row => {
           return (
-            <div>
+            <div className='float-right'>
               {
                 row.invited_status === '0' ?
                   <DropdownUserPending
@@ -72,8 +72,8 @@ const columnUsers = memoize(
                     onChangeRole={
                       () => onChangeRole(
                         row.id,
-                        row.roles[0].id,
-                        row.role
+                        row.branch_assign[0].pivot.role.id,
+                        row.branch_assign[0].pivot.role.name
                       )
                     }
                     onView={

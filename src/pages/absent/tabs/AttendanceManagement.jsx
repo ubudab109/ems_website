@@ -16,15 +16,10 @@ import http from '../../../service/PrivateConfigRequest';
 import { filterStyles } from '../../../style-component/ReactSelectFilterTable';
 import { TIME_STATUS_OPTION, WORK_PLACES_OPTION } from '../../../utils/constant';
 import DateButtonPicker from '../../../component/DateButtonPicker';
-import CalendarAttendance from '../component/CalendarAttendance';
 import columnAttendance from '../data/column_attendance_header';
-import CardShadow from '../../../component/CardShadow';
-import ChartWorkplaces from '../../../component/ChartWorkplaces';
-import ChartAttendance from '../../../component/ChartAttendance';
-import ScheduleManagement from '../../dashboard/components/ScheduleManagement';
 import CustomModalDetail from '../../../component/CustomModalDetail';
 import DetailAttendance from '../modal/DetailAttendance';
-import { setMessageError } from '../../../utils/helper';
+import { setMessageError, ucwords } from '../../../utils/helper';
 
 const AttendanceManagement = () => {
   /**
@@ -38,9 +33,9 @@ const AttendanceManagement = () => {
   const [attendanceData, setAttendanceData] = useState([]);
   const [detailAttendance, setDetailAttendance] = useState({});
   const [shiftTime, setShiftTime] = useState('');
+  const [isFetchingDetail, setIsFetchingDetail] = useState(false);
   const [errorDetailAttendance, setErrorDetailAttendance] = useState(false);
   const [errorDetailMessages, setErrorDetailMessages] = useState('');
-  const [isFetchingDetail, setIsFetchingDetail] = useState(false);
   const [showModalDetailAttendance, setShowModalDetailAttendance] = useState(false);
   const [isLoadingAttendance, setIsLoadingAttendance] = useState(false);
   const [errorFetching, setErrorFetching] = useState('');
@@ -112,15 +107,20 @@ const AttendanceManagement = () => {
   const handleFetchAllData = () => {
     setIsLoadingAttendance(true);
     fetchAttendanceList().then((res) => {
-      let attendanceData = res.data.data;
+      let attendanceData = res.data.data.data;
       setIsLoadingAttendance(false);
       setAttendanceData(attendanceData);
     }).catch((err) => {
-      if (err.status === 403) {
+      if (err.response.status === 403) {
         swal(err.response.data.message, {
           icon: 'error'
         }).then(() => {
           history.push('/forbidden');
+        });
+      } else {
+        swal("Error when fetching data", {
+          text: "Check Your connection or contact us if the problem still there",
+          icon: "error",
         });
       }
       setIsLoadingAttendance(false);
@@ -143,8 +143,6 @@ const AttendanceManagement = () => {
         setErrorDetailAttendance(true);
         setErrorDetailMessages(setMessageError(err.response.status))
       });
-
-
   };
 
   const handleCloseModalDetailAttendance = () => {
@@ -166,6 +164,7 @@ const AttendanceManagement = () => {
       setShowModalDetailAttendance(false);
     };
   }, [fetchAttendanceList]);
+  
 
 
   return (
@@ -197,14 +196,11 @@ const AttendanceManagement = () => {
                 ''
             }
             role={
-              detailAttendance.employee ?
-                detailAttendance.employee.roles_name
-                :
-                ''
+              detailAttendance.employee ? ucwords(detailAttendance.employee.job_position) : ''
             }
             employeeName={
               detailAttendance.employee ?
-                detailAttendance.employee.name
+                detailAttendance.employee.firstname + ' ' + detailAttendance.employee.lastname
                 :
                 ''
             }
@@ -249,7 +245,7 @@ const AttendanceManagement = () => {
       />
       {/* END MODAL */}
       <div className="d-flex flex-wrap">
-        <div className="col-xl-8 col-lg-12 col-md-12 col-sm-12">
+        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div className="card card-dashboard card-shadow">
             <div className="card-body" style={{ width: '100%' }}>
 
@@ -332,36 +328,6 @@ const AttendanceManagement = () => {
               {/* PAGINATION */}
             </div>
           </div>
-        </div>
-
-        <div className="col-xl-4 col-md-12 scrollbar" style={{
-          height: '80vh',
-          overflowY: 'scroll'
-        }}>
-          {/* CALENDAR */}
-          <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-            <CalendarAttendance />
-          </div>
-          {/* END CALENDAR */}
-
-          {/* CHART */}
-          <div className="d-flex">
-            <CardShadow title="Work Places">
-              <div className="col-12">
-                <ChartWorkplaces />
-              </div>
-            </CardShadow>
-            <ChartAttendance
-              gapChart="0px"
-            />
-          </div>
-          {/* END CHART */}
-
-          {/* SCHEDULE MANAGEMENT */}
-          <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-            <ScheduleManagement />
-          </div>
-          {/* END SCHEDULE MANAGEMENT */}
         </div>
       </div>
     </div>

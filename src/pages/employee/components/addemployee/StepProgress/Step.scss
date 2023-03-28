@@ -43,6 +43,24 @@
         color: white;
     }
 
+    ul.timeline > li.step-2.active:before {
+        border: 3px solid #22c0e8;
+        background-color: #19C8FF;
+        color: white;
+    }
+
+    ul.timeline > li.step-3.active:before {
+        border: 3px solid #22c0e8;
+        background-color: #19C8FF;
+        color: white;
+    }
+
+    ul.timeline > li.step-4.active:before {
+        border: 3px solid #22c0e8;
+        background-color: #19C8FF;
+        color: white;
+    }
+
     ul.timeline > li.step-2:before {
         content: "2";
         background: white;
@@ -85,6 +103,67 @@
         height: 50px;
         z-index: 400;
         padding-left: 17px;
+        padding-top: 9px;
+    }
+
+
+    ul.timeline > li.step-1.complete::before {
+        content: url('./Line.png');
+        background: white;
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid #22c0e8;
+        left: 5px;
+        width: 50px;
+        height: 50px;
+        z-index: 400;
+        padding-left: 11px;
+        padding-top: 9px;
+    }
+
+    ul.timeline > li.step-2.complete::before {
+        content: url('./Line.png');
+        background: white;
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid #22c0e8;
+        left: 5px;
+        width: 50px;
+        height: 50px;
+        z-index: 400;
+        padding-left: 11px;
+        padding-top: 9px;
+    }
+
+    ul.timeline > li.step-3.complete::before {
+        content: url('./Line.png');
+        background: white;
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid #22c0e8;
+        left: 5px;
+        width: 50px;
+        height: 50px;
+        z-index: 400;
+        padding-left: 11px;
+        padding-top: 9px;
+    }
+
+    ul.timeline > li.step-4.complete::before {
+        content: url('./Line.png');
+        background: white;
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid #22c0e8;
+        left: 5px;
+        width: 50px;
+        height: 50px;
+        z-index: 400;
+        padding-left: 11px;
         padding-top: 9px;
     }
     
