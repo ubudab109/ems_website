@@ -1,0 +1,29 @@
+// Search Bar
+  
+.search{
+    position: relative;     
+    }
+
+    .search input{
+     text-indent: 25px;
+     border: 1px solid #00617F !important;
+    }
+
+    .search .fa-search{
+     position: absolute;
+     top: 7px;
+     left: 16px;
+    }
+
+    .search button{
+     position: absolute;
+     top: 5px;
+     right: 5px;
+     height: 50px;
+     width: 110px;
+    }
+
+// custom table css
+table:not(.sticky) {
+    margin-top: 0px;
+}

@@ -1,0 +1,132 @@
+.hr1 {
+    margin: 1rem 0;
+    opacity: 1;
+}
+
+.border {
+    border: 15px solid #19C8FF !important;
+  }
+
+// custom table css
+table:not(.sticky) {
+    margin-top: 0px;
+}
+
+// Search Bar
+  
+.search{
+    position: relative;     
+    }
+
+    .search input{
+     text-indent: 25px;
+     border: 1px solid #00617F !important;
+    }
+
+    .search .fa-search{
+     position: absolute;
+     top: 7px;
+     left: 16px;
+    }
+
+    .search button{
+     position: absolute;
+     top: 5px;
+     right: 5px;
+     height: 50px;
+     width: 110px;
+    }
+
+// Btn Export
+.btn-export { 
+    color: #ffffff; 
+    background-color: #00617F; 
+    border-color: #00617F; 
+  } 
+   
+  .btn-export:hover, 
+  .btn-export:focus, 
+  .btn-export:active, 
+  .btn-export.active, 
+  .open .dropdown-toggle.btn-export { 
+    color: #ffffff; 
+    background-color: #00617F; 
+    border-color: #00617F; 
+  } 
+   
+  .btn-export:active, 
+  .btn-export.active, 
+  .open .dropdown-toggle.btn-export { 
+    background-image: none; 
+  } 
+   
+  .btn-export.disabled, 
+  .btn-export[disabled], 
+  fieldset[disabled] .btn-export, 
+  .btn-export.disabled:hover, 
+  .btn-export[disabled]:hover, 
+  fieldset[disabled] .btn-export:hover, 
+  .btn-export.disabled:focus, 
+  .btn-export[disabled]:focus, 
+  fieldset[disabled] .btn-export:focus, 
+  .btn-export.disabled:active, 
+  .btn-export[disabled]:active, 
+  fieldset[disabled] .btn-export:active, 
+  .btn-export.disabled.active, 
+  .btn-export[disabled].active, 
+  fieldset[disabled] .btn-export.active { 
+    background-color: #00617F; 
+    border-color: #00617F; 
+  } 
+   
+  .btn-export .badge { 
+    color: #00617F; 
+    background-color: #ffffff; 
+  }
+
+// btn orange
+.btn-orange { 
+    color: #ffffff; 
+    background-color: #FF5900; 
+    border-color: #FF5900; 
+  } 
+   
+  .btn-orange:hover, 
+  .btn-orange:focus, 
+  .btn-orange:active, 
+  .btn-orange.active, 
+  .open .dropdown-toggle.btn-orange { 
+    color: #ffffff; 
+    background-color: #FF5900; 
+    border-color: #FF5900; 
+  } 
+   
+  .btn-orange:active, 
+  .btn-orange.active, 
+  .open .dropdown-toggle.btn-orange { 
+    background-image: none; 
+  } 
+   
+  .btn-orange.disabled, 
+  .btn-orange[disabled], 
+  fieldset[disabled] .btn-orange, 
+  .btn-orange.disabled:hover, 
+  .btn-orange[disabled]:hover, 
+  fieldset[disabled] .btn-orange:hover, 
+  .btn-orange.disabled:focus, 
+  .btn-orange[disabled]:focus, 
+  fieldset[disabled] .btn-orange:focus, 
+  .btn-orange.disabled:active, 
+  .btn-orange[disabled]:active, 
+  fieldset[disabled] .btn-orange:active, 
+  .btn-orange.disabled.active, 
+  .btn-orange[disabled].active, 
+  fieldset[disabled] .btn-orange.active { 
+    background-color: #FF5900; 
+    border-color: #FF5900; 
+  } 
+   
+  .btn-orange .badge { 
+    color: #FF5900; 
+    background-color: #ffffff; 
+  }
