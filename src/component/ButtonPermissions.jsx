@@ -8,11 +8,12 @@ const ButtonPermissions = ({
   permissionName, 
   handleClick,
   className,
+  name,
 }) => {
   const permissionData = useSelector(state => state.auth.permissions.filter(e => e.name === scopePermission )[0]); // get permission 
   if(isActionAllowed(permissionData.permissions, permissionName)) {
     return (
-      <button className={className} onClick={handleClick}>View</button>
+      <button className={className} onClick={handleClick}>{name}</button>
     );
   } else {
     return (null);
@@ -24,11 +25,13 @@ ButtonPermissions.propTypes = {
   permissionName: PropTypes.string.isRequired,
   handleClick: PropTypes.func,
   className: PropTypes.string,
+  name: PropTypes.string,
 };
 
 ButtonPermissions.defaultProps = {
   handleClick: null,
   className: 'btn-detail',
+  name: 'View',
 };
 
 export default ButtonPermissions;

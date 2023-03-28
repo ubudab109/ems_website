@@ -472,7 +472,7 @@ const Payroll = ({ id }) => {
       ) {
         setDataFinance({ ...dataFinance, [type]: oldDataFinance });
       } else {
-        // REVERT VALUE FRO SALARY_INCOME AND SALARY_CUTS TYPE
+        // REVERT VALUE FOR SALARY_INCOME AND SALARY_CUTS TYPE
         if (type === "salary_income") {
           let cloneDataIncome = [...dataFinance.salary_income];
           for (let i = 0; i < dataFinance.salary_income.length; i++) {

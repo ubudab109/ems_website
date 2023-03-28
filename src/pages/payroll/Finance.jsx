@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { useSelector } from 'react-redux';
 import CustomTab from "../../component/CustomTab";
 import Payslip from "./tabbing/Payslip";
+import Reimbursement from "./tabbing/Reimbursement";
 
 const Finance = () => {
   const payslipPermissions = useSelector(state => state.auth.permissions.filter(e => e.name === 'Payroll')[0]).permissions;
@@ -19,7 +20,7 @@ const Finance = () => {
       label: 'Reimbursement',
       permissionName : 'employee-reimbursement-list',
       scopePermission: reiumbersementPermissions,
-      components: <div key={'reimbursement'}>Reimbursement</div>
+      components: <Reimbursement key={'reimbersement'} />
     },
 
   ];

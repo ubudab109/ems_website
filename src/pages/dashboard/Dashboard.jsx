@@ -1,24 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useState } from 'react';
-import { useCallback } from 'react';
 import { useEffect } from 'react';
 import CardShadow from '../../component/CardShadow';
 import ChartEmployee from '../../component/ChartEmployee';
 import ChartWorkplaces from '../../component/ChartWorkplaces';
 import ChartAttendance from '../../component/ChartAttendance';
 import moment from 'moment';
-import axios from 'axios';
 import UserManagament from './components/UserManagement';
 import DivisionManagement from './components/DivisionManagement';
 import ScheduleManagement from './components/ScheduleManagement';
 import CalendarDashboard from '../../component/Calendar';
+import http from '../../service/PrivateConfigRequest';
 
 const Dashboard = () => {
 
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [date, setDate] = useState(new Date());
   const [activeStartDate, setActiveStartDate] = useState(new Date());
   const [holidayDate, setHolidayDate] = useState([]);
   const [holidayEvent, setHolidayEvent] = useState('');
-
 
   /**
    * Handler on date change in calendar
@@ -35,11 +35,13 @@ const Dashboard = () => {
     setDate(data);
   }
 
-  const fetchHoliday = useCallback(async () => {
-    let year = activeStartDate;
-    return await axios.get(`https://kalenderindonesia.com/api/APIz5p37t16Zt/libur/masehi/${year.getFullYear()}`).then((res) => {
+  /**
+   * CALLBACK FETCH HOLIDAYS
+   */
+   const fetchHoliday = async (year) => {
+    return await http.get(`dataset/holidays?years=${year}`).then((res) => {
       let dataHoliday = [];
-      let arrayData = Object.values(res.data.data['holiday'])
+      let arrayData = Object.values(res.data.data)
       arrayData.forEach((item, i) => {
         if (item.data != null) {
           item.data.forEach((data, index) => {
@@ -55,19 +57,25 @@ const Dashboard = () => {
       }
       setHolidayDate(dataHoliday);
     });
-  }, [activeStartDate]);
+   };
 
+  /**
+   * Set active start date handler
+   * @param {String} value 
+   * @param {Event} event 
+   */
   const onChangeYear = (value, event) => {
     setActiveStartDate(value);
   }
 
   useEffect(() => {
-    fetchHoliday();
-
+    if (holidayDate.length < 1) {
+      fetchHoliday(currentYear.toString());
+    }
     return () => {
       setHolidayDate([]);
     };
-  }, [fetchHoliday]);
+  }, []);
 
   return (
     <Fragment>
@@ -92,8 +100,13 @@ const Dashboard = () => {
         <CalendarDashboard
           date={date}
           month={activeStartDate.toLocaleString('default', { month: 'long' })}
-          year={activeStartDate.getFullYear().toString()}
+          year={currentYear.toString()}
           onActiveStartDate={({ activeStartDate }) => {
+            if (currentYear.toString() !== activeStartDate.getFullYear().toString()) {
+              setHolidayDate([]);
+              setCurrentYear(activeStartDate.getFullYear());
+              fetchHoliday(activeStartDate.getFullYear().toString());
+            }
             setActiveStartDate(activeStartDate);
           }}
           onChangeDate={onChangeDate}

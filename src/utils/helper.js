@@ -339,6 +339,19 @@ export const yearsOption = () => {
 }
 
 /**
+ * DEFAULT NOTIF ERROR WHEN CREATING, UPDATING OR DELETING DATA
+ * @param {string} type - Type error which is : creating, updating, deleting
+ * @returns 
+ */
+export const defaultNotifError = (type) => (
+  swal({
+    title: "Failed",
+    text: `There is an error when ${type} data. Please contact administrator if problem still there`,
+    icon: 'error'
+  })
+);
+
+/**
  * NOTIF FOR ERROR SWEET ALERT
  * @param {string} title 
  * @param {string} text 
