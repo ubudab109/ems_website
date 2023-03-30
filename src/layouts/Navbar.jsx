@@ -128,7 +128,7 @@ const Navbar = () => {
   };
 
   return (
-    <div class="">
+    <div className="">
       {/* MODAL LOGOUT */}
       <CustomModal
         show={show}
@@ -139,7 +139,7 @@ const Navbar = () => {
       />
       {/* END */}
       <div className="responsive-custom">
-        <nav class="navbar navbar-expand-lg nav-custom">
+        <nav className="navbar navbar-expand-lg nav-custom">
               <div className="row justify-content-end">
                 <div className="col-xl-2 notif-margin ">
                   <div className="col" onClick={toggleDropdownNotif}>
