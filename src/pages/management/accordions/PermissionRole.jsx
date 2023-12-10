@@ -254,12 +254,12 @@ const PermissionRole = ({ roleId }) => {
                   }
                 }}>{isCantEdit ? 'Edit' : 'Cancel'}</button> : null
               }
-              {
+              {/* {
                 isActionAllowed(permissionData.permissions, 'role-permission-delete') ? 
                 !isUserCurrentRole || role !== 'superadmin' ?
                   <button className="btn-red m-1" onClick={handleShow}>Delete</button>
                   : null : null
-              }
+              } */}
 
             </div>
           </div>

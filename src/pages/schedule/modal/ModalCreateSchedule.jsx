@@ -8,6 +8,9 @@ const ModalCreateSchedule = ({
   clockIn,
   clockOut,
   onChangeInput,
+  latitude,
+  longitude,
+  address,
 }) => {
   return (
     <Fragment>
@@ -63,11 +66,16 @@ const ModalCreateSchedule = ({
           </label>
           <br />
           <span className="text-red">
-            This is the address point of the company's current branch <span className="text-bold">(LOOK AT THE RED MARKER)</span> . If this
-            is a mistake, please contact the administrator immediately to correct
-            this address point.
+            This is the address point of the company's current branch{" "}
+            <span className="text-bold">(LOOK AT THE RED MARKER)</span> . If
+            this is a mistake, please contact the administrator immediately to
+            correct this address point.
           </span>
-          <MapGoogle />
+          <MapGoogle
+            latitude={latitude}
+            longitude={longitude}
+            address={address}
+          />
         </div>
       </div>
     </Fragment>
@@ -82,9 +90,9 @@ ModalCreateSchedule.propTypes = {
 };
 
 ModalCreateSchedule.defaultProps = {
-  name: '',
-  clockIn: '',
-  clockOut: '',
+  name: "",
+  clockIn: "",
+  clockOut: "",
 };
 
 export default ModalCreateSchedule;

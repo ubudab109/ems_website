@@ -8,7 +8,6 @@ import UserManagement from './tabs/UserManagement';
 
 const Management = () => {
   const permissionData = useSelector(state => state.auth.permissions.filter(e => e.name === 'Management')[0]).permissions;
-  console.log(permissionData);
   const dataTabs = [
     {
       tabName : 'user',

@@ -474,3 +474,21 @@ export const REIMBURSEMENT_STATUS_INPUT = [
     label: 'Rejected'
   },
 ];
+
+export const WORKING_SYSTEM = [
+  {
+    name: "work_type",
+    value: "wfo",
+    label: "WFO (WORK FROM OFFICE)",
+  },
+  {
+    name: "work_type",
+    value: "remote",
+    label: "Remote",
+  },
+  {
+    name: "work_type",
+    value: "hybrid",
+    label: "Hybrid",
+  },
+];

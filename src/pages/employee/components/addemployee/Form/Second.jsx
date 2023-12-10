@@ -8,6 +8,7 @@ import { RequiredIcon } from "../../../../components/PiecesComponent";
 
 const Second = ({
   data,
+  ptkpData,
   onChange,
   onChangeSelect,
   departmentData,
@@ -117,6 +118,25 @@ const Second = ({
                 />
               </div>
             </div>
+
+            {/* PTKP */}
+            <div className="row mt-3">
+              <div className="form-group col-md-12">
+                <label htmlFor="ptkp_id" className="text-bold">
+                  PTKP Status
+                </label>
+                <Select
+                  onChange={onChangeSelect}
+                  id="ptkp_id"
+                  name="ptkp_id"
+                  value={data.ptkp_id}
+                  options={ptkpData}
+                  styles={selectStyles}
+                  isClearable={false}
+                  placeholder={"(OPTIONAL) PTKP Status..."}
+                />
+              </div>
+            </div>
           </div>
 
           {/* JOIN DATE */}
@@ -181,6 +201,7 @@ const Second = ({
 
 Second.propTypes = {
   data: PropTypes.object.isRequired,
+  ptkpData: PropTypes.array,
   onChange: PropTypes.func,
   onChangeSelect: PropTypes.func,
   departmentData: PropTypes.array.isRequired,

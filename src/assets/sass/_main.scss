@@ -4226,7 +4226,7 @@ fieldset:disabled .btn {
 }
 
 .dropdown-menu-notif {
-  position: fixed;
+  position: absolute;
   z-index: 1000;
   display: none;
   width: 200px;
@@ -8447,6 +8447,10 @@ fieldset:disabled .btn {
   margin: auto !important;
 }
 
+.me-auto {
+  margin-right: auto!important;
+}
+
 .mx-0 {
   margin-right: 0 !important;
   margin-left: 0 !important;
@@ -8879,6 +8883,12 @@ fieldset:disabled .btn {
 
 .lh-lg {
   line-height: 2 !important;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .text-start {
@@ -12701,7 +12711,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   font-size: 36px;
   line-height: 42px;
   color: #00617F;
-  padding-left: 14px;
+  padding-left: 2px;
 }
 
 @media (min-width: 768px) {
@@ -13267,6 +13277,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
 .ml-5 {
   margin-left: 5px !important;
+}
+
+.ms-2 {
+    margin-left: 0.5rem!important;
 }
 
 .img-circle {

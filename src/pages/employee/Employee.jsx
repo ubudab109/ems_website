@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 import swal from "sweetalert";
 import Select from "react-select";
+import { useHistory } from "react-router-dom";
 import SearchFilterInput from "../../component/SearchFilterInput";
 import http from "../../service/PrivateConfigRequest";
 import { filterStyles } from "../../style-component/ReactSelectFilterTable";
@@ -17,7 +18,6 @@ import { isActionAllowed } from "../../utils/helper";
 import method from "../../service/Method";
 import CustomModalForm from "../../component/CustomModalForm";
 import AddDepartmentModal from "./modal/AddDepartmentModal";
-import { useHistory } from "react-router-dom";
 
 const Employee = () => {
   const [departmentData, setDepartmentData] = useState([]);
@@ -300,6 +300,7 @@ const Employee = () => {
 
   return (
     <Fragment>
+      <h1 className="mt-4 breadcumb my-4">Employee</h1>
       {/* ADD DEPARTMENT MODAL */}
       <CustomModalForm
         children={

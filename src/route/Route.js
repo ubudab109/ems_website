@@ -9,6 +9,8 @@ export const Profile = lazy(() => import('../pages/profile/Profile'));
 const AddRolePermission = lazy(() => import('../pages/management/views/AddRolePermission'));
 const AddEmployee = lazy(() => import('../pages/employee/AddEmployee'));
 const DetailEmployee = lazy(() => import('../pages/employee/DetailEmployee'));
+const Storage = lazy(() => import('../pages/storage/Storage'));
+const FileStorage = lazy(() => import('../pages/storage/FileStorage'));
 
 const routes = [
   {
@@ -48,12 +50,12 @@ const routes = [
     icon: `${process.env.PUBLIC_URL}/assets/icon_menu/Paper.png`,
   },
   {
-    path: '/schedule',
+    path: '/time-management',
     component: Schedule,
     parentRoute : '',
     listPermissions: 'schedule-list',
     scopePermissions: 'Schedule',
-    name: 'Schedule',
+    name: 'Time Management',
     isSubRoute: false,
     exact: true,
     withoutPermissions: false,
@@ -130,6 +132,30 @@ const routes = [
     exact: false,
     icon: ``,
     withoutPermissions: true,
+  },
+  {
+    path: '/storage',
+    component: Storage,
+    parentRoute : '',
+    name: 'Storage',
+    isSubRoute: false,
+    listPermissions: '',
+    scopePermissions: '',
+    exact: true,
+    withoutPermissions: true,
+    icon: `${process.env.PUBLIC_URL}/assets/icon_menu/2 User.png`,
+  },
+  {
+    path: '/storage/files/:name',
+    component: FileStorage,
+    parentRoute : '',
+    name: 'File Storage',
+    isSubRoute: true,
+    listPermissions: '',
+    scopePermissions: '',
+    exact: false,
+    withoutPermissions: true,
+    icon: ``,
   },
   
 ];

@@ -25,7 +25,6 @@ const SalaryComponent = () => {
       label: "All",
     },
   });
-  const [detailDataSalary, setDetailDataSalary] = useState({});
   const [formDataSalary, setFormDataSalary] = useState({
     name: "",
     type: {
@@ -47,7 +46,6 @@ const SalaryComponent = () => {
     updateLoading: false,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingDetail, setIsLoadingDetail] = useState(false);
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
 

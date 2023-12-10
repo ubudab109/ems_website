@@ -213,6 +213,7 @@ const PaidLeave = ({ id }) => {
                 taken={detailPaidLeave ? detailPaidLeave.taken : ''}
                 status={detailStatusPaidLeave ? detailStatusPaidLeave : ''}
                 desc={detailPaidLeave ? detailPaidLeave.desc : ''}
+                statusName={detailPaidLeave ? detailPaidLeave.status_name: ''}
                 employee={detailPaidLeave && detailPaidLeave.employee ? detailPaidLeave.employee : {}}
                 department={detailPaidLeave && detailPaidLeave.department ? detailPaidLeave.department : {}}
                 files={detailPaidLeave && detailPaidLeave.files ? detailPaidLeave.files : []}
@@ -224,7 +225,7 @@ const PaidLeave = ({ id }) => {
           show={showModalDetail}
           handleClose={handleCloseModalDetailPaidLeave}
           headerTitle={'Detail Paid Leave'}
-          isEditable={detailStatusPaidLeave.value !== '2'}
+          isEditable={detailPaidLeave.status_name !== 'Rejected'}
           handleSave={e => updateStatusPaidLeave(e, detailStatusPaidLeave.value, detailPaidLeave.id)}
       />
       <div className="col-sm-12">

@@ -105,7 +105,11 @@ const AddEmployee = () => {
     },
     join_date: "",
     end_date: "",
-
+    ptkp_id: {
+      name: 'ptkp_id',
+      value: '',
+      label: '(OPTIONAL) PTKP Status'
+    },
     // FOR THIRD FORM
     payment_date: {
       name: "payment_date",
@@ -118,7 +122,7 @@ const AddEmployee = () => {
     salary: dataIncomeSalary,
     cuts: dataCutSalary,
   });
-
+  const [ptkpData, setPtkpData] = useState([]);
   /**
    * Request SALARY COMPONENT DATASET
    * @param {string} type 
@@ -128,6 +132,9 @@ const AddEmployee = () => {
     return await http.get(`dataset/salary-component?type=${type}`);
   }
 
+  /**
+   * FETCH DATA SALARY INCOME DATASET
+   */
   const fetchSalaryIncome = async () => {
     await requestGetSalaryComponent('income')
     .then((res) => {
@@ -149,6 +156,9 @@ const AddEmployee = () => {
     });
   };
 
+  /**
+   * FETCH DATA SALARY CUTS DATASET
+   */
   const fetchSalaryCut = async () => {
     await requestGetSalaryComponent('cut')
     .then((res) => {
@@ -187,6 +197,26 @@ const AddEmployee = () => {
       });
       setDepartmentData(options);
     });
+  };
+
+  /**
+   * FETCH DATA PTKP
+   */
+  const fetchPtkp = async () => {
+    await http.get('dataset/ptkp?select=1')
+    .then((res) => {
+      const data = res.data.data;
+      let options = [];
+      data.forEach((res) => {
+        let item = {
+          name: 'ptkp_id',
+          value: res.value,
+          label: res.label,
+        };
+        options.push(item);
+      });
+      setPtkpData(options);
+    })
   };
 
   /**
@@ -380,6 +410,9 @@ const AddEmployee = () => {
         if (formAddEmployee.job_status.value !== "0") {
           formData.append("end_date", formAddEmployee.end_date);
         }
+        if (formAddEmployee.ptkp_id.value !== "") {
+          formData.append("ptkp_id", formAddEmployee.ptkp_id.value);
+        }
         formData.append("payment_date", formAddEmployee.payment_date.value);
         formData.append("bank_name", formAddEmployee.bank_name);
         formData.append(
@@ -460,10 +493,12 @@ const AddEmployee = () => {
     fetchDepartment();
     fetchSalaryIncome();
     fetchSalaryCut();
+    fetchPtkp();
     return () => {
       setDepartmentData([]);
       setDataCutSalary([]);
       setDataIncomeSalary([]);
+      setPtkpData([]);
     };
   }, [formStep]);
 
@@ -511,6 +546,8 @@ const AddEmployee = () => {
     />,
     <Second
       data={formAddEmployee}
+      ptkpData={ptkpData}
+      ptkpSelected={formAddEmployee.ptkp_id}
       errorExistType={existsErrorType}
       departmentData={departmentData}
       handleCheckUser={(e) => handleCheckUser(e.target.name, e.target.value)}

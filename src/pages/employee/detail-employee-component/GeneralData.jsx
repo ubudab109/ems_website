@@ -22,6 +22,7 @@ const GeneralData = ({
   isPermanendIdCard,
   isSameAddress,
   departmentData,
+  ptkpData,
 }) => {
   const dataTabs = [
     {
@@ -78,6 +79,7 @@ const GeneralData = ({
           onChange={onChangeForm}
           isFetching={isFetching}
           isLoadingEdit={isLoadingEdit}
+          ptkpData={ptkpData}
           selectForm={selectForm}
           errorExistType={errorExistType}
           departmentData={departmentData}

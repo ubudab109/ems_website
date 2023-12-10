@@ -246,7 +246,7 @@ const AttendanceManagement = () => {
       {/* END MODAL */}
       <div className="d-flex flex-wrap">
         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-          <div className="card card-dashboard card-shadow">
+          <div className="card card-shadow">
             <div className="card-body" style={{ width: '100%' }}>
 
               {/* SEARCH AND FILTER */}

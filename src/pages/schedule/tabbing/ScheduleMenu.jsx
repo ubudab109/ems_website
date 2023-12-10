@@ -27,6 +27,7 @@ const ScheduleMenu = () => {
   const permissionSchedule = useSelector(
     (state) => state.auth.permissions.filter((e) => e.name === "Schedule")[0]
   );
+  const stateBranch = useSelector(state => state.auth.branch);
   const history = useHistory();
   const [oldDefaultSchedule, setOldDefaultSchedule] = useState({});
   const [selectedScheduled, setSelectedSchedule] = useState(0);
@@ -451,6 +452,9 @@ const ScheduleMenu = () => {
             name={formSchedule.name}
             clockIn={formSchedule.clock_in}
             clockOut={formSchedule.clock_out}
+            latitude={stateBranch.latitude}
+            longitude={stateBranch.longitude}
+            address={stateBranch.address}
             onChangeInput={(e) =>
               setFormSchedule({
                 ...formSchedule,

@@ -12,6 +12,7 @@ const DetailReimbursement = ({
   claim_type,
   employee,
   status,
+  statusName,
   files,
   isError,
   onChangeStatus,
@@ -89,7 +90,7 @@ const DetailReimbursement = ({
               <div className="col-12">
                 <label htmlFor="desc">Claim Type</label>
                 <div className="box-border-div">
-                  {parse(claim_type)}
+                  {claim_type.name}
                 </div>
               </div>
             </div>
@@ -117,7 +118,7 @@ const DetailReimbursement = ({
                 <Select
                   id="status"
                   className="high-index mr-5"
-                  isDisabled={status.value === '2'}
+                  isDisabled={statusName === 'Rejected'}
                   options={REIMBURSEMENT_STATUS_INPUT}
                   styles={filterStyles}
                   isClearable={false}
@@ -136,9 +137,10 @@ const DetailReimbursement = ({
 DetailReimbursement.propTypes = {
   date: PropTypes.string,
   total: PropTypes.any,
-  claim_type: PropTypes.string,
+  claim_type: PropTypes.object,
   employee: PropTypes.object,
   status: PropTypes.any,
+  statusName: PropTypes.string,
   files: PropTypes.array,
   isError: PropTypes.bool,
   onChangeStatus: PropTypes.func,

@@ -4,6 +4,7 @@ import { ucwords } from "../../../utils/helper";
 const columnDataSalary = memoize((viewDetail) => [
   {
     name: 'ID',
+    selector: row => row.id,
     sortable: true,
     cell: row => (
       <div className="td-text mb-1"> {row.id} </div>
@@ -11,6 +12,7 @@ const columnDataSalary = memoize((viewDetail) => [
   },
   {
     name: 'Name',
+    selector: row => row.name,
     sortable: true,
     cell: row => (
       <div className="td-text mb-1"> {row.name} </div>
@@ -18,6 +20,7 @@ const columnDataSalary = memoize((viewDetail) => [
   },
   {
     name: 'Type',
+    selector: row => row.type,
     sortable: true,
     cell: row => (
       <div className="td-text mb-1"> {ucwords(row.type)} </div>

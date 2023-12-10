@@ -21,6 +21,7 @@ const EmployementData = ({
   isLoadingEdit,
   errorExistType,
   departmentData,
+  ptkpData,
 }) => {
   if (isFetching) {
     return <div className="col-xl-12 mb-4"></div>;
@@ -46,7 +47,10 @@ const EmployementData = ({
               {/* NIP AND JOB POSITION */}
               <div className="row mt-3 px-3">
                 <div className="form-group col-xl-5-1 col-lg-6 col-md-6 col-sm-6">
-                  <label htmlFor="nip" className="text-bold text-blue-dark mb-1">
+                  <label
+                    htmlFor="nip"
+                    className="text-bold text-blue-dark mb-1"
+                  >
                     Employee Id
                   </label>
                   <input
@@ -68,7 +72,10 @@ const EmployementData = ({
                   ) : null}
                 </div>
                 <div className="form-group col-xl-5-1 col-lg-6 col-md-6 col-sm-6">
-                  <label htmlFor="job_position" className="text-bold text-blue-dark mb-1">
+                  <label
+                    htmlFor="job_position"
+                    className="text-bold text-blue-dark mb-1"
+                  >
                     Job Position
                   </label>
                   <input
@@ -206,6 +213,42 @@ const EmployementData = ({
                 </div>
               </div>
 
+              {/* PTKP STATUS */}
+              <div className="row mt-3 px-3">
+                <div className="form-group col-xl-10 col-lg-12 col-md-12 col-sm-12">
+                  <label
+                    htmlFor="ptkp_id"
+                    className="text-bold text-blue-dark mb-1"
+                  >
+                    PTKP Status
+                  </label>
+                  {isDisabled ? (
+                    <input
+                      type="text"
+                      name="ptkp_id"
+                      value={
+                        employeeData.ptkp_id !== null
+                          ? employeeData.ptkp.status
+                          : "PTKP Not Selected"
+                      }
+                      className="form-control input-border-grey"
+                      id="ptkp_id"
+                      disabled
+                    />
+                  ) : (
+                    <Select
+                      onChange={onChangeSelect}
+                      id="ptkp_id"
+                      name="ptkp_id"
+                      value={selectForm.ptkp_id}
+                      options={ptkpData}
+                      isClearable={false}
+                      placeholder={"Select PTKP..."}
+                    />
+                  )}
+                </div>
+              </div>
+
               {/* JOIN DATE & END DATE */}
               <div className="row mt-3 px-3">
                 <div className="form-group col-xl-5-1 col-lg-12 col-md-12 col-sm-12">
@@ -238,24 +281,38 @@ const EmployementData = ({
                     End Date
                   </label>
                   <input
-                    type={isDisabled || selectForm.job_status.value === '0' ? "text" : "date"}
+                    type={
+                      isDisabled || selectForm.job_status.value === "0"
+                        ? "text"
+                        : "date"
+                    }
                     onChange={onChange}
                     name="end_date"
                     value={
                       !isDisabled
-                      ? (selectForm.job_status.value === '0' ? '-' : (employeeData.end_date === null ? '' : employeeData.end_date))
-                      : (selectForm.job_status.value === '0' ? '-' : employeeData.date_human_diff.end_date)
+                        ? selectForm.job_status.value === "0"
+                          ? "-"
+                          : employeeData.end_date === null
+                          ? ""
+                          : employeeData.end_date
+                        : selectForm.job_status.value === "0"
+                        ? "-"
+                        : employeeData.date_human_diff.end_date
                     }
                     className="form-control input-border-grey"
                     id="end_date"
-                    disabled={isDisabled || selectForm.job_status.value === '0'}
+                    disabled={isDisabled || selectForm.job_status.value === "0"}
                   />
                 </div>
               </div>
               {!isDisabled ? (
                 <div className="row mt-3 px-3">
                   <div className="col-md-12">
-                    <ButtonBlueFilter disabled={errorExistType !== '' || isLoadingEdit} name={isLoadingEdit ? 'Saving...' : 'Save'} type="submit" />
+                    <ButtonBlueFilter
+                      disabled={errorExistType !== "" || isLoadingEdit}
+                      name={isLoadingEdit ? "Saving..." : "Save"}
+                      type="submit"
+                    />
                   </div>
                 </div>
               ) : null}

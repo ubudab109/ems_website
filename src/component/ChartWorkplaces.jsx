@@ -114,45 +114,55 @@ const ChartWorkplaces = () => {
       </Fragment>
     );
   } else {
-    return (
-      <Fragment>
-        <div className="" style={styles.relative}>
-          <Doughnut
-            data={dataOnsite}
-            options={{
-              plugins: {
-                legend: false,
-              },
-              rotation: 100,
-              radius: '70%',
-              cutout: '70%',
-              responsive: true,
-            }}
-          />
-          <div className="" style={styles.pieContainer}>
+    if (dataWorkPlace[0] === 0 && dataWorkPlace[1] === 0) {
+      return (
+        <Fragment>
+          <div>
+          Nothing logged in today
+          </div>
+        </Fragment>
+      )
+    } else {
+      return (
+        <Fragment>
+          <div className="" style={styles.relative}>
             <Doughnut
-              data={dataRemote}
+              data={dataOnsite}
               options={{
                 plugins: {
-                  legend: false
+                  legend: false,
                 },
-                responsive: true,
                 rotation: 100,
-                cutout: '60%',
+                radius: '70%',
+                cutout: '70%',
+                responsive: true,
               }}
             />
+            <div className="" style={styles.pieContainer}>
+              <Doughnut
+                data={dataRemote}
+                options={{
+                  plugins: {
+                    legend: false
+                  },
+                  responsive: true,
+                  rotation: 100,
+                  cutout: '60%',
+                }}
+              />
+            </div>
           </div>
-        </div>
-        <LegendChart
-          dataOneIcon={`${process.env.PUBLIC_URL}/assets/img/blue_dark_label.png`}
-          dataTwoIcon={`${process.env.PUBLIC_URL}/assets/img/purple_label.png`}
-          dataOne={dataWorkPlace[0]}
-          dataTwo={dataWorkPlace[1]}
-          dataOneLabel="On Site"
-          dataTwoLabel="Remote"
-        />
-      </Fragment>
-    );
+          <LegendChart
+            dataOneIcon={`${process.env.PUBLIC_URL}/assets/img/blue_dark_label.png`}
+            dataTwoIcon={`${process.env.PUBLIC_URL}/assets/img/purple_label.png`}
+            dataOne={dataWorkPlace[0]}
+            dataTwo={dataWorkPlace[1]}
+            dataOneLabel="On Site"
+            dataTwoLabel="Remote"
+          />
+        </Fragment>
+      );
+    }
   }
 };
 

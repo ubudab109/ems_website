@@ -279,6 +279,7 @@ export const isNull = data => data === null;
 /**
  * It takes a string date, converts it to a Date object, gets the day, month and year, and returns a
  * string with the day, month and year.
+ * @param {String} stringTime
  * @returns A string with the day, month and year.
  */
 export const formatedDate = stringDate => {
@@ -296,9 +297,21 @@ export const formatedDate = stringDate => {
 }
 
 /**
+ * The function converts a timestamp string into a formatted clock time string using the Date object
+ * and the toLocaleTimeString method.
+ * @param {String} stringTime
+ * @returns The function `timeStampToClock` takes a string representing a date and returns a string
+ * representing the time in 24-hour format (e.g. "13:30:00").
+ */
+export const timeStampToClock = stringDate => {
+  const date = new Date(stringDate);
+  return date.toLocaleTimeString("it-IT");
+}
+
+/**
  * It takes a string of time in the format of "HH:MM" and returns a string of time in the format of
  * "HH.MM"
- * @param {string} stringTime
+ * @param {String} stringTime
  * @returns A function that takes a string and returns a string.
  */
 export const formatingTime = stringTime => {
@@ -377,4 +390,41 @@ export const notifSuccess = (title, text) => {
     text,
     icon: "success",
   });
+}
+
+/**
+ * The excelModel function returns a mapping of model names to their corresponding namespaces in a
+ * Laravel application.
+ * @param {String | null} key
+ * @returns The function `excelModel` returns a JavaScript object `data` that contains key-value pairs
+ * of model names and their corresponding namespaces. If a `key` argument is provided, the function
+ * returns the value associated with that key in the `data` object. If `key` is not provided, the
+ * entire `data` object is returned.
+ */
+export const excelModel = (key = null) => {
+  const data = {
+    payslip: "App\\Models\\Payroll",
+    reimbursement: "App\\Models\\EmployeeReimburshment",
+    employee: "App\\Models\\User",
+    employeeattendance: "App\\Models\\EmployeeAttendance",
+    employeeovertime: "App\\Models\\EmployeeOvertime",
+  };
+
+  if (key !== null) {
+    return data[key];
+  } else {
+    return data;
+  }
+};
+
+/**
+ * The function `concatSpaceString` removes all spaces from a given string.
+ * @param {String} string - The parameter `string` is a string value that represents the input string that needs
+ * to be modified. The function `concatSpaceString` takes this string as input and removes all the
+ * spaces from it. The modified string is then returned as output.
+ * @returns {String} The function `concatSpaceString` takes a string as an argument and returns a new string
+ * with all spaces removed.
+ */
+export const concatSpaceString = (string) => {
+  return string.replace(/\s/g, '');
 }

@@ -1,5 +1,6 @@
 import memoize from "memoize-one";
 import { rupiah, ucwords } from "../../../utils/helper";
+import ButtonPermissions from "../../../component/ButtonPermissions";
 
 const columnEmployee = memoize((viewDetail) => [
   {
@@ -102,7 +103,11 @@ const columnEmployee = memoize((viewDetail) => [
     name: "Detail",
     sortable: true,
     cell: (row) => (
-      <button type="button" className="btn-detail" onClick={() => viewDetail(row.id)}>View</button>
+      <ButtonPermissions
+        scopePermission="Employee"
+        permissionName="employee-management-detail"
+        handleClick={() => viewDetail(row.id)}
+      />
     ),
   },
 ]);

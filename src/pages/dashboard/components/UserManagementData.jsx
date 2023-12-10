@@ -19,9 +19,8 @@ const UserManagementData = ({
         <div className="col-6">
           <div className="col-12 text-left mt-1">
             <ul className="ul-db">
-              <li className="text-um" style={{ fontSize: '14px', fontWeight: '600' }}>{name}</li>
-              <li className="text-um" style={{ fontSize: '10px' }}>{role}</li>
-              <li className="text-um" style={{ fontSize: '10px' }}>ID : {idNumber}</li>
+              <li className="text-um" style={{ fontSize: '18px', fontWeight: '600' }}>{name}</li>
+              <li className="text-um text-muted" style={{ fontSize: '12px' }}>{role}</li>
             </ul>
           </div>
         </div>

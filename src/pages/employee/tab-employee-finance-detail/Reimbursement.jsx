@@ -1,7 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useCallback, Fragment } from "react";
 import Select from "react-select";
-import { notifError, notifSuccess, yearsOption } from "../../../utils/helper";
+import {
+  defaultNotifError,
+  notifError,
+  notifSuccess,
+  yearsOption,
+} from "../../../utils/helper";
 import {
   MONTH_LIST,
   REIMBURSEMENT_STATUS_FILTER,
@@ -20,6 +25,7 @@ const Reimbursement = ({ id }) => {
   const date = new Date();
   const [dataReimbers, setDataReimbers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingExport, setIsLoadingExport] = useState(false);
   const yearsFilter = yearsOption();
   const [filterData, setFilterData] = useState({
     month: MONTH_LIST[date.getMonth()],
@@ -32,21 +38,20 @@ const Reimbursement = ({ id }) => {
       label: "All (Default)",
     },
   });
-  const [selectedData, setSelectedData] = useState([]);
   const [detailData, setDetailData] = useState({
-    id: '',
-    date: '',
-    claim_type: '',
-    amount: '',
+    id: "",
+    date: "",
+    claim_type: "",
+    amount: "",
     status: {
       name: "status",
-      value: '',
-      label: '',
+      value: "",
+      label: "",
     },
     employee: {
-      firstname: '',
-      lastname: '',
-      nip: '',
+      firstname: "",
+      lastname: "",
+      nip: "",
     },
     files: [],
   });
@@ -127,17 +132,6 @@ const Reimbursement = ({ id }) => {
   };
 
   /**
-   * It takes an object with a property called selectedRows, and returns an array of objects.
-   */
-  const handleSelectData = ({ selectedRows }) => {
-    let data = [];
-    selectedRows.forEach((value) => {
-      data.push(value);
-    });
-    setSelectedData(data);
-  };
-
-  /**
    * Handle click on close modal detail
    */
   const handleCloseModalDetail = () => {
@@ -181,22 +175,72 @@ const Reimbursement = ({ id }) => {
       } This Employee Overtime Status?`,
       buttons: true,
       dangerMode: true,
-      icon: "warning"
+      icon: "warning",
     }).then(async (isYes) => {
       if (isYes) {
         let reqBody = {
           onlyStatus: 1,
           status: status,
         };
-        await method.updateDataByIdWithPut('employee-reimbursement', detailData.id, reqBody)
-        .then(() => {
-          notifSuccess("Success", "Reimbursemeng Status Successfully Updated");
-          fetchDataReimbursement();
-          handleCloseModalDetail();
-        })
-        .catch(() => {
-          notifError("Failed", "Please check Your form. Contact administrator if the problem still exists")
-        })
+        await method
+          .updateDataByIdWithPut(
+            "employee-reimbursement",
+            detailData.id,
+            reqBody
+          )
+          .then(() => {
+            notifSuccess(
+              "Success",
+              "Reimbursemeng Status Successfully Updated"
+            );
+            fetchDataReimbursement();
+            handleCloseModalDetail();
+          })
+          .catch(() => {
+            notifError(
+              "Failed",
+              "Please check Your form. Contact administrator if the problem still exists"
+            );
+          });
+      }
+    });
+  };
+
+  /**
+   * EXPORT REIMBURSEMENT EMPLOYEE DATA IN CURRENT PERIOD
+   * @param {Event} e
+   */
+  const onExport = async (e) => {
+    e.preventDefault();
+    let form = new FormData();
+    form.append("export_type", "employee");
+    form.append("month", filterData.month.value);
+    form.append("year", filterData.year.value);
+    form.append("employee_id", id);
+    swal({
+      title: "Export",
+      text: "Are You sure want to export Reiumbursement data from this Employee in current period?",
+      icon: "warning",
+      dangerMode: true,
+      buttons: true,
+    }).then(async (isYes) => {
+      if (isYes) {
+        setIsLoadingExport(true);
+        await method
+          .createDataWithoutUpload("export-reimbursement", form)
+          .then((res) => {
+            notifSuccess(
+              "Success",
+              "Reimbursement data successfully exported. You can check the process at the Storage menu"
+            );
+            setIsLoadingExport(false);
+          })
+          .catch(() => {
+            defaultNotifError("Export Employee Reimbursement");
+            setIsLoadingExport(false);
+          });
+      } else {
+        return false;
       }
     });
   };
@@ -222,24 +266,35 @@ const Reimbursement = ({ id }) => {
             </div>
           ) : (
             <DetailReimbursement
-              claim_type={detailData ? detailData.claim_type : ''}
-              employee={detailData && detailData.employee ? detailData.employee : {}}
+              claim_type={
+                detailData && detailData.claim_type ? detailData.claim_type : {}
+              }
+              employee={
+                detailData && detailData.employee ? detailData.employee : {}
+              }
               files={detailData && detailData.files ? detailData.files : []}
+              statusName={
+                detailData && detailData.status_name
+                  ? detailData.statusName
+                  : ""
+              }
               isError={errorDetailData.status}
               onChangeStatus={(e) => {
-                setDetailData({...detailData, status: e})
+                setDetailData({ ...detailData, status: e });
               }}
-              date={detailData ? detailData.date : ''}
-              status={detailData ? detailData.status : ''}
-              total={detailData ? detailData.amount : ''}
+              date={detailData ? detailData.date : ""}
+              status={detailData ? detailData.status : ""}
+              total={detailData ? detailData.amount : ""}
             />
           )
         }
         show={showModalDetailData}
         handleClose={handleCloseModalDetail}
         headerTitle={"Detail Reimbursement"}
-        isEditable={detailData && detailData.status.value !== "2"}
-        handleSave={(e) => onSubmitEditReimbursement(e, detailData.status.value)}
+        isEditable={detailData && detailData.status_name !== "Rejected"}
+        handleSave={(e) =>
+          onSubmitEditReimbursement(e, detailData.status.value)
+        }
       />
       <div className="col-sm-12">
         <h5 className="text-blue-dark p-3">Employee Reimbursement</h5>
@@ -308,7 +363,11 @@ const Reimbursement = ({ id }) => {
               className="btn-group btn-group-xl"
               style={{ float: "right", padding: "15px" }}
             >
-              <ButtonWhiteFilter name="Export" />
+              <ButtonWhiteFilter
+                name="Export"
+                onClick={(e) => onExport(e)}
+                disabled={isLoadingExport}
+              />
             </div>
           </div>
         </div>
@@ -319,8 +378,6 @@ const Reimbursement = ({ id }) => {
             data={dataReimbers}
             pagination
             progressPending={isLoading}
-            selectableRows
-            onSelectedRowsChange={handleSelectData}
             fixedHeader
             fixedHeaderScrollHeight={"100vh"}
           />

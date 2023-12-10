@@ -40,7 +40,7 @@ const columnUsers = memoize(
         sortable: true,
         cell: row => (
           <div className="td-text mb-1 text-left">
-            <span className="">{row.branch_assign[0].pivot.role.name}</span>
+            <span className="">{row.role ?? 'Not Have Any Role'}</span>
           </div>
         )
       },
@@ -68,6 +68,7 @@ const columnUsers = memoize(
                     onResend={() => onResend(row.id)}
                   /> :
                   <DropdownUserAccepted
+                    currentUserId={row.id}
                     onRemove={() => onRemove(row.id)}
                     onChangeRole={
                       () => onChangeRole(

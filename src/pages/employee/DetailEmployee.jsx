@@ -21,6 +21,7 @@ const DetailEmployee = () => {
   const [existsErrorType, setExistErrorType] = useState('');
   const [isEmailValid, setEmailIsValid] = useState(true);
   const [departmentData, setDepartmentData] = useState([]);
+  const [ptkpData, setPtkpData] = useState([]);
   const [isLoadingEdit, setIsLoadingEdit] = useState(false);
   const [selectFormEmployee, setSelectFormEmployee] = useState();
   const [employeeFormCondition, setEmployeeFormCondition] = useState({
@@ -44,6 +45,26 @@ const DetailEmployee = () => {
         options.push(item);
       }
       setDepartmentData(options);
+    });
+  };
+
+  /** 
+   * FETCH PTKP DATASET
+   */
+  const fetchPtkp = async () => {
+    await http.get('dataset/ptkp?select=1')
+    .then((res) => {
+      let data = res.data.data;
+      let options = [];
+      for (let i = 0; i < data.length; i++) {
+        let item = {
+          name: 'ptkp_id',
+          value: data[i].value,
+          label: data[i].label,
+        };
+        options.push(item);
+      }
+      setPtkpData(options);
     });
   };
 
@@ -136,6 +157,7 @@ const DetailEmployee = () => {
           job_level: formEmployee.job_level,
           job_position: formEmployee.job_position,
           join_date: formEmployee.join_date,
+          ptkp_id: selectFormEmployee.ptkp_id.value !== "" ? selectFormEmployee.ptkp_id.value : null,
           end_date: selectFormEmployee.job_status.value === '0' ? null : formEmployee.end_date,
           citizent_address: formEmployee.citizent_address,
           resident_address: !employeeFormCondition.isSameAddress ? formEmployee.resident_address : formEmployee.citizent_address,
@@ -196,6 +218,7 @@ const DetailEmployee = () => {
       onChangeExists={e => handleCheckUser(e.target.name, e.target.value)}
       selectForm={selectFormEmployee}
       departmentData={departmentData}
+      ptkpData={ptkpData}
       isPermanendIdCard={employeeFormCondition.isPermanentIdCard}
       isSameAddress={employeeFormCondition.isSameAddress}
       onChangeCheckbox={e => {
@@ -275,7 +298,12 @@ const DetailEmployee = () => {
             name: 'status',
             value: data.branch.status,
             label: data.status_name,
-          }
+          },
+          ptkp_id: {
+            name: 'ptkp_id',
+            value: data.ptkp !== null ? data.ptkp.id : '',
+            label: data.ptkp !== null ? data.ptkp.status : 'PTKP Not Selected'
+          },
         };
         setEmployeeFormCondition({
           isPermanentIdCard: data.identity_expired === null,
@@ -294,6 +322,9 @@ const DetailEmployee = () => {
       });
   };
 
+  /** 
+   * HANDLER SELECT MENU IDENTITY
+   */
   const handleSelectMenu = index => setCurrentMenu(index);
 
   useEffect(() => {
@@ -301,6 +332,7 @@ const DetailEmployee = () => {
     if (isMounted) {
       fetchDetailEmployee();
       fetchDepartment();
+      fetchPtkp();
     }
     return () => (isMounted = false);
   }, []);
@@ -341,7 +373,12 @@ const DetailEmployee = () => {
                   {employee.firstname} {employee.lastname}
                 </h5>
                 <span className="mt-2">{employee.job_position}</span> <br />
-                <span className="mt-2">ID: {employee.nip}</span>
+                <span className="mt-2">ID: {employee.nip}</span> <br />
+                <hr />
+                {
+                  employee.ptkp_id ? <><span className="mt-2">PTKP Status: {employee.ptkp.status}</span> <br /></> : null
+                }
+                
               </div>
             )}
           </div>

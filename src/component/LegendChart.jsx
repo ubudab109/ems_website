@@ -10,8 +10,8 @@ const LegendChart = ({
   dataTwo,
 }) => {
   return (
-    <div className="row justify-content-end" style={{width: '100%'}}>
-      <div className="col-5">
+    <div className="box mt-5" style={{width: '100%'}}>
+      <div className="col-12 mb-5">
         <div className="d-flex">
           <div
             className="col-12"
@@ -37,7 +37,7 @@ const LegendChart = ({
           </div>
         </div>
       </div>
-      <div className="col-5">
+      <div className="col-12 ">
         <div className="d-flex">
           <div
             className="col-12"

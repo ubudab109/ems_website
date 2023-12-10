@@ -1,53 +1,50 @@
 import React, { Fragment } from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
+import { customStyles } from '../../../style-component/ReactSelectCustomStyle';
 
 const FormInviteSuperadmin = ({
-  isFetchingEmployee,
-  optionsEmployee,
-  customStyles,
-  onChangeSelectEmployee,
-  selectedEmployee,
+  name,
+  nip,
+  email,
+  onChangeText,
+  onChangeSelect,
+  onChangeSelectRoleAdmin,
   optionsBranch,
-  onChangeSelectBranch,
   selectedBranch,
-  optionsRole,
-  selectedRole,
-  onChangeSelectedRole,
-  detailEmployee
+  optionsRoles,
+  selectedRoles,
 }) => (
   <Fragment>
     <div className="form-group">
       <label htmlFor="name" className="text-blue-dark my-2">Name</label>
-      <Select
-        id="name"
-        options={optionsEmployee}
-        styles={customStyles}
-        onChange={onChangeSelectEmployee}
-        value={selectedEmployee}
-      />
+      <input type="text" name="name" id="name" onChange={onChangeText} value={name} className="form-control input-text-custom" />
     </div>
-
     <div className="form-group">
       <label htmlFor="name" className="text-blue-dark my-2">Branch</label>
       <Select
         id="name"
         options={optionsBranch}
         styles={customStyles}
-        onChange={onChangeSelectBranch}
+        onChange={onChangeSelect}
         value={selectedBranch}
       />
     </div>
     <div className="form-group">
-      <label htmlFor="role" className="text-blue-dark my-2">Role</label>
+      <label htmlFor="name" className="text-blue-dark my-2">Role</label>
       <Select
-        id="role"
-        options={optionsRole}
+        id="name"
+        options={optionsRoles}
+        isDisabled={selectedBranch.value === ""}
         styles={customStyles}
-        value={selectedRole}
-        defaultValue={'test'}
-        onChange={onChangeSelectedRole}
+        onChange={onChangeSelectRoleAdmin}
+        value={selectedRoles}
       />
+      {
+        selectedBranch.value !== "" && optionsRoles.length < 1 ? (
+          <span className="text-red text-bold">This Branch not have any roles. The manager will automatically invited as Head Branch</span>
+        ) : null
+      }
     </div>
     <div className="form-group">
       <label htmlFor="nip" className="text-blue-dark my-2">NIP</label>
@@ -55,9 +52,9 @@ const FormInviteSuperadmin = ({
         type="text"
         name="nip"
         id="nip"
-        readOnly
+        value={nip}
+        onChange={onChangeText}
         className="form-control input-text-custom"
-        value={isFetchingEmployee ? 'Getting Data...' : detailEmployee.nip}
       />
     </div>
     <div className="form-group">
@@ -66,27 +63,42 @@ const FormInviteSuperadmin = ({
         type="text"
         name="email"
         id="email"
-        readOnly
+        value={email}
         className="form-control input-text-custom"
-        value={isFetchingEmployee ? 'Getting Data...' : detailEmployee.email}
+        onChange={onChangeText}
       />
     </div>
   </Fragment>
 );
 
 FormInviteSuperadmin.propTypes = {
-  isFetchingEmployee: PropTypes.bool.isRequired,
-  optionsEmployee: PropTypes.object.isRequired,
-  customStyles: PropTypes.object.isRequired,
-  onChangeSelectEmployee: PropTypes.func,
-  selectedEmployee: PropTypes.object.isRequired,
-  optionsBranch: PropTypes.object.isRequired,
-  onChangeSelectBranch: PropTypes.func,
-  selectedBranch: PropTypes.object.isRequired,
-  optionsRole: PropTypes.object.isRequired,
-  selectedRole: PropTypes.object.isRequired,
-  onChangeSelectedRole: PropTypes.func,
-  detailEmployee: PropTypes.object
+  name: PropTypes.string,
+  nip: PropTypes.string,
+  email: PropTypes.string,
+  onChangeText: PropTypes.func,
+  onChangeSelect: PropTypes.func,
+  onChangeSelectRoleAdmin: PropTypes.func,
+  optionsBranch: PropTypes.array,
+  selectedBranch: PropTypes.object,
+  optionsRoles: PropTypes.array,
+  selectedRoles: PropTypes.object,
+};
+
+FormInviteSuperadmin.defaultProps = {
+  name: "",
+  nip: "",
+  email: "",
+  selectedBranch: {
+    name: "branch",
+    value: "",
+    label: "Select Branch..."
+  },
+  optionsRoles: [],
+  selectedRoles: {
+    name: "role",
+    value: "",
+    label: "Select Role..."
+  },
 };
 
 export default FormInviteSuperadmin;

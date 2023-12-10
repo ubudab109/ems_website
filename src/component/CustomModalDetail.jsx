@@ -12,6 +12,7 @@ const CustomModalDetail = ({
   isEditable,
   buttonName,
   disabledButtonSave,
+  closeButtonName,
 }) => {
   return (
     <Modal show={show} onHide={handleClose} size={size} centered>
@@ -30,7 +31,7 @@ const CustomModalDetail = ({
         {
           isEditable ? <button disabled={disabledButtonSave} className="btn-blue" onClick={handleSave}>{buttonName}</button> : null
         }
-        <button className="btn-border-blue" onClick={handleClose}>Close</button>
+        <button className="btn-border-blue" onClick={handleClose}>{closeButtonName}</button>
       </Modal.Footer>
     </Modal>
   );
@@ -46,6 +47,7 @@ CustomModalDetail.propTypes = {
   handleSave: PropTypes.func,
   buttonName: PropTypes.string,
   disabledButtonSave: PropTypes.bool,
+  closeButtonName: PropTypes.string,
 };
 
 CustomModalDetail.defaultProps = {
@@ -53,6 +55,7 @@ CustomModalDetail.defaultProps = {
   isEditable: true,
   buttonName: "Save",
   disabledButtonSave: false,
+  closeButtonName: "Close",
 };
 
 

@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import http from "../../../service/PrivateConfigRequest";
 import moment from "moment";
 import {
+  defaultNotifError,
   notifError,
   notifSuccess,
   rupiahInputFormat,
@@ -17,7 +18,6 @@ import columnReimbersementFinanceData from "../data/column_reimbersement_finance
 import SearchFilterInput from "../../../component/SearchFilterInput";
 import { REIMBURSEMENT_STATUS_FILTER } from "../../../utils/constant";
 import ButtonWhiteFilter from "../../../component/ButtonWhiteFilter";
-import ButtonBlueFilter from "../../../component/ButtonBlueFilter";
 import DateButtonPicker from "../../../component/DateButtonPicker";
 import DropdownDepartment from "../../employee/components/DropdownDepartment";
 import CustomModalDetail from "../../../component/CustomModalDetail";
@@ -47,9 +47,9 @@ const Reimbursement = () => {
     },
     claim_type_id: "",
     claim_type: {
-      id: '',
-      name: '',
-    }
+      id: "",
+      name: "",
+    },
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingDetailReimbersement, setIsLoadingDetailReimbersement] =
@@ -78,6 +78,7 @@ const Reimbursement = () => {
     reimbursementUpdate: false,
     claimUpdate: false,
     claimCreate: false,
+    export: false,
   });
 
   /**
@@ -388,6 +389,61 @@ const Reimbursement = () => {
       return false;
     }
   };
+
+  /**
+   * EXPORT DATA REIMBURSEMENT
+   * @param {Event} e
+   */
+  const onExport = async (e) => {
+    e.preventDefault();
+    let form = new FormData();
+    let text = "";
+    form.append("export_type", "all");
+    form.append(
+      "date",
+      moment(new Date(filterData.date)).format("YYYY-MM-DD").toString()
+    );
+
+    if (selectedData.length < 1) {
+      text = "Are You sure want to export ALL Reimbursement data employee?";
+      form.append("type", "all");
+    } else {
+      text =
+        "Are You sure want to export SELECTED data Reimbursement employee?";
+      form.append("type", "selected");
+      selectedData.forEach((val, _) => {
+        form.append("reimbursement_id[]", val.id);
+      });
+    }
+
+    swal({
+      title: "Export",
+      text,
+      icon: "warning",
+      dangerMode: true,
+      buttons: true,
+    }).then(async (isYes) => {
+      if (isYes) {
+        setLoadingSave({ ...loadingSave, export: true });
+        await method
+          .createDataWithoutUpload("export-reimbursement", form)
+          .then((res) => {
+            notifSuccess(
+              "Success",
+              "Reimbursement data successfully exported. You can check the process at the Storage menu"
+            );
+            setLoadingSave({ ...loadingSave, export: false });
+          })
+          .catch(() => {
+            defaultNotifError("Export Reimbursement");
+            setLoadingSave({ ...loadingSave, export: false });
+          });
+      } else {
+        return false;
+      }
+    });
+  };
+
   /**
    * COMPONENT DID MOUNT
    */
@@ -410,7 +466,10 @@ const Reimbursement = () => {
       {/* DETAIL REIMBERSEMENT */}
       <CustomModalDetail
         show={modalDetail}
-        handleClose={handleModalDetailReimbersement}
+        handleClose={() => {
+          setDetailReimbersement({});
+          setModalDetail(false);
+        }}
         headerTitle={"Detail Reimbersement"}
         children={
           isLoadingDetailReimbersement ? (
@@ -432,7 +491,9 @@ const Reimbursement = () => {
               }
               amount={detailReimbersement ? detailReimbersement.amount : ""}
               claimType={
-                detailReimbersement && detailReimbersement.claim_type ? detailReimbersement.claim_type.name : ""
+                detailReimbersement && detailReimbersement.claim_type
+                  ? detailReimbersement.claim_type.name
+                  : ""
               }
               reimberseStatus={
                 detailReimbersement ? detailReimbersement.status : ""
@@ -459,7 +520,7 @@ const Reimbursement = () => {
         headerTitle={"Create Claim Type"}
         isEditable
         disabledButtonSave={loadingSave.claimCreate}
-        handleClose={() => handleModalCreateClaim}
+        handleClose={() => setModalClaimCreate(false)}
         handleSave={(e) => handleSaveClaimType(e, "create")}
         children={
           <ModalCreateClaimType
@@ -482,7 +543,10 @@ const Reimbursement = () => {
         headerTitle={"Update Claim Type"}
         isEditable
         disabledButtonSave={loadingSave.claimUpdate}
-        handleClose={() => handleModalCreateClaim}
+        handleClose={() => {
+          setDetailClaimType({});
+          setModalDetailClaim(false);
+        }}
         handleSave={(e) => handleSaveClaimType(e, "update")}
         children={
           isLoadingDetailClaim ? (
@@ -594,8 +658,12 @@ const Reimbursement = () => {
                 className="btn-group btn-group-xl"
                 style={{ float: "right" }}
               >
-                <ButtonWhiteFilter name="Export" />
-                <ButtonBlueFilter name="Send Reiumbersement" />
+                <ButtonWhiteFilter
+                  name="Export"
+                  onClick={(e) => onExport(e)}
+                  disabled={loadingSave.export}
+                />
+                {/* <ButtonBlueFilter name="Send Reiumbersement" /> */}
               </div>
             </div>
           </div>
@@ -682,7 +750,7 @@ const Reimbursement = () => {
                           onEdit={() => handleModalDetailClaim(val.id)}
                           onRemove={() => console.log(val.id)}
                           isEditAllowed={true}
-                          isRemoveAllowed={true}
+                          isRemoveAllowed={false}
                         />
                       </td>
                     </tr>

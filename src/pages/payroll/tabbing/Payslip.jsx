@@ -5,6 +5,7 @@ import SearchFilterInput from "../../../component/SearchFilterInput";
 import { MONTH, MONTH_LIST } from "../../../utils/constant";
 import {
   arraySum,
+  defaultNotifError,
   isActionAllowed,
   notifError,
   notifSuccess,
@@ -83,6 +84,7 @@ const Payslip = () => {
   const [isErrorDetail, setIsErrorDetail] = useState(false);
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
   const [isLoadingSendPayslip, setIsLoadingSendPayslip] = useState(false);
+  const [isLoadingExport, setIsLoadingExport] = useState(false);
   const [modalDetailPayslip, setModalDetailPayslip] = useState(false);
 
   /**
@@ -683,14 +685,15 @@ const Payslip = () => {
 
   /**
    * PROCESS SENDING PAYSLIP
-   * @param {Event} e 
+   * @param {Event} e
    */
   const onSendPayslip = async (e) => {
     e.preventDefault();
     let form = new FormData();
     form.append("month", filterPayslip.month.value);
     form.append("year", filterPayslip.year.value);
-    let confirmText = "Please confirm the number of digits for each salary component. You will not be able to change or re send the payslip that has been sent during this period.";
+    let confirmText =
+      "Please confirm the number of digits for each salary component. You will not be able to change or re send the payslip that has been sent during this period.";
     let title = "";
     if (selectedRows.length > 0) {
       form.append("type", "selected");
@@ -699,10 +702,10 @@ const Payslip = () => {
         employeeId.push(val.id);
       });
       form.append("employeeId", JSON.stringify(employeeId));
-      title = "Send Payslip To The Selected Employee?"        
+      title = "Send Payslip To The SELECTED Employee?";
     } else {
       form.append("type", "all");
-      title = "Send Payslip To All Employee?"
+      title = "Send Payslip To ALL Employee?";
     }
     // CONFIRM BUTTON
     swal({
@@ -711,34 +714,86 @@ const Payslip = () => {
       icon: "warning",
       dangerMode: true,
       buttons: true,
-    })
-    .then(async (isYes) => {
+    }).then(async (isYes) => {
       if (isYes) {
         setIsLoadingSendPayslip(true);
-        await method.createDataWithoutUpload("send-payslip", form)
-        .then(() => {
-          setIsLoadingSendPayslip(false);
-          if (selectedRows.length > 0) {
-            setSelectedRows([]);
-          }
-          notifSuccess("Success", "Payslips have been successfully sent to employees. The message will be sent to email automatically.");
-        })
-        .catch((err) => {
-          setIsLoadingSendPayslip(false);
-          let errData = err.response;
-          if (errData.status > 400) {
-            notifError("Failed", errData.data.data.message);
-          } else {
-            notifError(
-              "Failed",
-              "There's an error when sending payslip. Please check Your connection or contact us if issues still there"
+        await method
+          .createDataWithoutUpload("send-payslip", form)
+          .then(() => {
+            setIsLoadingSendPayslip(false);
+            if (selectedRows.length > 0) {
+              setSelectedRows([]);
+            }
+            notifSuccess(
+              "Success",
+              "Payslips have been successfully sent to employees. The message will be sent to email automatically."
             );
-          }
-        })
+          })
+          .catch((err) => {
+            setIsLoadingSendPayslip(false);
+            let errData = err.response;
+            if (errData.status > 400) {
+              notifError("Failed", errData.data.data.message);
+            } else {
+              notifError(
+                "Failed",
+                "There's an error when sending payslip. Please check Your connection or contact us if issues still there"
+              );
+            }
+          });
       } else {
         return false;
       }
-    })
+    });
+  };
+
+  /**
+   * EXPORT DATA PAYSLIP
+   * @param {Event} e 
+   */
+  const onExport = async (e) => {
+    e.preventDefault();
+    let form = new FormData();
+    let text = "";
+    form.append("month", filterPayslip.month.value);
+    form.append("year", filterPayslip.year.value);
+    if (selectedRows.length < 1) {
+      text = "Are You sure want to export ALL Payslip data employee?";
+      form.append("type", "all");
+    } else {
+      text = "Are You sure want to export SELECTED data Payslip employee?";
+      form.append("type", "selected");
+      selectedRows.forEach((val, _) => {
+        form.append("employee_id[]", val.id);
+      });
+    }
+
+    swal({
+      title: "Export",
+      text,
+      icon: "warning",
+      dangerMode: true,
+      buttons: true,
+    }).then(async (isYes) => {
+      setIsLoadingExport(true);
+      if (isYes) {
+        await method
+          .createDataWithoutUpload("export-payslip", form)
+          .then((res) => {
+            notifSuccess(
+              "Success",
+              "Payslip data successfully exported. You can check the process at the Storage menu"
+            );
+            setIsLoadingExport(false);
+          })
+          .catch(() => {
+            defaultNotifError("Export Payslip");
+            setIsLoadingExport(false);
+          });
+      } else {
+        return false;
+      }
+    });
   };
 
   /**
@@ -749,7 +804,6 @@ const Payslip = () => {
     fetchDataPayslip();
     fetchDataGeneratedPayslip();
     fetchTotalWorkingDays();
-    console.log(payslipStatus);
     return () => {
       setDataPayslip([]);
       setDataDepartement([]);
@@ -912,14 +966,13 @@ const Payslip = () => {
                   className="btn-group btn-group-xl"
                   style={{ float: "right", padding: "25px" }}
                 >
-                  <ButtonWhiteFilter
-                    name="Export"
-                    disabled={dataPayslip.length === 0}
-                  />
+                  <ButtonWhiteFilter name="Export" onClick={(e) => onExport(e)} disabled={isLoadingExport} />
                   <ButtonBlueFilter
                     name={isLoadingSendPayslip ? "Sending..." : "Send Payslip"}
                     disabled={
-                      dataPayslip.length === 0 || payslipStatus.status === "2" || isLoadingSendPayslip ||
+                      dataPayslip.length === 0 ||
+                      payslipStatus.status === "2" ||
+                      isLoadingSendPayslip ||
                       !isActionAllowed(
                         payslipPermission.permissions,
                         "payslip-send"
@@ -930,10 +983,12 @@ const Payslip = () => {
                   <ButtonPlaint
                     name="Generate Payroll"
                     onClick={() => setModalGenerate(true)}
-                    disabled={!isActionAllowed(
-                      payslipPermission.permissions,
-                      "payslip-generate"
-                    )}
+                    disabled={
+                      !isActionAllowed(
+                        payslipPermission.permissions,
+                        "payslip-generate"
+                      )
+                    }
                   />
                   <ButtonPlaint
                     name="Refresh"

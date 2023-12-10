@@ -12,6 +12,7 @@ const DetailPaidLeave = ({
   endDate,
   taken,
   status,
+  statusName,
   desc,
   employee,
   department,
@@ -146,7 +147,7 @@ const DetailPaidLeave = ({
                 <Select
                   id="status"
                   className="high-index mr-5"
-                  isDisabled={status.value === '2'}
+                  isDisabled={statusName === 'Rejected'}
                   options={PAID_LEAVE_STATUS}
                   styles={filterStyles}
                   isClearable={false}
@@ -168,6 +169,7 @@ DetailPaidLeave.propTypes = {
   taken: PropTypes.number,
   status: PropTypes.any,
   desc: PropTypes.string,
+  statusName: PropTypes.string,
   employee: PropTypes.object,
   department: PropTypes.object,
   files: PropTypes.array,

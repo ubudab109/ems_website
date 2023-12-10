@@ -109,7 +109,6 @@ const Overtime = ({ id }) => {
     setErrorDetailOvertime(false);
   };
 
-
   /**
    * Fetching data overtime from callback then add to state
    */
@@ -161,9 +160,10 @@ const Overtime = ({ id }) => {
             fetchDataOvertime();
           })
           .catch((err) => {
+            const errorData = err.response.data;
             swal({
               title: "Failed To Update Overtime",
-              text: "Please check Your form. Contact administrator if the problem still exists",
+              text: errorData.message,
               icon: "error",
             });
           });
